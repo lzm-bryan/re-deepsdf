@@ -7,15 +7,15 @@
 
 ---
 
-## 一键运行
+## 一键运行（仅推理）
 
 ```bash
 # 1. 克隆仓库
 git clone https://github.com/lzm-bryan/re-deepsdf.git
 cd re-deepsdf
 
-# 2. 下载数据（见下方链接）
-# 下载后解压到 data/ 目录
+# 2. 下载数据
+# 从 Google Drive 下载并解压 data/ 目录（见下方链接）
 
 # 3. 生成新飞机
 python scripts/generate_new_planes.py -n 5
@@ -26,112 +26,159 @@ python scripts/visualize_compare.py single generated/GeneratedPlanes/generated_p
 
 ---
 
-## 数据下载
+## 完整复现训练（可选）
 
-数据存储在 Google Drive（因文件过大），下载后解压到本仓库 `data/` 目录：
+### 环境要求
 
-| 数据 | 大小 | 下载链接 |
-|------|------|----------|
-| 训练数据 | 795 KB | [training_4.13planes-600epoch.zip](https://drive.google.com/file/d/1fkHA9ZclgHxMAdm_jM-GYwCZ9MdiLC7B/view?usp=sharing) |
-| 测试数据 | 3.0 GB | [test_4.13planes-600epoch.zip](https://drive.google.com/file/d/19ENGz3Cnxp_7HmjjBLcPgkSR23UpwqC-/view?usp=sharing) |
-| 重建结果 | 261 MB | [reconstructions_4.13planes-600epoch.zip](https://drive.google.com/file/d/11KQy6ca7o8MuPxGZBU5PWwAhzOVQhw9n/view?usp=sharing) |
-| 隐向量 | 583 KB | [latentcodes_4.13planes-600epoch.zip](https://drive.google.com/file/d/1WeusBcG0clPVxzfozuSA0M84I8EKtSN7/view?usp=sharing) |
+```bash
+pip install torch numpy trimesh matplotlib scikit-image open3d
+# 或
+conda install pytorch numpy trimesh matplotlib scikit-image
+```
 
-**解压后目录结构：**
+### 数据准备
+
+#### 方式1：从 Google Drive 下载预处理数据
+
+下载并解压到本仓库 `data/` 目录：
+- [training_4.13planes-600epoch.zip](https://drive.google.com/file/d/1fkHA9ZclgHxMAdm_jM-GYwCZ9MdiLC7B/view?usp=sharing) (795 KB)
+- [test_4.13planes-600epoch.zip](https://drive.google.com/file/d/19ENGz3Cnxp_7HmjjBLcPgkSR23UpwqC-/view?usp=sharing) (3.0 GB)
+
+#### 方式2：从 ShapeNet 原始数据生成
+
+1. **下载 ShapeNet V2**
+   - 注册: https://shapenet.org/
+   - 下载类别: 02691156 (飞机)
+   - 需要原始 .obj mesh 文件
+
+2. **生成 SDF 采样数据**
+   ```bash
+   # 使用 DeepSDF 的预处理脚本
+   python source_code/src/generate_training_meshes.py \
+       --data-source /path/to/shapenet \
+       --shape-category 02691156 \
+       --output-dir ./data/SdfSamples
+   ```
+
+### 修改配置文件
+
+编辑 `configs/specs.json`，将路径改为你本地路径：
+
+```json
+{
+  "Description": "Train DeepSDF on planes",
+  "DataSource": "/your/local/path/to/SDFdata_train",
+  "TrainSplit": "examples/splits/planes_train.json",
+  "TestSplit": "examples/splits/planes_train.json",
+  "NetworkArch": "deep_sdf_decoder",
+  "NetworkSpecs": {
+    "dims": [512, 512, 512, 512, 512, 512, 512, 512],
+    "dropout": [0, 1, 2, 3, 4, 5, 6, 7],
+    "dropout_prob": 0.2,
+    "norm_layers": [0, 1, 2, 3, 4, 5, 6, 7],
+    "latent_in": [4],
+    "weight_norm": true
+  },
+  "CodeLength": 256,
+  "NumEpochs": 1000,
+  "SnapshotFrequency": 100,
+  "LearningRateSchedule": [
+    {"Type": "Step", "Initial": 0.0005, "Interval": 500, "Factor": 0.5}
+  ],
+  "SamplesPerScene": 16384,
+  "ScenesPerBatch": 4,
+  "ClampingDistance": 0.1,
+  "CodeRegularization": true,
+  "CodeRegularizationLambda": 1e-4
+}
+```
+
+### 训练
+
+```bash
+python source_code/src/train_deep_sdf.py \
+    --experiment-name planes_600epoch \
+    --data-path ./data \
+    --epochs 600 \
+    --batch-size 4
+```
+
+### 评估
+
+```bash
+# 重建测试集
+python source_code/src/reconstruct.py \
+    --experiment-name planes_600epoch \
+    --checkpoint models/ModelParameters/600.pth \
+    --data-path ./data/TestData
+
+# 计算指标
+python source_code/src/evaluate.py \
+    --experiment-name planes_600epoch \
+    --reconstruction-dir ./results/reconstructions
+```
+
+---
+
+## 数据说明
+
+### 数据目录结构
+
 ```
 data/
-├── TrainingData/NormalizationParameters/ShapeNetV2/02691156/  # 627个训练样本
-├── TestData/SdfSamples/ShapeNetV2/02691156/                   # 456个测试样本
-├── TestData/NormalizationParameters/ShapeNetV2/02691156/
-└── Reconstructions/600/Meshes/ShapeNetV2/02691156/            # 456个重建mesh
+├── SdfSamples/ShapeNetV2/02691156/    # SDF采样 (.npz)
+│   ├── 1a6f615e8b1b5ae4ce388047.npz
+│   ├── 1b0a2b0c05439c7e8a8e7d2a.npz
+│   └── ...
+├── NormalizationParameters/ShapeNetV2/02691156/  # 归一化参数 (.json)
+│   ├── 1a6f615e8b1b5ae4ce388047.json
+│   └── ...
+└── Reconstructions/600/Meshes/ShapeNetV2/02691156/  # 重建结果 (.ply)
+    ├── 1a6f615e8b1b5ae4ce388047.ply
+    └── ...
 ```
 
-**或自行从 ShapeNet 下载**：https://shapenet.org/
+### SDF 数据格式
+
+每个 .npz 文件包含：
+- `pos`: 正采样点 (N × 4) - [x, y, z, sdf]
+- `neg`: 负采样点 (M × 4) - [x, y, z, sdf]
 
 ---
 
-## 目录结构
+## 核心代码说明
 
-```
-├── configs/                          # 实验配置
-│   └── specs.json
-├── models/                          # 模型文件
-│   ├── ModelParameters/600.pth     # Decoder权重 (7.4 MB)
-│   ├── LatentCodes/600.pth         # 隐向量 (643 KB)
-│   └── Logs/Logs.pth              # 训练日志
-├── source_code/                     # 源代码
-│   ├── src/
-│   │   ├── train_deep_sdf.py       # 训练脚本
-│   │   ├── reconstruct.py          # 重建脚本
-│   │   ├── evaluate.py             # 评估脚本
-│   │   └── deep_sdf/              # 工具模块
-│   └── networks/
-│       └── deep_sdf_decoder.py     # Decoder网络
-├── scripts/                         # 工具脚本
-│   ├── generate_new_planes.py      # 生成新飞机
-│   ├── visualize_compare.py        # 可视化
-│   ├── render_planes.py           # 多视角渲染
-│   └── visualize_generated_vs_real.py  # 对比图
-├── generated/GeneratedPlanes/       # 生成的飞机 (PLY)
-├── images/                          # 可视化结果
-├── data/                            # 数据（需下载）
-└── README.md
-```
+### 网络架构 (deep_sdf_decoder.py)
 
----
-
-## 实验概述
-
-### 任务
-使用 DeepSDF 对 ShapeNet V2 飞机数据进行3D重建，并从随机隐向量生成新飞机。
-
-### 模型配置
-
-| 参数 | 值 |
-|------|-----|
-| 类型 | Auto-Decoder |
-| 隐向量维度 | 256 |
-| 网络结构 | [256+3] → 512×4 → 256 → 128 → 1 |
-| 训练Epoch | 600 |
-| 归一化 | Weight Norm + Layer Norm |
-
-### 评测结果
-
-| 指标 | 值 |
-|------|-----|
-| Chamfer Distance (×1000) | ~0.36 |
-| 重建完成率 | 100% |
-
----
-
-## 核心原理
-
-### SDF (Signed Distance Function)
-
-```
-SDF(p) < 0  →  点在物体内部
-SDF(p) = 0  →  点在物体表面
-SDF(p) > 0  →  点在物体外部
-```
-
-### Auto-Decoder
-
-训练时，隐向量作为可学习参数直接优化：
 ```python
-for each shape:
-    latent = optimizable_vector(256)
-    for epoch in range(600):
-        loss = MSE(decoder(latent, coords), sdf_true)
-        optimizer.step()  # 同时优化latent和decoder
+Decoder(
+    latent_size=256,     # 隐向量维度
+    dims=[512×8],        # 8层全连接
+    latent_in=[4],       # 隐向量在第4层注入
+    dropout=[0-7],       # 每层dropout
+    weight_norm=True     # 权重归一化
+)
 ```
 
-### 新形状生成
+### 训练策略
 
-从训练好的隐向量分布随机采样：
-```python
-z ~ N(mean=-0.000351, std=0.0456)  # 随机隐向量
-mesh = decoder(z, coords) → marching_cubes → PLY
+| 参数 | 值 | 说明 |
+|------|-----|------|
+| Batch Size | 4 | 每批次场景数 |
+| Samples/Scene | 16384 | 每场景采样点数 |
+| Learning Rate | 0.0005 | 初始学习率 |
+| LR Schedule | Step | 每500epoch减半 |
+| Epochs | 1000+ | 训练轮数 |
+| Code Regularization | 1e-4 | 隐向量L2正则 |
+
+### Auto-Decoder vs Auto-Encoder
+
 ```
+Auto-Encoder:  Image → [Encoder] → Latent → [Decoder] → SDF
+Auto-Decoder:  Latent(可学习) + XYZ → [Decoder] → SDF
+```
+
+DeepSDF使用Auto-Decoder，训练时隐向量作为可学习参数直接优化。
 
 ---
 
@@ -139,11 +186,11 @@ mesh = decoder(z, coords) → marching_cubes → PLY
 
 ### 生成新飞机
 ```bash
-# 生成5个新飞机到 generated/GeneratedPlanes/
+# 生成5个新飞机
 python scripts/generate_new_planes.py -n 5
 
 # 指定输出目录
-python scripts/generate_new_planes.py -n 10 -o my_planes
+python scripts/generate_new_planes.py -n 10 -o my_output
 ```
 
 ### 可视化
@@ -151,7 +198,7 @@ python scripts/generate_new_planes.py -n 10 -o my_planes
 # 查看单个mesh
 python scripts/visualize_compare.py single file.ply
 
-# 随机显示6个
+# 随机显示6个重建样本
 python scripts/visualize_compare.py
 
 # 对比两个mesh
@@ -166,48 +213,65 @@ python scripts/render_planes.py
 
 ---
 
-## 环境依赖
+## Google Drive 数据链接
 
-```bash
-pip install torch numpy trimesh matplotlib scikit-image
-```
-
----
-
-## 数据来源
-
-- **ShapeNet V2**: https://shapenet.org/
-  - 类别ID: 02691156 (飞机)
-  - 需要注册下载
+| 数据 | 大小 | 下载链接 |
+|------|------|----------|
+| 训练数据 | 795 KB | [training_4.13planes-600epoch.zip](https://drive.google.com/file/d/1fkHA9ZclgHxMAdm_jM-GYwCZ9MdiLC7B/view?usp=sharing) |
+| 测试数据 | 3.0 GB | [test_4.13planes-600epoch.zip](https://drive.google.com/file/d/19ENGz3Cnxp_7HmjjBLcPgkSR23UpwqC-/view?usp=sharing) |
+| 重建结果 | 261 MB | [reconstructions_4.13planes-600epoch.zip](https://drive.google.com/file/d/11KQy6ca7o8MuPxGZBU5PWwAhzOVQhw9n/view?usp=sharing) |
+| 隐向量 | 583 KB | [latentcodes_4.13planes-600epoch.zip](https://drive.google.com/file/d/1WeusBcG0clPVxzfozuSA0M84I8EKtSN7/view?usp=sharing) |
 
 ---
 
-## 可视化结果
+## 实验结果
+
+| 指标 | 值 |
+|------|-----|
+| 测试样本数 | 456 |
+| Chamfer Distance (×1000) | ~0.36 |
+| 重建完成率 | 100% |
+
+### 可视化示例
 
 | 文件 | 说明 |
 |------|------|
 | images/generated_planes_view.png | 6个生成飞机3D图 |
 | images/generated_vs_real.png | 生成 vs 真实重建对比 |
-| images/sample_planes.png | 重建样本展示 |
 | images/renders/*.png | 每个飞机的4视角渲染 |
 
 ---
 
-## 复现建议
+## 常见问题
 
-1. **训练复现**：需要GPU集群，从 ShapeNet 下载数据，运行 `source_code/src/train_deep_sdf.py`
-2. **仅推理**：直接下载模型权重和测试数据，运行 `scripts/generate_new_planes.py`
-3. **仅可视化**：下载重建结果 `reconstructions_*.zip`，用 MeshLab 或 Python 查看 PLY 文件
+### Q: 内存不足？
+```bash
+# 减小batch size
+# 修改 specs.json: "ScenesPerBatch": 2
+```
+
+### Q: 训练太慢？
+- 使用GPU加速
+- 减少 `SamplesPerScene` (建议8192起步)
+
+### Q: 生成质量差？
+- 增加训练epoch (当前600，建议1000+)
+- 提高Marching Cubes分辨率 (N=256)
+
+### Q: 如何查看训练进度？
+```bash
+python scripts/plot_log.py --log models/Logs/Logs.pth
+```
 
 ---
 
-## 后续研究
+## 后续研究方向
 
-- 更长训练 (1000+ epoch)
-- 更高分辨率 (N=256, 512)
-- 多类别 (车、船、椅子等)
-- 条件DeepSDF
-- 隐向量插值动画
+1. **更长训练**: Epoch 1000+
+2. **更高分辨率**: N=256, 512
+3. **多类别**: 车(02958340)、船(04530566)
+4. **条件生成**: 类别条件DeepSDF
+5. **隐向量插值**: 形状渐变动画
 
 ---
 
