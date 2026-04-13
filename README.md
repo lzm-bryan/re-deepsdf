@@ -38,24 +38,22 @@ conda install pytorch numpy trimesh matplotlib scikit-image
 
 ### 数据准备
 
-#### 方式1：从 Google Drive 下载预处理数据
+从 Google Drive 下载并解压到本仓库 `data/` 目录：
 
-下载并解压到本仓库 `data/` 目录：
-
-| 数据 | 大小 | 下载链接 |
-|------|------|----------|
-| 训练数据 (TrainingData) | 795 KB | [training_4.13planes-600epoch.zip](https://drive.google.com/file/d/1fkHA9ZclgHxMAdm_jM-GYwCZ9MdiLC7B/view?usp=sharing) |
-| 测试数据 (TestData) | 3.0 GB | [test_4.13planes-600epoch.zip](https://drive.google.com/file/d/19ENGz3Cnxp_7HmjjBLcPgkSR23UpwqC-/view?usp=sharing) |
-| 重建结果 (Reconstructions) | 261 MB | [reconstructions_4.13planes-600epoch.zip](https://drive.google.com/file/d/11KQy6ca7o8MuPxGZBU5PWwAhzOVQhw9n/view?usp=sharing) |
-| 隐向量 (LatentCodes) | 583 KB | [latentcodes_4.13planes-600epoch.zip](https://drive.google.com/file/d/1WeusBcG0clPVxzfozuSA0M84I8EKtSN7/view?usp=sharing) |
+| 数据 | 大小 | 说明 | 下载链接 |
+|------|------|------|----------|
+| 训练数据 (TrainingData) | 4.1 GB | **完整训练数据 (SdfSamples + NormalizationParameters)** | [train_4.13planes-600epoch.zip](https://drive.google.com/file/d/1KCqG-tOYm3H92792S17m-JFwLCmFdS0k/view?usp=sharing) |
+| 测试数据 (TestData) | 3.0 GB | SDF采样 + 归一化参数 | [test_4.13planes-600epoch.zip](https://drive.google.com/file/d/19ENGz3Cnxp_7HmjjBLcPgkSR23UpwqC-/view?usp=sharing) |
+| 重建结果 (Reconstructions) | 261 MB | 456个重建mesh | [reconstructions_4.13planes-600epoch.zip](https://drive.google.com/file/d/11KQy6ca7o8MuPxGZBU5PWwAhzOVQhw9n/view?usp=sharing) |
+| 隐向量 (LatentCodes) | 583 KB | 627个训练样本隐向量 | [latentcodes_4.13planes-600epoch.zip](https://drive.google.com/file/d/1WeusBcG0clPVxzfozuSA0M84I8EKtSN7/view?usp=sharing) |
 
 解压后目录结构：
 ```
 data/
-├── SdfSamples/ShapeNetV2/02691156/      # 训练用 SDF 采样
-├── NormalizationParameters/ShapeNetV2/02691156/  # 归一化参数
-├── TestData/SdfSamples/ShapeNetV2/02691156/      # 测试用 SDF 采样
-└── TestData/NormalizationParameters/ShapeNetV2/02691156/
+├── SdfSamples/ShapeNetV2/02691156/      # 627个训练样本SDF (.npz)
+├── NormalizationParameters/ShapeNetV2/02691156/  # 归一化参数 (.json)
+├── TestData/SdfSamples/ShapeNetV2/02691156/      # 456个测试样本SDF (.npz)
+└── TestData/NormalizationParameters/ShapeNetV2/02691156/  # 归一化参数 (.json)
 ```
 
 #### 方式2：从 ShapeNet 原始数据生成
@@ -198,12 +196,14 @@ python scripts/render_planes.py
 
 ## Google Drive 数据链接
 
-| 数据 | 大小 | 下载链接 |
-|------|------|----------|
-| 训练数据 | 795 KB | [training_4.13planes-600epoch.zip](https://drive.google.com/file/d/1fkHA9ZclgHxMAdm_jM-GYwCZ9MdiLC7B/view?usp=sharing) |
-| 测试数据 | 3.0 GB | [test_4.13planes-600epoch.zip](https://drive.google.com/file/d/19ENGz3Cnxp_7HmjjBLcPgkSR23UpwqC-/view?usp=sharing) |
-| 重建结果 | 261 MB | [reconstructions_4.13planes-600epoch.zip](https://drive.google.com/file/d/11KQy6ca7o8MuPxGZBU5PWwAhzOVQhw9n/view?usp=sharing) |
-| 隐向量 | 583 KB | [latentcodes_4.13planes-600epoch.zip](https://drive.google.com/file/d/1WeusBcG0clPVxzfozuSA0M84I8EKtSN7/view?usp=sharing) |
+| 数据 | 大小 | 说明 | 下载链接 |
+|------|------|------|----------|
+| **训练SDF采样** | 4.1 GB | **完整训练数据，可直接复现训练** | [待上传] |
+| 测试数据 | 3.0 GB | 456个测试样本SDF采样 | [test_4.13planes-600epoch.zip](https://drive.google.com/file/d/19ENGz3Cnxp_7HmjjBLcPgkSR23UpwqC-/view?usp=sharing) |
+| 重建结果 | 261 MB | 456个重建mesh (.ply) | [reconstructions_4.13planes-600epoch.zip](https://drive.google.com/file/d/11KQy6ca7o8MuPxGZBU5PWwAhzOVQhw9n/view?usp=sharing) |
+| 隐向量 | 583 KB | 627个训练样本隐向量 | [latentcodes_4.13planes-600epoch.zip](https://drive.google.com/file/d/1WeusBcG0clPVxzfozuSA0M84I8EKtSN7/view?usp=sharing) |
+
+> ⚠️ **请上传 `sdfsamples_4.13planes-600epoch.zip` 到 Google Drive 并更新上方链接**
 
 ---
 
