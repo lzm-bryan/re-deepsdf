@@ -41,8 +41,22 @@ conda install pytorch numpy trimesh matplotlib scikit-image
 #### 方式1：从 Google Drive 下载预处理数据
 
 下载并解压到本仓库 `data/` 目录：
-- [training_4.13planes-600epoch.zip](https://drive.google.com/file/d/1fkHA9ZclgHxMAdm_jM-GYwCZ9MdiLC7B/view?usp=sharing) (795 KB)
-- [test_4.13planes-600epoch.zip](https://drive.google.com/file/d/19ENGz3Cnxp_7HmjjBLcPgkSR23UpwqC-/view?usp=sharing) (3.0 GB)
+
+| 数据 | 大小 | 下载链接 |
+|------|------|----------|
+| 训练数据 (TrainingData) | 795 KB | [training_4.13planes-600epoch.zip](https://drive.google.com/file/d/1fkHA9ZclgHxMAdm_jM-GYwCZ9MdiLC7B/view?usp=sharing) |
+| 测试数据 (TestData) | 3.0 GB | [test_4.13planes-600epoch.zip](https://drive.google.com/file/d/19ENGz3Cnxp_7HmjjBLcPgkSR23UpwqC-/view?usp=sharing) |
+| 重建结果 (Reconstructions) | 261 MB | [reconstructions_4.13planes-600epoch.zip](https://drive.google.com/file/d/11KQy6ca7o8MuPxGZBU5PWwAhzOVQhw9n/view?usp=sharing) |
+| 隐向量 (LatentCodes) | 583 KB | [latentcodes_4.13planes-600epoch.zip](https://drive.google.com/file/d/1WeusBcG0clPVxzfozuSA0M84I8EKtSN7/view?usp=sharing) |
+
+解压后目录结构：
+```
+data/
+├── SdfSamples/ShapeNetV2/02691156/      # 训练用 SDF 采样
+├── NormalizationParameters/ShapeNetV2/02691156/  # 归一化参数
+├── TestData/SdfSamples/ShapeNetV2/02691156/      # 测试用 SDF 采样
+└── TestData/NormalizationParameters/ShapeNetV2/02691156/
+```
 
 #### 方式2：从 ShapeNet 原始数据生成
 
@@ -60,38 +74,9 @@ conda install pytorch numpy trimesh matplotlib scikit-image
        --output-dir ./data/SdfSamples
    ```
 
-### 修改配置文件
+### 配置文件
 
-编辑 `configs/specs.json`，将路径改为你本地路径：
-
-```json
-{
-  "Description": "Train DeepSDF on planes",
-  "DataSource": "/your/local/path/to/SDFdata_train",
-  "TrainSplit": "examples/splits/planes_train.json",
-  "TestSplit": "examples/splits/planes_train.json",
-  "NetworkArch": "deep_sdf_decoder",
-  "NetworkSpecs": {
-    "dims": [512, 512, 512, 512, 512, 512, 512, 512],
-    "dropout": [0, 1, 2, 3, 4, 5, 6, 7],
-    "dropout_prob": 0.2,
-    "norm_layers": [0, 1, 2, 3, 4, 5, 6, 7],
-    "latent_in": [4],
-    "weight_norm": true
-  },
-  "CodeLength": 256,
-  "NumEpochs": 1000,
-  "SnapshotFrequency": 100,
-  "LearningRateSchedule": [
-    {"Type": "Step", "Initial": 0.0005, "Interval": 500, "Factor": 0.5}
-  ],
-  "SamplesPerScene": 16384,
-  "ScenesPerBatch": 4,
-  "ClampingDistance": 0.1,
-  "CodeRegularization": true,
-  "CodeRegularizationLambda": 1e-4
-}
-```
+`configs/specs.json` 已配置好默认参数，数据路径使用相对路径 `./data/`。
 
 ### 训练
 
@@ -99,8 +84,7 @@ conda install pytorch numpy trimesh matplotlib scikit-image
 python source_code/src/train_deep_sdf.py \
     --experiment-name planes_600epoch \
     --data-path ./data \
-    --epochs 600 \
-    --batch-size 4
+    --epochs 600
 ```
 
 ### 评估
@@ -109,33 +93,32 @@ python source_code/src/train_deep_sdf.py \
 # 重建测试集
 python source_code/src/reconstruct.py \
     --experiment-name planes_600epoch \
-    --checkpoint models/ModelParameters/600.pth \
-    --data-path ./data/TestData
+    --checkpoint models/ModelParameters/600.pth
 
 # 计算指标
 python source_code/src/evaluate.py \
     --experiment-name planes_600epoch \
-    --reconstruction-dir ./results/reconstructions
+    --reconstruction-dir ./data/Reconstructions
 ```
 
 ---
 
 ## 数据说明
 
-### 数据目录结构
+### 数据目录结构（下载后）
 
 ```
 data/
-├── SdfSamples/ShapeNetV2/02691156/    # SDF采样 (.npz)
-│   ├── 1a6f615e8b1b5ae4ce388047.npz
-│   ├── 1b0a2b0c05439c7e8a8e7d2a.npz
-│   └── ...
-├── NormalizationParameters/ShapeNetV2/02691156/  # 归一化参数 (.json)
-│   ├── 1a6f615e8b1b5ae4ce388047.json
-│   └── ...
+├── TrainingData/
+│   └── NormalizationParameters/ShapeNetV2/02691156/  # 627个训练样本
+│       ├── 1a6f615e8b1b5ae4ce388047.json
+│       └── ...
+├── TestData/
+│   ├── SdfSamples/ShapeNetV2/02691156/      # 456个测试样本 (.npz)
+│   │   ├── 1a6f615e8b1b5ae4ce388047.npz
+│   │   └── ...
+│   └── NormalizationParameters/ShapeNetV2/02691156/  # 归一化参数
 └── Reconstructions/600/Meshes/ShapeNetV2/02691156/  # 重建结果 (.ply)
-    ├── 1a6f615e8b1b5ae4ce388047.ply
-    └── ...
 ```
 
 ### SDF 数据格式

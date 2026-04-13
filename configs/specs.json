@@ -1,8 +1,8 @@
 {
-  "Description": "Train DeepSDF on planes (airplanes)",
-  "DataSource": "/home/msai/zhiming002/SDFdata_train",
+  "Description": "Train DeepSDF on planes (airplanes) - ShapeNet V2 02691156",
+  "DataSource": "./data/SdfSamples",
   "TrainSplit": "examples/splits/planes_train.json",
-  "TestSplit": "examples/splits/planes_train.json",
+  "TestSplit": "examples/splits/planes_eval.json",
   "NetworkArch": "deep_sdf_decoder",
   "NetworkSpecs": {
     "dims": [512, 512, 512, 512, 512, 512, 512, 512],
@@ -16,7 +16,7 @@
     "weight_norm": true
   },
   "CodeLength": 256,
-  "NumEpochs": 2000,
+  "NumEpochs": 1000,
   "SnapshotFrequency": 100,
   "AdditionalSnapshots": [10, 50],
   "LearningRateSchedule": [
@@ -25,16 +25,10 @@
       "Initial": 0.0005,
       "Interval": 500,
       "Factor": 0.5
-    },
-    {
-      "Type": "Step",
-      "Initial": 0.001,
-      "Interval": 500,
-      "Factor": 0.5
     }
   ],
   "SamplesPerScene": 16384,
-  "ScenesPerBatch": 256,
+  "ScenesPerBatch": 4,
   "DataLoaderThreads": 4,
   "ClampingDistance": 0.1,
   "CodeRegularization": true,
