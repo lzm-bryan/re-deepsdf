@@ -12,9 +12,16 @@
 
 **⚠️ 数据文件过大（~3.9GB），存储在 Google Drive**
 
-### 下载地址
-- **Google Drive**: [链接待补充]
-- **或自行准备 ShapeNet V2**: https://shapenet.org/
+### Google Drive 下载地址
+
+| 文件 | 大小 | 下载链接 |
+|------|------|----------|
+| 训练数据 (TrainingData) | 795 KB | [training_4.13planes-600epoch.zip](https://drive.google.com/file/d/1fkHA9ZclgHxMAdm_jM-GYwCZ9MdiLC7B/view?usp=sharing) |
+| 测试数据 (TestData) | 3.0 GB | [test_4.13planes-600epoch.zip](https://drive.google.com/file/d/19ENGz3Cnxp_7HmjjBLcPgkSR23UpwqC-/view?usp=sharing) |
+| 重建结果 (Reconstructions) | 261 MB | [reconstructions_4.13planes-600epoch.zip](https://drive.google.com/file/d/11KQy6ca7o8MuPxGZBU5PWwAhzOVQhw9n/view?usp=sharing) |
+| 隐向量 (LatentCodes) | 583 KB | [latentcodes_4.13planes-600epoch.zip](https://drive.google.com/file/d/1WeusBcG0clPVxzfozuSA0M84I8EKtSN7/view?usp=sharing) |
+
+**或自行准备 ShapeNet V2**: https://shapenet.org/
 
 ### 数据目录结构
 ```
