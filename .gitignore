@@ -1,3 +1,17 @@
-# Data folders - too large for GitHub
-# Download from Google Drive or ShapeNet (see README)
+# Data - download from Google Drive (see README)
 data/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
