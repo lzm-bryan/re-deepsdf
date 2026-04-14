@@ -1,0 +1,982 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CSDN 文章本地保存 - 149218796</title>
+  <style>
+    body { margin: 0; padding: 24px; font-family: "Segoe UI", "Microsoft YaHei", sans-serif; background: #f7f8fa; color: #222; }
+    .wrap { max-width: 960px; margin: 0 auto; background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px; }
+    .meta { color: #666; margin-bottom: 12px; font-size: 14px; }
+    pre { white-space: pre-wrap; word-break: break-word; line-height: 1.55; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="meta">来源镜像: https://r.jina.ai/http://blog.csdn.net/weixinhum/article/details/149218796</div>
+    <pre>Title: DeepSDF璁烘枃澶嶇幇1---鏁版嵁闆嗙敓鎴?---瀹樻柟浠ｇ爜杩愯
+
+URL Source: http://blog.csdn.net/weixinhum/article/details/149218796
+
+Published Time: 2025-07-09T11:05:10+08:00
+
+Markdown Content:
+# DeepSDF璁烘枃澶嶇幇1---鏁版嵁闆嗙敓鎴?---瀹樻柟浠ｇ爜杩愯_deepsdf婧愮爜杩愯鎬庝箞杩愯-CSDN鍗氬
+
+[![Image 6: CSDN棣栭〉](https://img-home.csdnimg.cn/images/20201124032511.png)](https://www.csdn.net/)
+
+*   [鍗氬](https://blog.csdn.net/)
+*   [涓嬭浇](https://download.csdn.net/)
+*   [绀惧尯](https://devpress.csdn.net/)
+*   [![Image 7](https://img-home.csdnimg.cn/images/20240829093757.png)AtomGit](https://link.csdn.net/?target=https%3A%2F%2Fgitcode.com%3Futm_source%3Dcsdn_toolbar)
+*   [![Image 8](https://i-operation.csdnimg.cn/images/3c66245675ae423e9cc897dc790b8ac9.png)GPU绠楀姏 ![Image 9](https://i-operation.csdnimg.cn/images/b4db3100c53e4a7c9fd6a3d647156191.png)](https://ai.csdn.net/)
+*   [鏇村](http://blog.csdn.net/weixinhum/article/details/149218796)[浼氳](https://www.bagevent.com/event/9117243 &quot;浼氳&quot;)[瀛︿範](https://edu.csdn.net/?utm_source=zhuzhantoolbar &quot;楂樿川閲忚绋嬄峰ぇ浼氫簯浼氬憳&quot;)[![Image 10](https://i-operation.csdnimg.cn/images/77c4dd7a760a493498bee1d336b064c0.png)InsCode](https://inscode.net/?utm_source=csdn_blog_top_bar &quot;InsCode&quot;) 
+
+鎼滅储
+AI 鎼滅储
+
+[鐧诲綍](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+鐧诲綍鍚庢偍鍙互锛?
+*   澶嶅埗浠ｇ爜鍜屼竴閿繍琛?*   涓庡崥涓诲ぇV娣卞害浜掑姩
+*   瑙ｉ攣娴烽噺绮鹃€夎祫婧?*   鑾峰彇鍓嶆部鎶€鏈祫璁?
+[绔嬪嵆鐧诲綍](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+[![Image 11](https://i-operation.csdnimg.cn/images/f9098e9320264ddc85f274234b2f0c6a.png)鏂板寮€閫氫細鍛?绔嬪噺60![Image 12](https://i-operation.csdnimg.cn/images/97f199b02b604390ab516e4897fb5bfe.png)](https://mall.csdn.net/vip?utm_source=dl_hover)
+
+[浼氬憳路鏂颁汉绀煎寘 ![Image 13](https://i-operation.csdnimg.cn/images/105eda9d414f4250a7c3fe45be3cd15f.png)](https://mall.csdn.net/vip?utm_source=vip_toolbarhyzx_hy)
+
+[娑堟伅](https://i.csdn.net/#/msg/index)
+
+[鍒涗綔涓績](https://mp.csdn.net/ &quot;鍒涗綔涓績&quot;)
+
+[鍒涗綔](https://mp.csdn.net/edit)
+
+[![Image 14](https://i-operation.csdnimg.cn/images/6e41bd372d1f4ec39b3cd36ab95046c4.png)](https://mp.csdn.net/edit)![Image 15](https://i-operation.csdnimg.cn/images/43349e98a45341699652b0b6fa4ea541.png)![Image 16](https://i-operation.csdnimg.cn/images/0f13ec529b6b4195ad99894f76653e56.png)
+
+# DeepSDF璁烘枃澶嶇幇1---鏁版嵁闆嗙敓鎴?---瀹樻柟浠ｇ爜杩愯
+
+鍘熷垱 宸蹭簬 2026-02-01 23:56:46 淇敼路1.6k 闃呰
+
+路![Image 17](https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Active.png)![Image 18](https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Black.png) 18 
+
+路[![Image 19](https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollect2.png)![Image 20](https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollectionActive2.png) 12](http://blog.csdn.net/weixinhum/article/details/149218796)路
+
+CC 4.0 BY-SA鐗堟潈
+
+ 鐗堟潈澹版槑锛氭湰鏂囦负鍗氫富鍘熷垱鏂囩珷锛岄伒寰猍CC 4.0 BY-SA](http://creativecommons.org/licenses/by-sa/4.0/)鐗堟潈鍗忚锛岃浆杞借闄勪笂鍘熸枃鍑哄閾炬帴鍜屾湰澹版槑銆?
+
+鏂囩珷鏍囩锛?[#DeepSDF](https://so.csdn.net/so/search/s.do?q=DeepSDF&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art)
+
+浜?2025-07-09 11:05:10 棣栨鍙戝竷
+
+[![Image 21](https://i-blog.csdnimg.cn/columns/default/20201014180756923.png?x-oss-process=image/resize,m_fixed,h_224,w_224)璁烘枃娣卞害瑙ｈ&amp;澶嶇幇 涓撴爮鏀跺綍璇ュ唴瀹筣(https://blog.csdn.net/ohantanyanying/category_13001860.html &quot;璁烘枃娣卞害瑙ｈ&amp;澶嶇幇&quot;)
+
+4 绡囨枃绔?
+[璁㈤槄涓撴爮](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+DeepSDF锛圖eepSDF: Learning Continuous Signed Distance Functions for Shape Representation锛夋槸涓夌淮琛ㄨ揪棰嗗煙涓€绡囬噸瑕佺殑璁烘枃锛屾彁鍑轰簡浣跨敤绁炵粡缃戠粶鏉ユ嫙鍚堢┖闂寸偣鍒颁笁缁翠綋琛ㄩ潰鐨勫叕寮忥紝浠庤€屽疄鐜颁笁缁翠綋鐨勮〃杈俱€傛帴涓嬫潵锛屾垜浠皢閫氳繃涓€绯诲垪鍗氬娣卞叆鍒嗘瀽杩欑瘒鏂囩珷锛屼互鏈熷璇ユ柟娉曟湁鏇存繁鍒荤殑鐞嗚В銆?
+鐢变簬DeepSDF娌℃湁鐩存帴缁欏嚭 鏁版嵁闆嗭紝鍙粰浜嗙敓鎴愭暟鎹泦鐨勪唬鐮侊紝鍔犱箣鏃舵棩涔呰繙锛屼唬鐮佽繍琛岃捣鏉ユ湁鐗堟湰鐩稿叧鐨勪竴浜涢棶棰樸€傚洜姝よ繖涓€绯诲垪鏂囩珷鐨勭涓€绡囧崥瀹紝鎴戜滑涓昏璁茶堪濡備綍鎴愭灉杩愯瀹樻柟鐨勪唬鐮佷粠鑰岃幏寰桪eepSDF鐨勬暟鎹泦锛屼互渚涚缁忕綉缁滆繘琛岃缁冦€備箣鍓嶆姌鑵捐繃澶嶇幇鐨勮€佸摜搴旇鏈夊悓鎰燂紝杩欓儴鍒嗗彲浠ヨ鏄暣绡囨枃绔犳渶鎭跺績鐨勯儴鍒嗐€傘€傘€?
+PS: 杩欎釜宸ヤ綔涓嶆槸蹇呴』鐨勶紝缃戜笂鏈夐浄閿嬪凡缁忚窇浜嗘暣涓祦绋嬬劧鍚庢妸鏁版嵁闆嗘墦鍖呭彂浜嗗嚭鏉ワ紝濡傛灉鍙槸鎯宠缁冧竴涓嬪彲浠ョ洿鎺ユ壘鍒版枃绔犳渶鍚庣殑[閾炬帴涓嬭浇](https://blog.csdn.net/qq_38677322/article/details/110957634)銆傚彟澶栵紝鏈変笓闂ㄧ敤浜庣敓鎴怐eepSDF鏁版嵁闆嗙殑python鍖咃紝鍙仛mesh-to-sdf锛屼篃鍙互瀹炵幇鐢熸垚DeepSDF鏁版嵁闆嗙殑鍔熻兘銆傝嚜宸辫窇鏁版嵁闆嗙殑鐢熸垚锛屼竴鏂归潰鏄负浜嗙‘淇濆拰瀹樻柟浣跨敤鐨勬暟鎹泦涓€鑷达紙浜嬪疄涓婂洜涓烘暟鎹泦鐨勭敓鎴愪唬鐮佷腑鏈夐殢鏈鸿〃闈㈤噰鏍凤紝鎴戜滑瀹屽叏鏃犳硶淇濊瘉鍜屽畼鏂逛娇鐢ㄧ殑鏁版嵁涓€鏍凤紝鑹癸級銆傚彟涓€鏂归潰锛屽垯鏄负浜嗙湅鐪嬪畼鏂规彁渚涚殑鏁版嵁闆嗘湁娌℃湁浠€涔堟瘺鐥咃紙鏈汉鐪嬩簡瀹樻柟鐨勪唬鐮佷箣鍚庣殑纭彂鐜颁簡涓€浜涘皬闂锛屼笅涓€绡囧崥瀹㈠啀璇达級銆?
+涓嬮潰鐩存帴杩涘叆姝ｉ锛屾湰鏂囧弬鑰冧簡瀹樻柟github涓璠Issues](https://github.com/facebookresearch/DeepSDF/issues)鐨勭浉鍏虫弿杩帮紝鍦║buntu24.04涓皢鐜閰嶇疆浜嗚捣鏉ュ苟杩涜鏁版嵁闆嗙敓鎴愩€傦紙24.04闇€瑕佸皢 GCC 鍒囨崲 涓?2銆傚鏋滄槸鑰佷竴鐐圭殑Ubuntu鐗堟湰锛屽嵆榛樿GCC12浠ヤ笅锛屽寘鎷?2鐨勭増鏈紝鍒欎笉闇€瑕佸共杩欎欢浜嬨€?
+## [](http://blog.csdn.net/weixinhum/article/details/149218796)[](http://blog.csdn.net/weixinhum/article/details/149218796)鏁版嵁闆嗙敓鎴?
+### [](http://blog.csdn.net/weixinhum/article/details/149218796)[](http://blog.csdn.net/weixinhum/article/details/149218796)锛?锛塖hapeNet 鏁版嵁闆嗕笅杞?
+DeepSDF浣跨敤鐨勬暟鎹泦鐢盨hapeNet鏁版嵁闆嗗鐞嗚€屾潵锛屽洜姝ょ涓€姝ヨ鍏堜笅杞絊hapeNet鏁版嵁闆嗐€?
+##### [](http://blog.csdn.net/weixinhum/article/details/149218796)涓嬭浇鍦板潃
+
+[ShapeNet/ShapeNetCore 路 Datasets at Hugging Face](https://huggingface.co/datasets/ShapeNet/ShapeNetCore)
+
+杩欎釜缃戠珯闇€瑕佹瀛愭墠涓婂緱鍘伙紝涓嬭浇涔嬪墠闇€瑕佸厛鐢宠锛屾垜鐢宠涓ゅぉ鍚庢嬁鍒版潈闄愬氨鍙互涓嬭浇銆?
+##### [](http://blog.csdn.net/weixinhum/article/details/149218796)涓嬭浇缁嗚妭
+
+鍙互浜哄伐涓€涓釜鐐瑰嚮涓嬭浇锛岄偅鏍蜂細鐩存帴鐢ㄦ祻瑙堝櫒鐨勪笅杞藉櫒涓嬭浇銆傚鏋滃彧鎯冲鐜癉eepSDF锛屽彲浠ュ彧涓嬭浇&quot;02691156&quot;锛屸€?3001627鈥濓紝鈥?3636649鈥濓紝鈥?4256520鈥濓紝&quot;04379243&quot;浜斾釜鏁版嵁鍖咃紝鍥犳鐐逛簲涓嬩篃涓嶆槸寰堥夯鐑︼紝鑰屼笖杩樿兘鑺傜渷涓€鐐圭┖闂淬€?
+![Image 22: 璇锋坊鍔犲浘鐗囨弿杩癩(https://i-blog.csdnimg.cn/direct/f9309447439e47c78bc15f17f8f423d3.png)
+
+濡傛灉鎯充笅鍏ㄩ儴鏁版嵁锛屽垯鍙互浣跨敤 git  clone鏉ヤ笅杞斤紝涓嶈繃闇€瑕佽缃唬鐞嗭細
+
+```bash
+git config --global http.proxy &#39;http://127.0.0.1:VPN绔彛鍙?
+git config --global https.proxy &#39;http://127.0.0.1:VPN绔彛鍙?
+git config --global http.proxy &#39;socks5://127.0.0.1:VPN绔彛鍙?
+git config --global https.proxy &#39;socks5://127.0.0.1:VPN绔彛鍙?
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+*   2
+*   3
+*   4
+
+鐒跺悗鍦?Hugging Face 娣诲姞SSH &amp; GPG Keys锛屾渶鍚庝娇鐢ㄥ涓嬩唬鐮佷笅杞藉嵆鍙細
+
+```bash
+git clone git@hf.co:datasets/ShapeNet/ShapeNetCore
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+
+涓嬭浇涓嬫潵鐨勬暟鎹暱涓嬮潰杩欎釜鏍峰瓙锛?
+![Image 23: 璇锋坊鍔犲浘鐗囨弿杩癩(https://i-blog.csdnimg.cn/direct/86eced7524244644baf9cdf42671a646.png)
+
+### [](http://blog.csdn.net/weixinhum/article/details/149218796)[](http://blog.csdn.net/weixinhum/article/details/149218796)锛?锛夊畨瑁呮墍闇€搴?
+鏁版嵁闆嗙殑杞崲涓昏鐢ㄥ埌CLI11銆丒igen3銆丳angolin 鍜宯anoflann鍥涗釜搴擄紝闇€瑕佹尐涓紪璇戝畨瑁呫€?
+#### [](http://blog.csdn.net/weixinhum/article/details/149218796)[](http://blog.csdn.net/weixinhum/article/details/149218796)CLI11瀹夎
+
+杩欎釜搴撶敤浜庡鐞嗘帶鍒跺彴缁欏埌鐨勫懡浠わ紝闈炲父鏂逛究锛屾帹鑽愬啓鎺у埗鍙扮▼搴忕殑鑰佸摜閮借涓娿€?
+```bash
+git clone https://github.com/CLIUtils/CLI11 --recursive
+cd CLI11
+mkdir build &amp;&amp; cd build
+cmake ..
+make
+sudo make install
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+*   2
+*   3
+*   4
+*   5
+*   6
+
+#### [](http://blog.csdn.net/weixinhum/article/details/149218796)[](http://blog.csdn.net/weixinhum/article/details/149218796)Eigen3瀹夎
+
+杩欎釜搴撶敤浜庢暟瀛︾煩闃佃绠楋紝鏁版嵁闆嗗鐞嗕腑璁＄畻涓夎褰㈢殑闈㈢Н锛屾硶绾垮凡缁忚皟鏁?OpenGL 鐨勭浉鏈轰綅缃瓑閮界敤鍒颁簡杩欎釜搴撱€傛煡浜嗕竴涓嬶紝Eigen3鏈€鏂扮増鏈槸3.4.0锛屽洜姝よ浜嗚繖涓€?
+```bash
+wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
+tar xvf eigen-3.4.0.tar.gz
+cd eigen-3.4.0
+mkdir build &amp;&amp; cd build
+cmake ..
+make
+sudo make install
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+*   2
+*   3
+*   4
+*   5
+*   6
+*   7
+
+#### [](http://blog.csdn.net/weixinhum/article/details/149218796)[](http://blog.csdn.net/weixinhum/article/details/149218796)Pangolin瀹夎
+
+杩欎釜鏄疧penGL鐨勫皝瑁呭簱锛屽ぇ閮ㄥ垎澶嶇幇鐨勫悓瀛︿富瑕佸氨鏄崱鍦ㄨ繖涓簱涓婇潰锛屼粠浠ｇ爜涓婄湅鎰熻瀹屽叏娌″繀瑕佺敤杩欎釜搴擄紝璁烘枃鐨勪綔鑰呭彲鑳芥槸鑷繁鐢ㄨ繖涓簱鐢ㄧ啛浜嗗惂銆傘€傘€?
+浣跨敤鏈€鏂扮増鏈殑Pangolin浼氶亣鍒板悇绉嶉棶棰橈紙淇敼瀵瑰簲鐨勬簮鐮佷篃鑳借В鍐筹紝灏辨槸楹荤儲涓€鐐癸級锛岄渶瑕佹敼鎴恦0.6鐗堟湰銆傜劧鑰岋紝ubuntu24.04鐨勯粯璁cc鐗堟湰鏄?3锛岀紪璇憊0.6鐗堟湰浼氭湁闂锛岄渶瑕佹敼鎴?2锛屾搷浣滃涓?
+
+```bash
+# 鍗歌浇褰撳墠鐗堟湰鐨刧++鍜実cc
+sudo apt remove g++
+sudo apt remove gcc
+sudo apt install g++-12 # 杩欏皢鑷姩瀹夎gcc
+# 灏唃cc鍜実++鐨勯粯璁ょ増鏈寚瀹氫负褰撳墠鐨?2鐗堟湰
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 20
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 20
+# 娉細鏈€鍚庝竴涓暟瀛?0鏄紭鍏堢骇锛岄櫎闈炲瓨鍦ㄥ涓猤cc g++鐗堟湰锛岃繖涓暟瀛楁棤闇€鏇存敼
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+*   2
+*   3
+*   4
+*   5
+*   6
+*   7
+*   8
+
+闅忓悗涓嬭浇浠ｇ爜骞跺垏鎹㈠埌v0.6鐗堟湰锛?
+```bash
+git clone https://github.com/stevenlovegrove/Pangolin.git --recursive
+cd Pangolin
+git checkout v0.6
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+*   2
+*   3
+
+鍥犱负鏂扮殑ffmpeg鏀逛簡寰堝鍛藉悕锛岃繖涓」鐩張鐢ㄤ笉鍒帮紝鎵€浠ユ渶鏂逛究鐨勬柟娉曟槸鎶婂畠鐨勭紪璇戦€夐」鍏虫帀锛堝惁鍒欓渶瑕佽嚜宸卞幓淇敼鐩稿叧鐨勪唬鐮侊紝涓ょ溂涓€榛戙€傘€傘€傦級銆?
+```bash
+mkdir build &amp;&amp; cd build
+cmake -DBUILD_PANGOLIN_FFMPEG=OFF .. #鍥犱负鐗堟湰闂锛屾渶杩戠殑ffmpeg浼氬瓨鍦ㄦ壘涓嶅埌瀵硅薄鐨勯棶棰橈紝鍙嶆涔熶笉闇€瑕佺敤鍒帮紝鐩存帴鍏充簡ffmpeg
+cmake --build .
+sudo make install
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+*   2
+*   3
+*   4
+
+#### [](http://blog.csdn.net/weixinhum/article/details/149218796)[](http://blog.csdn.net/weixinhum/article/details/149218796)閬囪闂
+
+##### [](http://blog.csdn.net/weixinhum/article/details/149218796)1.  python鐗堟湰 闂
+
+```bash
+error: invalid use of incomplete type 鈥楶yFrameObject鈥?{aka 鈥榮truct _frame鈥檥
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+
+杩欎釜闂鍜宲ython鐗堟湰鏈夊叧锛屽彲浠ラ€氳繃鍦ㄨ櫄鎷熺幆澧冧腑瀹夎3.10鏉ヨВ鍐炽€傛搷浣滀箣鍓嶅厛鎶奲uild鏂囦欢澶规竻绌恒€?
+```bash
+conda create -n DeepSDFNew python=3.10
+conda activate DeepSDFNew
+cmake -DBUILD_PANGOLIN_FFMPEG=OFF ..
+cmake --build .
+sudo make install
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+*   2
+*   3
+*   4
+*   5
+
+##### [](http://blog.csdn.net/weixinhum/article/details/149218796)2. 婧愮爜缂哄け闂
+
+```bash
+error: 鈥榥umeric_limits鈥?is not a member of 鈥榮td鈥?```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+
+鎵惧埌&quot;include/pangolin/gl/colour.h&quot;杩欎釜鏂囦欢锛屽湪include閮ㄥ垎鍔犱笂#include 銆傞殢鍚庡啀缂栬瘧鍗冲彲銆傝繖涓棶棰樹篃鍙互鍏堣В鍐筹紝涓嶇劧绛夊埌鎶ラ敊鎵嶆暣姣旇緝楹荤儲銆?
+##### [](http://blog.csdn.net/weixinhum/article/details/149218796)3. 缂哄皯GLEW搴?
+```Markdown
+CMake Error at CMakeModules/FindGLEW.cmake:51 (MESSAGE):
+  Could not find GLEW
+Call Stack (most recent call first):
+  src/CMakeLists.txt:174 (find_package)
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?Markdown
+
+*   1
+*   2
+*   3
+*   4
+
+瑁呬笂鍗冲彲锛?
+```bash
+sudo apt install libglew-dev
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+
+#### [](http://blog.csdn.net/weixinhum/article/details/149218796)[](http://blog.csdn.net/weixinhum/article/details/149218796)nanoflann瀹夎
+
+杩欎釜搴撶敤浜庢瀯寤轰笉鍚屾嫇鎵戙€傚湪杩欎唤浠ｇ爜涓紝鐢ㄨ繖涓簱鏋勫缓KD-Tree锛屼互蹇€熸悳绱㈢┖闂寸偣闄勮繎鐨勮〃闈㈢偣锛屼粠鑰岃绠楃┖闂寸偣鐨凷DF鍊硷紝鍗充笌涓変綅浣撹〃闈㈢殑璺濈銆?
+```bash
+git clone https://github.com/jlblancoc/nanoflann
+cd nanoflann
+mkdir build &amp;&amp; cd build
+cmake ..
+make
+sudo make install
+
+cd /usr/local/include
+sudo mkdir nanoflann
+sudo mv nanoflann.hpp nanoflann
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+![Image 24](https://csdnimg.cn/release/blogv2/dist/pc/img/runCode/icon-arrowwhite.png)
+
+*   1
+*   2
+*   3
+*   4
+*   5
+*   6
+*   7
+*   8
+*   9
+*   10
+
+### [](http://blog.csdn.net/weixinhum/article/details/149218796)[](http://blog.csdn.net/weixinhum/article/details/149218796)锛?锛塂eepSDF浠ｇ爜缂栬瘧杩愯
+
+瀹屾垚涓婇潰鐨勫伐浣滐紝鎺ヤ笅鏉ュ氨鏄疍eepSDF鐨勪唬鐮佺紪璇戣繍琛屼簡銆?
+```bash
+git clone https://github.com/facebookresearch/DeepSDF.git
+cd DeepSDF/third-party
+git clone https://github.com/rogersce/cnpy.git
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+*   2
+*   3
+
+瀹氫綅鍒癉eepSDF鐨凷haderProgram.cpp鏂囦欢涓紝鎶奿n int gl_PrimitiveID杩欒娉ㄩ噴鎺夈€傝繖鍙ヨ瘽濡傛灉涓嶆敞閲婃帀铏界劧缂栬瘧涓嶄細鍑洪敊锛岀劧鑰岀瓑浼氳繍琛岀▼搴忕殑鏃跺€欑潃鑹插櫒浼氭姤閿欍€?
+```bash
+mkdir build &amp;&amp; cd build
+cmake -DCMAKE_CXX_STANDARD=17 ..
+make
+sudo make install
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+*   2
+*   3
+*   4
+
+濡傛灉娌℃姤閿欏簲璇ュ氨OK浜嗐€傚湪`DeepSDF/bin`鐩綍涓嬩骇鐢熶袱涓彲鎵ц鏂囦欢锛屽垎鍒槸`PreprocessMesh`鍜宍SampleVisibleMeshSurface`锛屽鏋滄湁杩欎袱涓枃浠跺垯璇存槑SDF鐨勭幆澧冮兘閰嶇疆鎴愬姛浜嗐€?
+鐒跺悗閰嶇疆涓媝ython鐜锛?
+```bash
+conda create -n DeepSDFdata python=3.6
+conda activate DeepSDFdata
+conda install pytorch==1.1.0 torchvision==0.3.0 cudatoolkit=10.0 -c pytorch
+pip install plyfile
+pip install scikit-image
+pip install trimesh
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+*   2
+*   3
+*   4
+*   5
+*   6
+
+鐩存帴杩愯preprocess_data.py鍗冲彲锛屾敞鎰忓皢&quot;[鈥/ShapeNetCore.v2/&quot;鏀逛负ShapeNet鏁版嵁闆嗙殑鐪熷疄璺緞銆?
+```bash
+mkdir data
+sudo ldconfig
+python preprocess_data.py --data_dir data --source [...]/ShapeNetCore.v2/ --name ShapeNetV2 --split examples/splits/sv2_sofas_train.json --skip
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+*   2
+*   3
+
+杩愯杩囧悗浠ｇ爜浼氬湪 data 鏂囦欢澶逛笅鐢熸垚鏂囦欢锛岀敓鎴愰€熷害澶ф涓€涓?0s宸﹀彸鐨勬牱瀛愶紙 AMD  5900x+RTX4090锛夈€?
+濡傛灉鐢熸垚鐨勬槸娴嬭瘯闆嗭紝浣跨敤濡備笅鍛戒护锛?
+```Python
+python preprocess_data.py --data_dir data --source [...]/ShapeNetCore.v2/ --name ShapeNetV2 --split examples/splits/sv2_planes_test.json --surface --skip
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?Python 杩愯
+
+*   1
+
+鍙﹀锛屾祴璇曢泦闄や簡SDF鏁版嵁澶栵紝杩橀渶瑕佺敓鎴愮墿浣撹〃闈㈢殑閲囨牱鐐逛互渚涜瘎浼帮紝浠ｇ爜濡備笅锛?
+```Python
+python preprocess_data.py --data_dir data --source [...]/ShapeNetCore.v2/ --name ShapeNetV2 --split examples/splits/sv2_sofas_test.json --surface --skip
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?Python 杩愯
+
+*   1
+
+鍊煎緱涓€璇寸殑鏄紝杩欓噷鐢熸垚鐨勫叾瀹炴槸涓夌淮浣撹〃闈㈢殑閲囨牱鐐癸紝鐒惰€屽畼鏂圭洿鎺ュ皢鐐圭殑椤哄簭淇濆瓨鎴愪笁瑙掑舰鐨勭储寮曪紝瀵艰嚧淇濆瓨鍑烘潵鐨勪笁缁翠綋鐪嬭捣鏉ユ槸杩欐牱鐨勶細
+
+![Image 25: 璇锋坊鍔犲浘鐗囨弿杩癩(https://i-blog.csdnimg.cn/direct/3bb10be8aa1a4d8da61f15a0d43d3be4.png)
+
+涓嶈繃鍥犱负璇勪及鐨勬椂鍊欏彧鍏冲績鐐癸紝鍥犳杩欎釜鏄笉褰卞搷浠讳綍缁撴灉鐨勶紝灏辨槸鐪嬬潃寰堝埆鎵€傚鏋滃疄鍦ㄥ繊涓嶄簡锛屽彲浠ヤ慨鏀逛笅SampleVisibleMeshSurface.cpp鐨勪唬鐮侊紝灏哠avePointsToPLY鍑芥暟淇敼濡備笅锛?
+```cpp
+void SavePointsToPLY(const std::vector&lt;Eigen::Vector3f&gt;&amp; verts, const std::string outputfile) {
+  const std::size_t num_verts = verts.size();
+  Eigen::Vector3f v;
+
+  std::ofstream plyFile;
+  plyFile.open(outputfile);
+  plyFile &lt;&lt; &quot;ply\n&quot;;
+  plyFile &lt;&lt; &quot;format ascii 1.0\n&quot;;
+  plyFile &lt;&lt; &quot;element vertex &quot; &lt;&lt; num_verts &lt;&lt; &quot;\n&quot;;
+  plyFile &lt;&lt; &quot;property float x\n&quot;;
+  plyFile &lt;&lt; &quot;property float y\n&quot;;
+  plyFile &lt;&lt; &quot;property float z\n&quot;;
+  // plyFile &lt;&lt; &quot;element face &quot; &lt;&lt; (num_verts / 3) &lt;&lt; &quot;\n&quot;;
+  // plyFile &lt;&lt; &quot;property list uchar int vertex_index\n&quot;;
+  plyFile &lt;&lt; &quot;end_header\n&quot;;
+
+  for (uint i = 0; i &lt; num_verts; i++) {
+    v = verts[i];
+    plyFile &lt;&lt; v[0] &lt;&lt; &quot; &quot; &lt;&lt; v[1] &lt;&lt; &quot; &quot; &lt;&lt; v[2] &lt;&lt; &quot;\n&quot;;
+  }
+
+  // for (uint i = 0; i &lt; num_verts; i += 3) {
+  //   plyFile &lt;&lt; &quot;3 &quot; &lt;&lt; i &lt;&lt; &quot; &quot; &lt;&lt; (i + 1) &lt;&lt; &quot; &quot; &lt;&lt; (i + 2) &lt;&lt; &quot;\n&quot;;
+  // }
+
+  plyFile.close();
+}
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?cpp 杩愯
+
+![Image 26](https://csdnimg.cn/release/blogv2/dist/pc/img/runCode/icon-arrowwhite.png)
+
+*   1
+*   2
+*   3
+*   4
+*   5
+*   6
+*   7
+*   8
+*   9
+*   10
+*   11
+*   12
+*   13
+*   14
+*   15
+*   16
+*   17
+*   18
+*   19
+*   20
+*   21
+*   22
+*   23
+*   24
+*   25
+*   26
+*   27
+
+閲嶆柊缂栬瘧鍚庡啀杩愯灏卞彲寰楀埌鐗╀綋琛ㄩ潰鐨勯噰鏍风偣锛屼笉杩囪繖涔堟搷浣滃悗缁殑璇勪及鍙兘涔熼渶瑕佺◢浣滀慨鏀癸紝杩欓噷鏈汉娌″幓灏濊瘯銆?
+#### [](http://blog.csdn.net/weixinhum/article/details/149218796)[](http://blog.csdn.net/weixinhum/article/details/149218796)閬囪闂
+
+##### [](http://blog.csdn.net/weixinhum/article/details/149218796)1. 缂哄皯ZLIB搴?
+```bash
+CMake Error at /usr/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
+  Could NOT find ZLIB (missing: ZLIB_INCLUDE_DIR)
+Call Stack (most recent call first):
+  /usr/share/cmake-3.28/Modules/FindPackageHandleStandardArgs.cmake:600 (_FPHSA_FAILURE_MESSAGE)
+  /usr/share/cmake-3.28/Modules/FindZLIB.cmake:199 (FIND_PACKAGE_HANDLE_STANDARD_ARGS)
+  third-party/cnpy/CMakeLists.txt:12 (find_package)
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+*   2
+*   3
+*   4
+*   5
+*   6
+
+瑁呬笂
+
+```bash
+sudo apt-get install zlib1g-dev
+```
+
+涓€閿幏鍙栧畬鏁撮」鐩唬鐮?bash
+
+*   1
+
+![Image 27](https://csdnimg.cn/release/blogv2/dist/pc/img/vip-limited-close-newWhite.png)
+
+ 纭畾瑕佹斁寮冩湰娆℃満浼氾紵 
+
+绂忓埄鍊掕鏃?
+_:_ _:_
+
+![Image 28](https://csdnimg.cn/release/blogv2/dist/pc/img/vip-limited-close-roup.png)绔嬪噺 楼
+
+鏅€歏IP骞村崱鍙敤
+
+[绔嬪嵆浣跨敤](https://mall.csdn.net/vip)
+
+[![Image 29](https://profile-avatar.csdnimg.cn/b09b254c8ca94c6aa441ca927a68e9e0_ohantanyanying.jpg!1) _瀵掓江闆佸奖](https://blog.csdn.net/oHanTanYanYing)
+
+[鍏虫敞](javascript:;)[鍏虫敞](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+*   [![Image 30](https://csdnimg.cn/release/blogv2/dist/pc/img/tobarThumbUpactive.png)![Image 31](https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/like-active.png)![Image 32](https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/like.png) 18](http://blog.csdn.net/weixinhum/article/details/149218796)鐐硅禐 
+*   [![Image 33](https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/unlike-active.png)![Image 34](https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/unlike.png)](http://blog.csdn.net/weixinhum/article/details/149218796)韪?
+*   [![Image 35](https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/collect-active.png)![Image 36](https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/collect.png)![Image 37](https://csdnimg.cn/release/blogv2/dist/pc/img/newCollectActive.png) 12](javascript:;) 鏀惰棌    瑙夊緱杩樹笉閿?  涓€閿敹钘?![Image 38](https://csdnimg.cn/release/blogv2/dist/pc/img/collectionCloseWhite.png)  
+*   [![Image 39](https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/comment.png) 0](http://blog.csdn.net/weixinhum/article/details/149218796#commentBox)璇勮 
+*   [![Image 40](https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/share.png)鍒嗕韩](javascript:;)[澶嶅埗閾炬帴](http://blog.csdn.net/weixinhum/article/details/149218796) [鍒嗕韩鍒?QQ](http://blog.csdn.net/weixinhum/article/details/149218796) [鍒嗕韩鍒版柊娴井鍗歖(http://blog.csdn.net/weixinhum/article/details/149218796) ![Image 41](http://blog.csdn.net/weixinhum/article/details/149218796) ![Image 42](https://csdnimg.cn/release/blogv2/dist/pc/img/share/icon-wechat.png)鎵竴鎵?    
+*   [![Image 43](https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/more.png)](http://blog.csdn.net/weixinhum/article/details/149218796)[![Image 44](https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/report.png)涓炬姤](http://blog.csdn.net/weixinhum/article/details/149218796) [![Image 45](https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/report.png)涓炬姤](http://blog.csdn.net/weixinhum/article/details/149218796)  
+
+[涓撴爮鐩綍](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+![Image 46](https://kunyu.csdn.net/1.png?p=58&amp;adBlockFlag=0&amp;adId=1087435&amp;a=1087435&amp;c=3507791&amp;k=DeepSDF%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B01---%E6%95%B0%E6%8D%AE%E9%9B%86%E7%94%9F%E6%88%901---%E5%AE%98%E6%96%B9%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C&amp;spm=1001.2101.3001.5002&amp;articleId=149218796&amp;d=1&amp;t=3&amp;u=814028a0d7a346c89968d6926caad87d)
+
+[_DeepSDF_ _璁烘枃_ _澶嶇幇_ 5 _-_ _-_ _-_ 浠庣悊璁哄埌瀹炶返锛氭綔鍦ㄥ悜閲忎紭鍖栦笌涓夌淮閲嶅缓瀹炴垬 鏈€鏂板彂甯僝(https://blog.csdn.net/weixin_29041767/article/details/158308044)
+
+[weixin_29041767鐨勫崥瀹(https://blog.csdn.net/weixin_29041767)
+
+02-23![Image 47](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 303 
+
+[鏈枃娣卞叆瑙ｆ瀽浜?_DeepSDF_ _璁烘枃_ 涓綔鍦ㄥ悜閲忎紭鍖栫殑鏍稿績鍘熺悊涓庡疄鎴樹唬鐮併€傞€氳繃 _澶嶇幇_ 杩囩▼锛岃缁嗛槓杩颁簡濡備綍鍒╃敤閮ㄥ垎瑙傛祴鏁版嵁锛堝绋€鐤忕偣浜戯級浼樺寲娼滃湪鍚戦噺锛屽苟椹卞姩棰勮缁冪綉缁滃畬鎴愰珮璐ㄩ噺鐨勪笁缁撮噸寤轰笌鐐逛簯琛ュ叏锛屽睍绀轰簡浠庣悊璁哄埌瀹炶返鐨勫畬鏁村疄鐜拌矾寰勩€俔(https://blog.csdn.net/weixin_29041767/article/details/158308044)
+
+[](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+鍙備笌璇勮 鎮ㄨ繕鏈櫥褰曪紝璇峰厛 鐧诲綍 鍚庡彂琛ㄦ垨鏌ョ湅璇勮
+
+[銆愪翰娴嬪厤璐广€?_DeepSDF_ 寮€婧愰」鐩娇鐢ㄦ暀绋媇(https://blog.csdn.net/gitblog_00383/article/details/141246276)
+
+4-10
+
+[gitclonehttps://github.com/facebookresearch/_DeepSDF_.git cd _DeepSDF_ bash 瀹夎渚濊禆: pip install _-_ r requirements.txt bash _杩愯_ 绀轰緥: python run_example.py bash 搴旂敤妗堜緥鍜屾渶浣冲疄璺?_DeepSDF_ 鍦ㄥ涓鍩熼兘鏈夊箍娉涚殑搴旂敤,鍖呮嫭浣嗕笉闄愪簬: 3D 褰㈢姸閲嶅缓:浠庣█鐤忕殑 3D 鐐逛簯鏁版嵁涓噸寤哄畬鏁寸殑 3D 妯″瀷銆俔(https://blog.csdn.net/gitblog_00383/article/details/141246276)
+
+[_1_ 0鍒嗛挓涓婃墜 _DeepSDF_:瓒呯畝鍗曞畨瑁呬笌鐜閰嶇疆鏁欑▼](https://blog.csdn.net/gitblog_00296/article/details/151781350)
+
+3-2
+
+[绗竴姝?鑾峰彇 _DeepSDF_ 婧愪唬鐮?棣栧厛,鍏嬮殕 _DeepSDF_ 浠撳簱鍒版湰鍦? gitclonehttps://gitcode.com/gh_mirrors/de/_DeepSDF_ cd _DeepSDF_ bash 绗簩姝?缂栬瘧C++棰勫鐞嗗伐鍏?_DeepSDF_ 鐨勯澶勭悊鍔熻兘闇€瑕佺紪璇慍++浠ｇ爜,鎸夌収鏍囧噯CMake娴佺▼杩涜鏋勫缓: mkdirbuild cdbuild cmake ..](https://blog.csdn.net/gitblog_00296/article/details/151781350)
+
+[_璁烘枃_ _澶嶇幇_锛氣€淿DeepSDF_: Learning Continuous Signed Distance Functions for Shape Representation鈥淽(https://blog.csdn.net/qq_38677322/article/details/110957634)
+
+[zParquet鐨勫崥瀹(https://blog.csdn.net/qq_38677322)
+
+12-12![Image 48](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 1涓? 
+
+[鐩綍涓€銆?_鏁版嵁闆哶 _鐢熸垚_锛堜竴锛夌幆澧冮厤缃鏄庯紙浜岋級cmake鍜宮ake锛堜笁锛夊畨瑁匔LI _1_ _1_锛堝洓锛夊畨瑁匬angolin锛堜簲锛夊畨瑁卬anoflann锛堝叚锛夊畨瑁匛igen3锛堜竷锛夌紪璇慡DF锛堝叓锛夊鐞?_鏁版嵁闆哶 浜屻€佹ā鍨嬭缁冿紙涓€锛塖DF鏁版嵁娴呮瀽锛堜簩锛夎缁冭繃绋?涓€銆?_鏁版嵁闆哶 _鐢熸垚_ 锛堜竴锛夌幆澧冮厤缃鏄?杩欑瘒鍗氭枃涓昏璁茶В鈥淿DeepSDF_: Learning Continuous Signed Distance Functions for Shape Representation鈥濊繖绡噋aper _澶嶇幇_ 杩囩▼涓殑鐜閰嶇疆宸ヤ綔銆傜敱浜嶥eepSD](https://blog.csdn.net/qq_38677322/article/details/110957634)
+
+[銆愪翰娴嬪厤璐广€?_DeepSDF_ 寮€婧愰」鐩娇鐢ㄦ暀绋媇(https://devpress.csdn.net/v1/article/detail/141246276)
+
+[gitblog_00383鐨勫崥瀹(https://blog.csdn.net/gitblog_00383)
+
+12-27![Image 49](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 1048 
+
+[_DeepSDF_ 鏄竴涓敤浜庡涔犺繛缁鍙疯窛绂诲嚱鏁帮紙Signed Distance Functions, SDF锛変互杩涜褰㈢姸琛ㄧず鐨勫紑婧愰」鐩€傝椤圭洰鐢?Facebook Research 鍥㈤槦寮€鍙戯紝骞跺湪 CVPR 20 _1_ 9 浼氳涓婂彂琛ㄣ€俖DeepSDF_ 鑳藉浠庨儴鍒嗗拰鍣０鐨?3D 杈撳叆鏁版嵁涓畬鎴愬舰鐘剁殑琛ㄧず锛屽叾鏍稿績鎬濇兂鏄€氳繃涓€涓繛缁殑浣撶Н鍦烘潵琛ㄧず褰㈢姸鐨勮〃闈紝鍏朵腑鍦轰腑鏌愮偣鐨勫箙搴﹁〃绀哄埌琛ㄩ潰杈圭晫鐨勮窛绂伙紝绗﹀彿琛ㄧず璇ョ偣](https://devpress.csdn.net/v1/article/detail/141246276)
+
+[shape_sdf:鐢ㄤ簬琛ㄧず鍗曚釜褰㈢姸鐨凷DF鐨勭畝鍗昅LP璧勬簮](https://download.csdn.net/download/weixin_42155721/16810048)
+
+4-12
+
+[鍏锋湁MLP鐨凷DF琛ㄧず 绠€鍗曠殑缃戠粶鏄剧ず鍗曚釜褰㈢姸鐨?_DeepSDF_ 鏍峰紡琛ㄧず銆?浣跨敤NeRF鏍峰紡鐨勪綅缃紪鐮?鍙互鏇村鏄撳湴鎷熷悎褰㈢姸銆?渚濆瓨鍏崇郴 璇ュ瓨鍌ㄥ簱闇€瑕乶umpy , pytorch , pytorch _-_ lightning鍜孭yMarchingCubes (鍦ㄦ壘鍒?銆?璁粌 浠庢牴鐩綍浣跨敤浠ヤ笅鍛戒护杩涜璁粌: python trainer/train_implicit.py 棰勬湡浜ч噺 妗ｆ缁撴瀯 鏂囦欢澶?鎻忚堪 data/hollo...](https://download.csdn.net/download/weixin_42155721/16810048)
+
+[_Deepsdf_ _璁烘枃_ _澶嶇幇_ _-_ ubuntu20.04 _-_ 2023.04.08](https://blog.csdn.net/cgsmalcloud/article/details/130024637)
+
+[cgsmalcloud鐨勫崥瀹(https://blog.csdn.net/cgsmalcloud)
+
+04-08![Image 50](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 1111 
+
+[銆愪唬鐮併€慱Deepsdf_ _璁烘枃_ _澶嶇幇_ _-_ ubuntu20.04 _-_ 2023.04.08銆俔(https://blog.csdn.net/cgsmalcloud/article/details/130024637)
+
+[缂栬瘧sail鐨勬椂鍊欙紝鎶ラ敊](https://blog.csdn.net/weixin_40749043/article/details/134180582)
+
+[鎴戞槸纭濋吀閽剧殑鍗氬](https://blog.csdn.net/weixin_40749043)
+
+11-02![Image 51](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 747 
+
+[鎶ヤ笅闈㈢殑杩欎釜閿欒锛屾槸鍥犱负sail杩樹笉鏀寔python3._1_ _1_ 鐨勭増鏈€傛兂鍔炴硶闄嶇骇make灏卞彲浠ヤ簡銆俔(https://blog.csdn.net/weixin_40749043/article/details/134180582)
+
+[銆愪唬鐮?_澶嶇幇_銆慏IF _-_ Net: Deformed Implicit Field: Modeling 3D Shapes with Learned Dense Correspondence _澶嶇幇_ 璁板綍](https://blog.csdn.net/passer__jw767/article/details/128672190)
+
+[passer__jw767鐨勫崥瀹(https://blog.csdn.net/passer__jw767)
+
+01-13![Image 52](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 1486 
+
+[鏈瘒鍗氬璁板綍浜嗕竴浜汥IF _-_ Net _璁烘枃_ 鐨勯槄鍚庢劅鍜屼竴浜涚畝鍗曠殑 _澶嶇幇_ 杩囩▼鍙婄籂姝ｈ繃绋嬶紝鏈€鍚庨檮涓婁簡generate鐨勪竴鐐圭偣 _澶嶇幇_ 缁撴灉](https://blog.csdn.net/passer__jw767/article/details/128672190)
+
+[璁板綍鍏充簬`error: invalid use of incomplete type`閿欒鐨勮В鍐虫€濊矾 鐑棬鎺ㄨ崘](https://robotics.blog.csdn.net/article/details/117038139)
+
+[灏忓己鐨勬満鍣ㄤ汉宸ュ潑](https://blog.csdn.net/l1216766050)
+
+05-19![Image 53](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 2涓? 
+
+[鍦ㄥ鍒汉鐨勮蒋浠朵唬鐮佽繘琛屼簩娆″紑鍙戠殑杩囩▼涓紝鍑虹幇`error: invalid use of incomplete type`鐨勯敊璇紝杩欎釜寰堟湁鍙兘鏄細鍦ㄨ皟鐢ㄦ煇涓被鐨勬垚鍛樺嚱鏁扮殑鏃跺€欙紝鍑虹幇杩欎釜闂锛岃€屾牴鏈師鍥犳槸浣犲湪褰撳墠鍑洪敊鐨勬枃浠朵腑骞舵湭include璇ョ被鐨勫ご鏂囦欢锛屽彧鏄墠缃敵鏄庝簡璇ョ被鑰屽凡锛岃В鍐虫柟妗堜篃寰堢畝鍗曪紝鎶婂搴旂被鐨勫ご鏂囦欢鍖呭惈杩涙潵鍗冲彲瑙ｅ喅闂銆?...](https://robotics.blog.csdn.net/article/details/117038139)
+
+[_DeepSDF_ _璁烘枃_ _澶嶇幇_ 2 _-_ _-_ _-_ _鏁版嵁闆哶 _鐢熸垚_ 2 _-_ _-_ _-_ 鍘熺悊瑙ｆ瀽](https://devpress.csdn.net/v1/article/detail/149372717)
+
+[weixinhum](https://blog.csdn.net/oHanTanYanYing)
+
+07-15![Image 54](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 1466 
+
+[鐢辫繖绡囧崥瀹㈢殑鍘熺悊鍒嗘瀽鐪嬶紝_DeepSDF_ 鍦ㄥ仛 _鏁版嵁闆哶 _鐢熸垚_ 鐨勬椂鍊欏苟涓嶆槸鐗瑰埆绮剧‘锛屾湁浜涘湴鏂圭殑澶勭悊鐢氳嚦鍙互绠楁槸绠€鍗曠矖鏆达紝绮惧害涓嶉珮銆傜劧鑰岋紝瀵逛簬瀛︽湳鐮旂┒鑰岃█锛宊DeepSDF_ 鐨勮繖绉嶅鐞嗘柟娉曚篃鏃犲彲鍘氶潪锛屾瘯绔熸枃绔犲叧娉ㄧ殑鐐瑰苟涓嶅湪姝ゅ銆俖鏁版嵁闆哶 _鐢熸垚_ 閮ㄥ垎鐨勪紭鍖栨湁鍙兘缁欒缁冪粨鏋滃甫鏉ョ簿搴︾殑鎻愬崌锛屼絾涓嶄細鏈夎川鐨勫彉鍖栥€傚悗缁湰浜烘湁绌猴紝灏嗗啓涓€涓洿瀹屽杽鐨勪笁缁翠綋琛ㄩ潰鎻愬彇浠ｇ爜渚涘ぇ瀹跺弬鑰冿紝灞婃椂鍐嶇画鍐?_DeepSDF_ _鏁版嵁闆哶 _鐢熸垚_ 杩欎竴閮ㄥ垎銆俔(https://devpress.csdn.net/v1/article/detail/149372717)
+
+[_DeepSDF_ _璁烘枃_ _澶嶇幇_ 3 _-_ _-_ _-_ 鍘熺悊瑙ｆ瀽涓庝唬鐮?_澶嶇幇_ _1_ _-_ _-_ _-_ _瀹樻柟_ _浠ｇ爜杩愯_](https://blog.csdn.net/oHanTanYanYing/article/details/151052383)
+
+[weixinhum](https://blog.csdn.net/oHanTanYanYing)
+
+08-31![Image 55](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 1376 
+
+[鏈枃浠嬬粛浜?_DeepSDF_ _璁烘枃_ 浠ｇ爜鐨?_澶嶇幇_ 杩囩▼锛屼富瑕佸寘鎷幆澧冮厤缃€乢鏁版嵁闆哶 澶勭悊銆佹ā鍨嬭缁冨拰缁撴灉鍙鍖栫瓑姝ラ銆傜敱浜庝唬鐮佸勾浠ｈ緝涔咃紝_杩愯_ 杩囩▼涓渶瑕佽皟鏁撮儴鍒嗗弬鏁板拰鍑芥暟璋冪敤浠ラ€傞厤鏂扮増鏈琍yTorch銆傞€氳繃璁粌 _鐢熸垚_ 鐨勬ā鍨嬪彲浠ュ涓夌淮鐗╀綋杩涜閲嶅缓锛屼絾缁撴灉鍦ㄧ粏鑺備笂浠嶅瓨鍦ㄧ己闄枫€備綔鑰呭姣斾簡涓嶅悓璁粌杞涓嬬殑閲嶅缓鏁堟灉锛屽苟鎸囧嚭妯″瀷鍦ㄨ〃闈㈠钩婊戝害鍜岃繛缁€ф柟闈㈢殑涓嶈冻銆傛暣浣撹€岃█锛岃宸ヤ綔灞曠ず浜嗘繁搴﹀涔犲湪涓夌淮閲嶅缓棰嗗煙鐨勬棭鏈熷簲鐢紝涓哄悗缁敼杩涙彁渚涗簡鍩虹銆俔(https://blog.csdn.net/oHanTanYanYing/article/details/151052383)
+
+[_DeepSDF_ _璁烘枃_ _澶嶇幇_ 4 _-_ _-_ _-_ 娣卞叆瑙ｆ瀽涓庝唬鐮?_澶嶇幇_ 2 _-_ _-_ _-_ 鍘熺悊鍒嗘瀽涓庝唬鐮佸疄鐜癩(https://blog.csdn.net/oHanTanYanYing/article/details/152174374)
+
+[weixinhum](https://blog.csdn.net/oHanTanYanYing)
+
+09-27![Image 56](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 1005 
+
+[_DeepSDF_ _璁烘枃_ 鎻愬嚭浜嗕竴绉嶅熀浜庣缁忕綉缁滅殑闅愬紡3D褰㈢姸琛ㄧず鏂规硶銆傝鏂规硶閫氳繃鏈夌鍙疯窛绂诲嚱鏁?SDF)鎻忚堪3D褰㈢姸锛屼娇鐢ㄥ叏杩炴帴缃戠粶瀛︿範绌洪棿鐐逛笌鐗╀綋琛ㄩ潰鐨勮窛绂诲叧绯汇€傛牳蹇冨垱鏂板寘鎷細_1_)寮曞叆娼滃湪鍚戦噺缂栫爜鍚岀被鐗╀綋鐨勫叡鎬у拰涓綋鐗瑰緛锛?)鎻愬嚭Auto _-_ decoder妗嗘灦锛岄€氳繃浼樺寲娼滃湪鍚戦噺瀹炵幇鏂板舰鐘剁殑鎷熷悎銆傜浉姣斾紶缁熸樉寮忚〃绀?鐐逛簯銆佺綉鏍笺€佷綋绱?锛岃鏂规硶鑳芥洿楂樻晥鍦拌〃绀洪珮绮惧害3D褰㈢姸锛屽苟鏀寔褰㈢姸琛ュ叏鍜岄噸寤恒€備唬鐮佸疄鐜伴儴鍒嗗睍绀轰簡鏁版嵁鍔犺浇鍜岄噰鏍风瓥鐣ワ紝閫氳繃骞宠　閲囨牱鍐呴儴鍜屽閮ㄧ偣鏉ヨ缁冪綉缁溿€俔(https://blog.csdn.net/oHanTanYanYing/article/details/152174374)
+
+[eigen _-_ 3.4.0鐗堟湰](https://download.csdn.net/download/m0_44975814/89935625)
+
+10-30
+
+[eigen搴擄紝鐭╅樀璁＄畻鐨勫簱銆俔(https://download.csdn.net/download/m0_44975814/89935625)
+
+[_DeepSDF_:瀛︿範杩炵画绗﹀彿璺濈鍑芥暟杩涜褰㈢姸琛ㄧず](https://download.csdn.net/download/weixin_42099530/18219868)
+
+04-29
+
+[娣卞害鑷崼闃?杩欐槸Park绛変汉鍦–VPR &#39;_1_ 9 _璁烘枃_鈥?_DeepSDF_锛氬涔犵敤浜庡舰鐘惰〃绀虹殑杩炵画鏈夌鍙疯窛绂诲嚱鏁扳€濅腑鐨勫疄鐜般€?璇风湅鐨?_璁烘枃_銆?寮曠敤 _DeepSDF_ 濡傛灉鎮ㄥ湪鐮旂┒涓娇鐢?_DeepSDF_锛岃寮曠敤浠ヤ笅锛?@InProceedings{Park_20 _1_ 9_CVPR, author = {Park, Jeong Joon and Florence, Peter and Straub, Julian and Newcombe, Richard and Lovegrove, Steven}, title = {_DeepSDF_: Learning Continuous Signed Distance Functions for Shape Representation}, booktitle = {The IEEE Conference on Computer Vision and Pattern](https://download.csdn.net/download/weixin_42099530/18219868)
+
+[error: invalid use of incomplete type](https://blog.csdn.net/AAA123524457/article/details/106457998)
+
+[akjw008鐨勪笓鏍廬(https://blog.csdn.net/AAA123524457)
+
+05-31![Image 57](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 2涓? 
+
+[error: invalid use of incomplete type 涓€锛?棣栧厛锛岃纭畾鑷繁瀹氫箟鐨勭被鏄畬鏁寸殑锛屾瀯閫犲嚱鏁帮紝鏋愭瀯鍑芥暟閮芥湁锛屽嚱鏁扮殑澹版槑鍙婂畾涔夊垎寮€鍦?h鍜?cpp涓疄鐜般€?濡傛灉纭畾绫绘槸瀹屾暣鐨勶紝浠嶇劧鍑虹幇error: invalid use of incomplete type鐨勬姤閿欙紝閭ｄ箞闂鍑虹幇鍦ㄨ绫荤殑浣跨敤涓婏紝鑰屼笉鏄被鐨勫疄鐜颁笂锛?浜岋紟 鍦ㄤ娇鐢ㄦ煇涓凡缁忓疄鐜扮殑绫绘椂锛?濡傛灉鍙槸瀹氫箟鏌愪釜绫荤殑鎸囬拡锛屽彲浠ヤ娇鐢╟lass鍏抽敭瀛楀厛杩涜澹版槑锛岃€屼笉闇€鍖呭惈澶存枃浠讹紱 浣嗗鏋滄秹鍙婂埌瀹氫箟鏌愪釜绫荤殑瀵硅薄鎴朷(https://blog.csdn.net/AAA123524457/article/details/106457998)
+
+[_DeepSDF_ 椤圭洰浣跨敤鏁欑▼](https://blog.csdn.net/gitblog_00160/article/details/141247605)
+
+[gitblog_00160鐨勫崥瀹(https://blog.csdn.net/gitblog_00160)
+
+12-27![Image 58](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 642 
+
+[_DeepSDF_ 椤圭洰鐨勭洰褰曠粨鏋勫涓嬶細 ``` _DeepSDF_/ 鈹溾攢鈹€ README.md 鈹溾攢鈹€ CodeOfConduct.md 鈹溾攢鈹€ LICENSE 鈹溾攢鈹€ Security.md 鈹溾攢鈹€ specs.json 鈹溾攢鈹€ experiment_name/ 鈹?鈹溾攢鈹€ specs.json 鈹?鈹溾攢鈹€ Logs.pth 鈹?鈹溾攢鈹€ LatentCodes/ 鈹?鈹?鈹斺攢鈹€](https://blog.csdn.net/gitblog_00160/article/details/141247605)
+
+[Deep SDF 銆丯euS瀛︿範](https://devpress.csdn.net/v1/article/detail/127866055)
+
+[qq_44708206鐨勫崥瀹(https://blog.csdn.net/qq_44708206)
+
+11-17![Image 59](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 6155 
+
+[Deep SDF NeuS瀛︿範](https://devpress.csdn.net/v1/article/detail/127866055)
+
+[鐙楅兘鑳界湅鎳傜殑 _DeepSDF_ _璁烘枃_ 璇﹁В](https://blog.csdn.net/weixin_42392454/article/details/151188980)
+
+[涓汉瀛︿範绗旇](https://blog.csdn.net/weixin_42392454)
+
+09-04![Image 60](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 1123 
+
+[_DeepSDF_ 鐨勫墠韬槸SDF锛屽嵆Signed Distance Field (SDF)鏄竴绉嶉殣寮忚〃杈撅紝涔嬪墠娌℃湁濂藉ソ浠嬬粛杩囧悇绉嶆樉寮忚〃杈剧殑鍐呭銆傛垜浠厛鏉ョ湅鐪嬩笉鍚屾樉寮忚〃杈剧殑宸紓銆俔(https://blog.csdn.net/weixin_42392454/article/details/151188980)
+
+[_DeepSDF_ 闃呰](https://blog.csdn.net/qq_49130177/article/details/139156502)
+
+[qq_49130177鐨勫崥瀹(https://blog.csdn.net/qq_49130177)
+
+05-23![Image 61](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 956 
+
+[涔嬪墠鏂囩珷鐨剆df閮芥槸绂绘暎鐨勶紝鍙兘寰楀埌鍥哄畾缃戞牸浣嶇疆鐨剆df鍊硷紝鎯宠寰楀埌闅忔剰浣嶇疆鐨剆df鍊奸渶瑕佸褰撳墠浣嶇疆鐨勯偦灞呯殑sdf鍊艰繘琛岄噰鏍枫€俖DeepSDF_ 鐢ㄧ缁忕綉缁滄嫙鍚圫DF鍑芥暟銆傜敱浜庣缁忕綉缁滅殑鎷熷悎鎬ц川锛岃兘澶熼娴嬩换鎰忎綅缃殑sdf鍊笺€傚湪 _DeepSDF_ 琛ㄧず鍗曚釜鐗╀綋鐨勫熀纭€涓婃彁鍑篈uto _-_ decoder鏋舵瀯锛屽疄鐜伴噸寤烘煇涓€绫诲舰鐘剁殑浠诲姟锛屽皢妯″瀷澶у皬鍑忓皯浜嗕竴涓暟閲忕骇銆傞拡瀵圭粰瀹氱殑鐩爣褰㈢姸璁粌鍗曚釜娣卞害缃戠粶銆傜粰瀹氱洰鏍囧舰鐘讹紝鍑嗗涓€缁勭敱3D鐐瑰強鍏禨DF鍊肩粍鎴愮殑缁刋銆傚浜庤緭鍏ヤ笁缁村潗鏍噚锛屽緱鍒板綋鍓嶄綅缃鐨凷DF鍊約锛岀粍鎴怷瀵广€俔(https://blog.csdn.net/qq_49130177/article/details/139156502)
+
+[[Error] invalid use of incomplete type 浣跨敤浜嗘湭瀹氫箟鐨勭被鍨媇(https://blog.csdn.net/weixin_62264287/article/details/125246807)
+
+[绗旇](https://blog.csdn.net/weixin_62264287)
+
+06-12![Image 62](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 1879 
+
+[鈥?浠婂ぉ鍦ㄥ啓濂ョ壒鏇兼墦澶ф€吔鐨勬椂鍊欙紝鍙戠幇涓€涓鎬殑闂锛屾垜瀹氫箟浜嗕袱涓熀绫籙ltraman鍜孧onster锛屼竴涓狹onster鐨勫瓙绫籅oss锛岀劧鍚庝袱涓熀绫绘槸鏈夌浉浜掑嬀缁撶殑鍦版柟锛屽畠浠兘鎴栧鎴栧皯鐨勪娇鐢ㄤ簡瀵规柟鐨勭被鍨嬭繘琛屽畾涔夎嚜宸憋紝鐒跺悗鎴戝湪绗竴涓被瀹炵幇鍓嶉潰杩涜浜嗗彟涓€涓被鐨勫０鏄庯細 涔嬪悗缂栬瘧鎶ラ敊锛?鐒跺悗瀹冭涓嶈兘浣跨敤涓嶅畬鏁寸殑绫荤被鍨嬶細 鎴戝氨寮€濮嬬姱杩风硦浜嗭紝鏄庢槑鎴戜袱涓被瀹氫箟鐨勫ソ濂界殑锛屽拫灏辫鎴戞病鏈夊畾涔夊憿銆傛垜涔熷湪鍓嶉潰澹版槑浜嗐€?鐒跺悗缁忚繃鎴戝拰鍙︿竴涓ぇ涓夌殑瀛﹂暱涓や釜浜轰袱涓皬鏃剁殑瀵绘壘锛屽悇绉嶆帓鏌ワ紝缁堜簬鎰忚瘑鍒颁竴涓棶棰橈細 鍥犱负杩欎袱涓猐(https://blog.csdn.net/weixin_62264287/article/details/125246807)
+
+[_DeepSDF_ 鐜閰嶇疆鍙婅缁冮亣鍒扮殑闂](https://blog.csdn.net/weixin_43969015/article/details/126927108)
+
+[weixin_43969015鐨勫崥瀹(https://blog.csdn.net/weixin_43969015)
+
+09-20![Image 63](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png) 1422 
+
+[_DeepSDF_ 鐨勭幆澧冮厤缃強璁粌涓殑闂](https://blog.csdn.net/weixin_43969015/article/details/126927108)
+
+[](https://wenku.csdn.net/doc/7aqd0itw8g)
+
+[](https://wenku.csdn.net/doc/7aqd0itw8g)
+
+*   [鍏充簬鎴戜滑](http://www.csdn.net/company/index.html#about)
+*   [鎷涜搐绾冲＋](http://www.csdn.net/company/index.html#recruit)
+*   [鍟嗗姟鍚堜綔](https://fsc-p05.txscrm.com/T8PN8SFII7W)
+*   [瀵绘眰鎶ラ亾](http://marketing.csdn.net/questions/Q2202181748074189855)
+*   ![Image 64](http://g.csdnimg.cn/common/csdn-footer/images/tel.png)400-660-0108
+*   ![Image 65](http://g.csdnimg.cn/common/csdn-footer/images/email.png)[kefu@csdn.net](mailto:webmaster@csdn.net)
+*   ![Image 66](http://g.csdnimg.cn/common/csdn-footer/images/cs.png)[鍦ㄧ嚎瀹㈡湇](https://csdn.s2.udesk.cn/im_client/?web_plugin_id=29181)
+*    宸ヤ綔鏃堕棿 8:30-22:00 
+
+*   ![Image 67](http://g.csdnimg.cn/common/csdn-footer/images/badge.png)[鍏畨澶囨鍙?1010502030143](http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502030143)
+*   [浜琁CP澶?9004658鍙穄(http://beian.miit.gov.cn/publish/query/indexFirst.action)
+*   [浜綉鏂囥€?020銆?039-165鍙穄(https://csdnimg.cn/release/live_fe/culture_license.png)
+*   [缁忚惀鎬х綉绔欏妗堜俊鎭痌(https://csdnimg.cn/cdn/content-toolbar/csdn-ICP.png)
+*   [鍖椾含浜掕仈缃戣繚娉曞拰涓嶈壇淇℃伅涓炬姤涓績](http://www.bjjubao.org/)
+*   [瀹堕暱鐩戞姢](https://download.csdn.net/tutelage/home)
+*   [缃戠粶110鎶ヨ鏈嶅姟](https://cyberpolice.mps.gov.cn/)
+*   [涓浗浜掕仈缃戜妇鎶ヤ腑蹇僝(http://www.12377.cn/)
+*   [Chrome鍟嗗簵涓嬭浇](https://chrome.google.com/webstore/detail/csdn%E5%BC%80%E5%8F%91%E8%80%85%E5%8A%A9%E6%89%8B/kfkdboecolemdjodhmhmcibjocfopejo?hl=zh-CN)
+*   [璐﹀彿绠＄悊瑙勮寖](https://blog.csdn.net/blogdevteam/article/details/126135357)
+*   [鐗堟潈涓庡厤璐ｅ０鏄嶿(https://www.csdn.net/company/index.html#statement)
+*   [鐗堟潈鐢宠瘔](https://blog.csdn.net/blogdevteam/article/details/90369522)
+*   [鍑虹増鐗╄鍙瘉](https://img-home.csdnimg.cn/images/20250103023206.png)
+*   [钀ヤ笟鎵х収](https://img-home.csdnimg.cn/images/20250103023201.png)
+*   漏1999-2026鍖椾含鍒涙柊涔愮煡缃戠粶鎶€鏈湁闄愬叕鍙?
+[![Image 68](https://profile-avatar.csdnimg.cn/b09b254c8ca94c6aa441ca927a68e9e0_ohantanyanying.jpg!1)](https://blog.csdn.net/oHanTanYanYing)
+
+[_瀵掓江闆佸奖](https://blog.csdn.net/oHanTanYanYing &quot;_瀵掓江闆佸奖&quot;)
+
+鍗氬绛夌骇 ![Image 69](https://csdnimg.cn/identity/blog7.png)
+
+鐮侀緞13骞?
+[341 鍘熷垱](https://blog.csdn.net/oHanTanYanYing)2040 鐐硅禐 5633 鏀惰棌 2789 绮変笣
+
+[鍏虫敞](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+[绉佷俊](https://im.csdn.net/chat/oHanTanYanYing)
+
+[![Image 70](https://i-operation.csdnimg.cn/images/b9a16c5abef246139d3e473e5efb8b61.png)](https://blog.csdn.net/blogdevteam/article/details/159927751?utm_source=1160366079)
+
+[](https://wwads.cn/click/bait)[![Image 71: 涓囩淮骞垮憡鑱旂洘](https://cdn.wwads.cn/creatives/1ovXHr1r6tTukP9AYFPhUjfjZqFCTVW9Fb0ANOwr.png)](https://wwads.cn/click/bundle?code=BjWdAvPyNE7fbZhhoM4FehZZO99G8o)
+
+[馃搳 **寮€婧愬厤璐圭殑 BI 宸ュ叿**銆備粎闇€ 5 鍒嗛挓锛屾暟鎹彉澶у睆銆備紬澶氱簿缇庡彲瑙嗗寲澶у睆妯℃澘绛変綘鏉ラ€夈€俔(https://wwads.cn/click/bundle?code=BjWdAvPyNE7fbZhhoM4FehZZO99G8o)[![Image 72](http://blog.csdn.net/weixinhum/article/details/149218796)骞垮憡](https://wwads.cn/?utm_source=property-175&amp;utm_medium=footer &quot;鐐瑰嚮浜嗚В涓囩淮骞垮憡鑱旂洘&quot;)
+
+[](http://blog.csdn.net/weixinhum/article/details/149218796 &quot;闅愯棌骞垮憡&quot;)
+
+![Image 73](https://kunyu.csdn.net/1.png?p=56&amp;adId=1071043&amp;adBlockFlag=0&amp;a=1071043&amp;c=0&amp;k=DeepSDF%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B01---%E6%95%B0%E6%8D%AE%E9%9B%86%E7%94%9F%E6%88%901---%E5%AE%98%E6%96%B9%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C&amp;spm=1001.2101.3001.5000&amp;articleId=149218796&amp;d=1&amp;t=3&amp;u=c8968f73bfbf401c8e84f0a119be3828)
+
+### 鐑棬鏂囩珷
+
+*   [鐩稿鐔碉紙KL鏁ｅ害锛?![Image 74](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png)85935](https://blog.csdn.net/oHanTanYanYing/article/details/85064685)
+*   [娣卞害瀛︿範1---鏈€绠€鍗曠殑鍏ㄨ繛鎺ョ缁忕綉缁?![Image 75](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png)70929](https://blog.csdn.net/oHanTanYanYing/article/details/79273480)
+*   [VS2019~2022鐣岄潰澶栬缇庡寲 ![Image 76](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png)64449](https://blog.csdn.net/oHanTanYanYing/article/details/100154683)
+*   [LaTeX---琛岃窛璁剧疆 ![Image 77](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png)56343](https://blog.csdn.net/oHanTanYanYing/article/details/104594454)
+*   [鍏辫江鍑芥暟 ![Image 78](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png)36374](https://blog.csdn.net/oHanTanYanYing/article/details/86083189)
+
+### 鍒嗙被涓撴爮
+
+*   [![Image 79](https://i-blog.csdnimg.cn/blog_column_migrate/93b4cecfa8455f24625573e18a314ca7.png?x-oss-process=image/resize,m_fixed,h_64,w_64) OpenGL宸ョ▼瀹炵幇瀹炵敤鏁欑▼ 浠樿垂](https://blog.csdn.net/ohantanyanying/category_11600033.html)6绡?*   [![Image 80](https://i-blog.csdnimg.cn/blog_column_migrate/50ebd4af1d8ce5bdece6406b1f1ca55c.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 绁炵粡缃戠粶瀹炵敤宸ュ叿锛堟暣娲伙級绯诲垪 浠樿垂](https://blog.csdn.net/ohantanyanying/category_12338549.html)3绡?*   [![Image 81](https://i-blog.csdnimg.cn/blog_column_migrate/758088d2b247c99cd196d5478792b049.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鏃犱汉鏈?鏃犱汉杞︿豢鐪熻蒋浠跺涔犱笌瀹炶返 浠樿垂](https://blog.csdn.net/ohantanyanying/category_11707672.html)4绡?*   [![Image 82](https://i-blog.csdnimg.cn/blog_column_migrate/6248ade82c6a3162526eaeb554893c1a.jpeg?x-oss-process=image/resize,m_fixed,h_64,w_64) ROS鎿嶄綔绯荤粺瀛︿範 浠樿垂](https://blog.csdn.net/ohantanyanying/category_9282110.html)40绡?*   [![Image 83](https://i-blog.csdnimg.cn/blog_column_migrate/146e6e14a275b5eb34a36cc757aedd19.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鍥惧儚澶勭悊 浠樿垂](https://blog.csdn.net/ohantanyanying/category_2208629.html)51绡?*   [![Image 84](https://i-blog.csdnimg.cn/blog_column_migrate/146e6e14a275b5eb34a36cc757aedd19.png?x-oss-process=image/resize,m_fixed,h_64,w_64) FFmpeg瀛︿範鍜屽疄鎴?浠樿垂](https://blog.csdn.net/ohantanyanying/category_2390821.html)10绡?*   [![Image 85](https://i-blog.csdnimg.cn/columns/default/20201014180756923.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 璁烘枃娣卞害瑙ｈ&amp;澶嶇幇](https://blog.csdn.net/ohantanyanying/category_13001860.html)4绡?*   [![Image 86](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) ESP32寮€鍙慮(https://blog.csdn.net/ohantanyanying/category_13117201.html)2绡?*   [![Image 87](https://i-blog.csdnimg.cn/columns/default/20201014180756926.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 璁＄畻鍑犱綍](https://blog.csdn.net/ohantanyanying/category_13014934.html)1绡?*   [![Image 88](https://i-blog.csdnimg.cn/columns/default/20201014180756916.png?x-oss-process=image/resize,m_fixed,h_64,w_64) LaTeX](https://blog.csdn.net/ohantanyanying/category_9574153.html)6绡?*   [![Image 89](https://i-blog.csdnimg.cn/blog_column_migrate/95da33e3817cd25f882f88bbf8a84cb5.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鏈哄櫒瑙嗚](https://blog.csdn.net/ohantanyanying/category_9268901.html)19绡?*   [![Image 90](https://i-blog.csdnimg.cn/blog_column_migrate/e6d7c3daa1ba5d72d689774d4ed58561.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鏈哄櫒瀛︿範鏁板鍩虹](https://blog.csdn.net/ohantanyanying/category_9282849.html)11绡?*   [![Image 91](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鏂囨。鑷姩鍖朷(https://blog.csdn.net/ohantanyanying/category_12347377.html)7绡?*   [![Image 92](https://i-blog.csdnimg.cn/columns/default/20201014180756916.png?x-oss-process=image/resize,m_fixed,h_64,w_64) Typst](https://blog.csdn.net/ohantanyanying/category_12561353.html)1绡?*   [![Image 93](https://i-blog.csdnimg.cn/columns/default/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 缁忓吀璁烘枃澶嶇幇](https://blog.csdn.net/ohantanyanying/category_12400669.html)1绡?*   [![Image 94](https://i-blog.csdnimg.cn/columns/default/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64) Qt5+OpenGL](https://blog.csdn.net/ohantanyanying/category_10295229.html)6绡?*   [![Image 95](https://i-blog.csdnimg.cn/columns/default/20201014180756913.png?x-oss-process=image/resize,m_fixed,h_64,w_64) Manjaro](https://blog.csdn.net/ohantanyanying/category_10804922.html)1绡?*   [![Image 96](https://i-blog.csdnimg.cn/columns/default/20201014180756918.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 缂栫▼浜虹敓](https://blog.csdn.net/ohantanyanying/category_10071666.html)3绡?*   [![Image 97](https://i-blog.csdnimg.cn/columns/default/20201014180756780.png?x-oss-process=image/resize,m_fixed,h_64,w_64) mfc](https://blog.csdn.net/ohantanyanying/category_2187675.html)41绡?*   [![Image 98](https://i-blog.csdnimg.cn/columns/default/20201014180756930.png?x-oss-process=image/resize,m_fixed,h_64,w_64) Visual Studio](https://blog.csdn.net/ohantanyanying/category_2228067.html)15绡?*   [![Image 99](https://i-blog.csdnimg.cn/columns/default/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64) cuda瀛︿範](https://blog.csdn.net/ohantanyanying/category_2235095.html)7绡?*   [![Image 100](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) C++](https://blog.csdn.net/ohantanyanying/category_2236225.html)64绡?*   [![Image 101](https://i-blog.csdnimg.cn/columns/default/20201014180756724.png?x-oss-process=image/resize,m_fixed,h_64,w_64) c璇█](https://blog.csdn.net/ohantanyanying/category_2277135.html)5绡?*   [![Image 102](https://i-blog.csdnimg.cn/columns/default/20201014180756916.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 缂栫▼鐞愪簨](https://blog.csdn.net/ohantanyanying/category_2296393.html)8绡?*   [![Image 103](https://i-blog.csdnimg.cn/columns/default/20201014180756930.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 闊抽澶勭悊](https://blog.csdn.net/ohantanyanying/category_2331299.html)6绡?*   [![Image 104](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鐜鎼缓](https://blog.csdn.net/ohantanyanying/category_2374897.html)23绡?*   [![Image 105](https://i-blog.csdnimg.cn/columns/default/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 缃戠粶浼犺緭](https://blog.csdn.net/ohantanyanying/category_2417293.html)10绡?*   [![Image 106](https://i-blog.csdnimg.cn/columns/default/20201014180756928.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 娓告垙缂栫▼瀛︿範](https://blog.csdn.net/ohantanyanying/category_2683605.html)2绡?*   [![Image 107](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鏁版嵁搴撶浉鍏砞(https://blog.csdn.net/ohantanyanying/category_2741825.html)7绡?*   [![Image 108](https://i-blog.csdnimg.cn/columns/default/20201014180756928.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鐢佃剳闂鐩稿叧鐨勪慨澶峕(https://blog.csdn.net/ohantanyanying/category_2767637.html)5绡?*   [![Image 109](https://i-blog.csdnimg.cn/columns/default/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 骞惰鍔犻€焆(https://blog.csdn.net/ohantanyanying/category_3025869.html)1绡?*   [![Image 110](https://i-blog.csdnimg.cn/columns/default/20201014180756928.png?x-oss-process=image/resize,m_fixed,h_64,w_64) C#](https://blog.csdn.net/ohantanyanying/category_5853557.html)15绡?*   [![Image 111](https://i-blog.csdnimg.cn/columns/default/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64) WPF](https://blog.csdn.net/ohantanyanying/category_5904951.html)16绡?*   [![Image 112](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) Direct 2D](https://blog.csdn.net/ohantanyanying/category_6052337.html)1绡?*   [![Image 113](https://i-blog.csdnimg.cn/columns/default/20201014180756923.png?x-oss-process=image/resize,m_fixed,h_64,w_64) DirectX](https://blog.csdn.net/ohantanyanying/category_6241860.html)2绡?*   [![Image 114](https://i-blog.csdnimg.cn/columns/default/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 濂界敤鐨勮蒋浠禲(https://blog.csdn.net/ohantanyanying/category_6502333.html)3绡?*   [![Image 115](https://i-blog.csdnimg.cn/columns/default/20201014180756913.png?x-oss-process=image/resize,m_fixed,h_64,w_64) office](https://blog.csdn.net/ohantanyanying/category_6645818.html)1绡?*   [![Image 116](https://i-blog.csdnimg.cn/columns/default/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鏈哄櫒瀛︿範](https://blog.csdn.net/ohantanyanying/category_6892327.html)6绡?*   [![Image 117](https://i-blog.csdnimg.cn/columns/default/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64) python](https://blog.csdn.net/ohantanyanying/category_7098119.html)8绡?*   [![Image 118](https://i-blog.csdnimg.cn/columns/default/20201014180756724.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 娣卞害瀛︿範](https://blog.csdn.net/ohantanyanying/category_7447087.html)15绡?*   [![Image 119](https://i-blog.csdnimg.cn/columns/default/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64) latex瀛︿範](https://blog.csdn.net/ohantanyanying/category_7712960.html)1绡?*   [![Image 120](https://i-blog.csdnimg.cn/columns/default/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64) ROS瀛︿範](https://blog.csdn.net/ohantanyanying/category_8120128.html)20绡?*   [![Image 121](https://i-blog.csdnimg.cn/columns/default/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鎿嶄綔绯荤粺](https://blog.csdn.net/ohantanyanying/category_8245127.html)4绡?*   [![Image 122](https://i-blog.csdnimg.cn/columns/default/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64) PyTorch](https://blog.csdn.net/ohantanyanying/category_8487127.html)2绡?*   [![Image 123](https://i-blog.csdnimg.cn/columns/default/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 涔︾睄缈昏瘧](https://blog.csdn.net/ohantanyanying/category_8522237.html)1绡?*   [![Image 124](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鑷姩椹鹃┒](https://blog.csdn.net/ohantanyanying/category_8536801.html)2绡?*   [![Image 125](https://i-blog.csdnimg.cn/columns/default/20201014180756724.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 绁炵粡缃戠粶鏁板鍩虹](https://blog.csdn.net/ohantanyanying/category_8540415.html)11绡?*   [![Image 126](https://i-blog.csdnimg.cn/columns/default/20201014180756757.png?x-oss-process=image/resize,m_fixed,h_64,w_64) PCL](https://blog.csdn.net/ohantanyanying/category_8726956.html)7绡?*   [![Image 127](https://i-blog.csdnimg.cn/columns/default/20201014180756928.png?x-oss-process=image/resize,m_fixed,h_64,w_64) QT](https://blog.csdn.net/ohantanyanying/category_8932773.html)1绡?*   [![Image 128](https://i-blog.csdnimg.cn/columns/default/20201014180756738.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 瑙嗛纭搷浣淽(https://blog.csdn.net/ohantanyanying/category_9102222.html)2绡?*   [![Image 129](https://i-blog.csdnimg.cn/columns/default/20201014180756724.png?x-oss-process=image/resize,m_fixed,h_64,w_64) OpenGL](https://blog.csdn.net/ohantanyanying/category_9127071.html)2绡?
+[灞曞紑鍏ㄩ儴![Image 130](https://csdnimg.cn/release/blogv2/dist/pc/img/arrowup-line-bot-White.png)](http://blog.csdn.net/weixinhum/article/details/149218796)[鏀惰捣![Image 131](https://csdnimg.cn/release/blogv2/dist/pc/img/arrowup-line-top-White.png)](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+ 涓婁竴绡囷細 [浣跨敤LaTeX鐨刢ircuitikz搴撶粯鍒剁數璺浘](https://blog.csdn.net/oHanTanYanYing/article/details/149195278) 涓嬩竴绡囷細 [DeepSDF璁烘枃澶嶇幇2---鏁版嵁闆嗙敓鎴?---鍘熺悊瑙ｆ瀽](https://blog.csdn.net/oHanTanYanYing/article/details/149372717)
+
+### 澶у鍦ㄧ湅
+
+*   [瀹為獙锛氳法鍩烳PLS OptionB鏂规瀹炵幇Hub&amp;Spoke閮ㄧ讲](https://blog.csdn.net/xhyt6411/article/details/160136825)
+*   [澶фā鍨嬪紑鍙戯細骞昏闂娣卞害瑙ｆ瀽锛堥檮妗堜緥\+瀹炴搷瑙ｅ喅鏂规硶锛塢(https://blog.csdn.net/weixin_60925698/article/details/160155464)
+*   [銆愪粠闆跺紑濮嬪Java | 绗笁鍗佸洓绡囥€慒ile ![Image 132](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png)276](https://blog.csdn.net/iting_0924/article/details/160122700)
+*   [2026骞村ぇ妯″瀷Agent闈㈣瘯蹇呯湅锛?绉岮gent妯″紡椤圭洰锛岃浣犲湪鍗风帇甯傚満涓劚棰栬€屽嚭锛乚(https://blog.csdn.net/2401_84204207/article/details/160155366)
+*   [璋冨弬鍍忕倰鑿溾€斺€旂伀鍊欍€佺洂閲忛兘寰楄瘯 ![Image 133](https://csdnimg.cn/release/blogv2/dist/pc/img/readCountWhite.png)439](https://blog.csdn.net/yweng18/article/details/160061588)
+
+### 鏈€鏂版枃绔?
+*   [LVGL浠跨湡璋冭瘯锛圵indows锛塢(https://blog.csdn.net/oHanTanYanYing/article/details/157262407)
+*   [ESP32P4骞冲彴LVGL9鎬ц兘娴嬭瘯](https://blog.csdn.net/oHanTanYanYing/article/details/156908752)
+*   [DeepSDF璁烘枃澶嶇幇4---娣卞叆瑙ｆ瀽涓庝唬鐮佸鐜?---鍘熺悊鍒嗘瀽涓庝唬鐮佸疄鐜癩(https://blog.csdn.net/oHanTanYanYing/article/details/152174374)
+
+[2026骞?2绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2026&amp;month=01)
+
+[2025骞?7绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2025&amp;month=09)
+
+[2024骞?10绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2024&amp;month=12)
+
+[2023骞?18绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2023&amp;month=12)
+
+[2022骞?18绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2022&amp;month=12)
+
+[2021骞?14绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2021&amp;month=11)
+
+[2020骞?27绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2020&amp;month=10)
+
+[2019骞?57绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2019&amp;month=12)
+
+[2018骞?47绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2018&amp;month=12)
+
+[2017骞?25绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2017&amp;month=12)
+
+[2016骞?24绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2016&amp;month=12)
+
+[2015骞?35绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2015&amp;month=12)
+
+[2014骞?68绡嘳(https://blog.csdn.net/oHanTanYanYing?type=blog&amp;year=2014&amp;month=12)
+
+![Image 134](https://kunyu.csdn.net/1.png?p=57&amp;adBlockFlag=0&amp;adId=1087416&amp;a=1087416&amp;c=3611717&amp;k=DeepSDF%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B01---%E6%95%B0%E6%8D%AE%E9%9B%86%E7%94%9F%E6%88%901---%E5%AE%98%E6%96%B9%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C&amp;spm=1001.2101.3001.5001&amp;articleId=149218796&amp;d=1&amp;t=3&amp;u=06467995e1fe48b08e96ea82c9625d67)
+
+### 鐩綍
+
+1.   [鏁版嵁闆嗙敓鎴怾(http://blog.csdn.net/weixinhum/article/details/149218796#t0)
+2.       1.   [锛?锛塖hapeNet鏁版嵁闆嗕笅杞絔(http://blog.csdn.net/weixinhum/article/details/149218796#t1)
+    2.   [锛?锛夊畨瑁呮墍闇€搴揮(http://blog.csdn.net/weixinhum/article/details/149218796#t2)
+    3.           1.   [CLI11瀹夎](http://blog.csdn.net/weixinhum/article/details/149218796#t3)
+        2.   [Eigen3瀹夎](http://blog.csdn.net/weixinhum/article/details/149218796#t4)
+        3.   [Pangolin瀹夎](http://blog.csdn.net/weixinhum/article/details/149218796#t5)
+        4.   [閬囪闂](http://blog.csdn.net/weixinhum/article/details/149218796#t6)
+        5.   [nanoflann瀹夎](http://blog.csdn.net/weixinhum/article/details/149218796#t7)
+
+    4.   [锛?锛塂eepSDF浠ｇ爜缂栬瘧杩愯](http://blog.csdn.net/weixinhum/article/details/149218796#t8)
+    5.           1.   [閬囪闂](http://blog.csdn.net/weixinhum/article/details/149218796#t9)
+
+灞曞紑鍏ㄩ儴![Image 135](https://csdnimg.cn/release/blogv2/dist/pc/img/arrowup-line-bot-White.png)
+
+鏀惰捣![Image 136](https://csdnimg.cn/release/blogv2/dist/pc/img/arrowup-line-top-White.png)
+
+![Image 137](https://kunyu.csdn.net/1.png?p=530&amp;adBlockFlag=0&amp;adId=1093541&amp;a=1093541&amp;c=3831943&amp;k=DeepSDF%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B01---%E6%95%B0%E6%8D%AE%E9%9B%86%E7%94%9F%E6%88%901---%E5%AE%98%E6%96%B9%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C&amp;spm=1001.2101.3001.4647&amp;articleId=149218796&amp;d=1&amp;t=3&amp;u=33bb185b783d4d79b2e5102512cd6e5a)
+
+### 鐩綍
+
+1.   [鏁版嵁闆嗙敓鎴怾(http://blog.csdn.net/weixinhum/article/details/149218796#t0)
+2.       1.   [锛?锛塖hapeNet鏁版嵁闆嗕笅杞絔(http://blog.csdn.net/weixinhum/article/details/149218796#t1)
+    2.   [锛?锛夊畨瑁呮墍闇€搴揮(http://blog.csdn.net/weixinhum/article/details/149218796#t2)
+    3.           1.   [CLI11瀹夎](http://blog.csdn.net/weixinhum/article/details/149218796#t3)
+        2.   [Eigen3瀹夎](http://blog.csdn.net/weixinhum/article/details/149218796#t4)
+        3.   [Pangolin瀹夎](http://blog.csdn.net/weixinhum/article/details/149218796#t5)
+        4.   [閬囪闂](http://blog.csdn.net/weixinhum/article/details/149218796#t6)
+        5.   [nanoflann瀹夎](http://blog.csdn.net/weixinhum/article/details/149218796#t7)
+
+    4.   [锛?锛塂eepSDF浠ｇ爜缂栬瘧杩愯](http://blog.csdn.net/weixinhum/article/details/149218796#t8)
+    5.           1.   [閬囪闂](http://blog.csdn.net/weixinhum/article/details/149218796#t9)
+
+灞曞紑鍏ㄩ儴![Image 138](https://csdnimg.cn/release/blogv2/dist/pc/img/arrowup-line-bot-White.png)
+
+鏀惰捣![Image 139](https://csdnimg.cn/release/blogv2/dist/pc/img/arrowup-line-top-White.png)
+
+[](https://wwads.cn/click/bait)[![Image 140: 涓囩淮骞垮憡鑱旂洘](https://cdn.wwads.cn/creatives/1ovXHr1r6tTukP9AYFPhUjfjZqFCTVW9Fb0ANOwr.png)](https://wwads.cn/click/bundle?code=BjWdAvPyNE7fbZhhoM4FehZZO99G8o)
+
+[馃搳 **寮€婧愬厤璐圭殑 BI 宸ュ叿**銆備粎闇€ 5 鍒嗛挓锛屾暟鎹彉澶у睆銆備紬澶氱簿缇庡彲瑙嗗寲澶у睆妯℃澘绛変綘鏉ラ€夈€俔(https://wwads.cn/click/bundle?code=BjWdAvPyNE7fbZhhoM4FehZZO99G8o)[![Image 141](http://blog.csdn.net/weixinhum/article/details/149218796)骞垮憡](https://wwads.cn/?utm_source=property-175&amp;utm_medium=footer &quot;鐐瑰嚮浜嗚В涓囩淮骞垮憡鑱旂洘&quot;)
+
+[](http://blog.csdn.net/weixinhum/article/details/149218796 &quot;闅愯棌骞垮憡&quot;)
+
+![Image 142](https://kunyu.csdn.net/1.png?p=479&amp;adId=1071044&amp;adBlockFlag=0&amp;a=1071044&amp;c=0&amp;k=DeepSDF%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B01---%E6%95%B0%E6%8D%AE%E9%9B%86%E7%94%9F%E6%88%901---%E5%AE%98%E6%96%B9%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C&amp;spm=1001.2101.3001.4834&amp;articleId=149218796&amp;d=1&amp;t=3&amp;u=9783a174df6843dfa56cfeabebcd0e90)
+
+ 涓婁竴绡囷細 [浣跨敤LaTeX鐨刢ircuitikz搴撶粯鍒剁數璺浘](https://blog.csdn.net/oHanTanYanYing/article/details/149195278) 涓嬩竴绡囷細 [DeepSDF璁烘枃澶嶇幇2---鏁版嵁闆嗙敓鎴?---鍘熺悊瑙ｆ瀽](https://blog.csdn.net/oHanTanYanYing/article/details/149372717)
+
+### 鍒嗙被涓撴爮
+
+*   [![Image 143](https://i-blog.csdnimg.cn/blog_column_migrate/93b4cecfa8455f24625573e18a314ca7.png?x-oss-process=image/resize,m_fixed,h_64,w_64) OpenGL宸ョ▼瀹炵幇瀹炵敤鏁欑▼ 浠樿垂](https://blog.csdn.net/ohantanyanying/category_11600033.html)6绡?*   [![Image 144](https://i-blog.csdnimg.cn/blog_column_migrate/50ebd4af1d8ce5bdece6406b1f1ca55c.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 绁炵粡缃戠粶瀹炵敤宸ュ叿锛堟暣娲伙級绯诲垪 浠樿垂](https://blog.csdn.net/ohantanyanying/category_12338549.html)3绡?*   [![Image 145](https://i-blog.csdnimg.cn/blog_column_migrate/758088d2b247c99cd196d5478792b049.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鏃犱汉鏈?鏃犱汉杞︿豢鐪熻蒋浠跺涔犱笌瀹炶返 浠樿垂](https://blog.csdn.net/ohantanyanying/category_11707672.html)4绡?*   [![Image 146](https://i-blog.csdnimg.cn/blog_column_migrate/6248ade82c6a3162526eaeb554893c1a.jpeg?x-oss-process=image/resize,m_fixed,h_64,w_64) ROS鎿嶄綔绯荤粺瀛︿範 浠樿垂](https://blog.csdn.net/ohantanyanying/category_9282110.html)40绡?*   [![Image 147](https://i-blog.csdnimg.cn/blog_column_migrate/146e6e14a275b5eb34a36cc757aedd19.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鍥惧儚澶勭悊 浠樿垂](https://blog.csdn.net/ohantanyanying/category_2208629.html)51绡?*   [![Image 148](https://i-blog.csdnimg.cn/blog_column_migrate/146e6e14a275b5eb34a36cc757aedd19.png?x-oss-process=image/resize,m_fixed,h_64,w_64) FFmpeg瀛︿範鍜屽疄鎴?浠樿垂](https://blog.csdn.net/ohantanyanying/category_2390821.html)10绡?*   [![Image 149](https://i-blog.csdnimg.cn/columns/default/20201014180756923.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 璁烘枃娣卞害瑙ｈ&amp;澶嶇幇](https://blog.csdn.net/ohantanyanying/category_13001860.html)4绡?*   [![Image 150](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) ESP32寮€鍙慮(https://blog.csdn.net/ohantanyanying/category_13117201.html)2绡?*   [![Image 151](https://i-blog.csdnimg.cn/columns/default/20201014180756926.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 璁＄畻鍑犱綍](https://blog.csdn.net/ohantanyanying/category_13014934.html)1绡?*   [![Image 152](https://i-blog.csdnimg.cn/columns/default/20201014180756916.png?x-oss-process=image/resize,m_fixed,h_64,w_64) LaTeX](https://blog.csdn.net/ohantanyanying/category_9574153.html)6绡?*   [![Image 153](https://i-blog.csdnimg.cn/blog_column_migrate/95da33e3817cd25f882f88bbf8a84cb5.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鏈哄櫒瑙嗚](https://blog.csdn.net/ohantanyanying/category_9268901.html)19绡?*   [![Image 154](https://i-blog.csdnimg.cn/blog_column_migrate/e6d7c3daa1ba5d72d689774d4ed58561.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鏈哄櫒瀛︿範鏁板鍩虹](https://blog.csdn.net/ohantanyanying/category_9282849.html)11绡?*   [![Image 155](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鏂囨。鑷姩鍖朷(https://blog.csdn.net/ohantanyanying/category_12347377.html)7绡?*   [![Image 156](https://i-blog.csdnimg.cn/columns/default/20201014180756916.png?x-oss-process=image/resize,m_fixed,h_64,w_64) Typst](https://blog.csdn.net/ohantanyanying/category_12561353.html)1绡?*   [![Image 157](https://i-blog.csdnimg.cn/columns/default/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 缁忓吀璁烘枃澶嶇幇](https://blog.csdn.net/ohantanyanying/category_12400669.html)1绡?*   [![Image 158](https://i-blog.csdnimg.cn/columns/default/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64) Qt5+OpenGL](https://blog.csdn.net/ohantanyanying/category_10295229.html)6绡?*   [![Image 159](https://i-blog.csdnimg.cn/columns/default/20201014180756913.png?x-oss-process=image/resize,m_fixed,h_64,w_64) Manjaro](https://blog.csdn.net/ohantanyanying/category_10804922.html)1绡?*   [![Image 160](https://i-blog.csdnimg.cn/columns/default/20201014180756918.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 缂栫▼浜虹敓](https://blog.csdn.net/ohantanyanying/category_10071666.html)3绡?*   [![Image 161](https://i-blog.csdnimg.cn/columns/default/20201014180756780.png?x-oss-process=image/resize,m_fixed,h_64,w_64) mfc](https://blog.csdn.net/ohantanyanying/category_2187675.html)41绡?*   [![Image 162](https://i-blog.csdnimg.cn/columns/default/20201014180756930.png?x-oss-process=image/resize,m_fixed,h_64,w_64) Visual Studio](https://blog.csdn.net/ohantanyanying/category_2228067.html)15绡?*   [![Image 163](https://i-blog.csdnimg.cn/columns/default/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64) cuda瀛︿範](https://blog.csdn.net/ohantanyanying/category_2235095.html)7绡?*   [![Image 164](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) C++](https://blog.csdn.net/ohantanyanying/category_2236225.html)64绡?*   [![Image 165](https://i-blog.csdnimg.cn/columns/default/20201014180756724.png?x-oss-process=image/resize,m_fixed,h_64,w_64) c璇█](https://blog.csdn.net/ohantanyanying/category_2277135.html)5绡?*   [![Image 166](https://i-blog.csdnimg.cn/columns/default/20201014180756916.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 缂栫▼鐞愪簨](https://blog.csdn.net/ohantanyanying/category_2296393.html)8绡?*   [![Image 167](https://i-blog.csdnimg.cn/columns/default/20201014180756930.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 闊抽澶勭悊](https://blog.csdn.net/ohantanyanying/category_2331299.html)6绡?*   [![Image 168](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鐜鎼缓](https://blog.csdn.net/ohantanyanying/category_2374897.html)23绡?*   [![Image 169](https://i-blog.csdnimg.cn/columns/default/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 缃戠粶浼犺緭](https://blog.csdn.net/ohantanyanying/category_2417293.html)10绡?*   [![Image 170](https://i-blog.csdnimg.cn/columns/default/20201014180756928.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 娓告垙缂栫▼瀛︿範](https://blog.csdn.net/ohantanyanying/category_2683605.html)2绡?*   [![Image 171](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鏁版嵁搴撶浉鍏砞(https://blog.csdn.net/ohantanyanying/category_2741825.html)7绡?*   [![Image 172](https://i-blog.csdnimg.cn/columns/default/20201014180756928.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鐢佃剳闂鐩稿叧鐨勪慨澶峕(https://blog.csdn.net/ohantanyanying/category_2767637.html)5绡?*   [![Image 173](https://i-blog.csdnimg.cn/columns/default/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 骞惰鍔犻€焆(https://blog.csdn.net/ohantanyanying/category_3025869.html)1绡?*   [![Image 174](https://i-blog.csdnimg.cn/columns/default/20201014180756928.png?x-oss-process=image/resize,m_fixed,h_64,w_64) C#](https://blog.csdn.net/ohantanyanying/category_5853557.html)15绡?*   [![Image 175](https://i-blog.csdnimg.cn/columns/default/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64) WPF](https://blog.csdn.net/ohantanyanying/category_5904951.html)16绡?*   [![Image 176](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) Direct 2D](https://blog.csdn.net/ohantanyanying/category_6052337.html)1绡?*   [![Image 177](https://i-blog.csdnimg.cn/columns/default/20201014180756923.png?x-oss-process=image/resize,m_fixed,h_64,w_64) DirectX](https://blog.csdn.net/ohantanyanying/category_6241860.html)2绡?*   [![Image 178](https://i-blog.csdnimg.cn/columns/default/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 濂界敤鐨勮蒋浠禲(https://blog.csdn.net/ohantanyanying/category_6502333.html)3绡?*   [![Image 179](https://i-blog.csdnimg.cn/columns/default/20201014180756913.png?x-oss-process=image/resize,m_fixed,h_64,w_64) office](https://blog.csdn.net/ohantanyanying/category_6645818.html)1绡?*   [![Image 180](https://i-blog.csdnimg.cn/columns/default/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鏈哄櫒瀛︿範](https://blog.csdn.net/ohantanyanying/category_6892327.html)6绡?*   [![Image 181](https://i-blog.csdnimg.cn/columns/default/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64) python](https://blog.csdn.net/ohantanyanying/category_7098119.html)8绡?*   [![Image 182](https://i-blog.csdnimg.cn/columns/default/20201014180756724.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 娣卞害瀛︿範](https://blog.csdn.net/ohantanyanying/category_7447087.html)15绡?*   [![Image 183](https://i-blog.csdnimg.cn/columns/default/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64) latex瀛︿範](https://blog.csdn.net/ohantanyanying/category_7712960.html)1绡?*   [![Image 184](https://i-blog.csdnimg.cn/columns/default/20201014180756922.png?x-oss-process=image/resize,m_fixed,h_64,w_64) ROS瀛︿範](https://blog.csdn.net/ohantanyanying/category_8120128.html)20绡?*   [![Image 185](https://i-blog.csdnimg.cn/columns/default/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鎿嶄綔绯荤粺](https://blog.csdn.net/ohantanyanying/category_8245127.html)4绡?*   [![Image 186](https://i-blog.csdnimg.cn/columns/default/20201014180756927.png?x-oss-process=image/resize,m_fixed,h_64,w_64) PyTorch](https://blog.csdn.net/ohantanyanying/category_8487127.html)2绡?*   [![Image 187](https://i-blog.csdnimg.cn/columns/default/20201014180756754.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 涔︾睄缈昏瘧](https://blog.csdn.net/ohantanyanying/category_8522237.html)1绡?*   [![Image 188](https://i-blog.csdnimg.cn/columns/default/20201014180756925.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 鑷姩椹鹃┒](https://blog.csdn.net/ohantanyanying/category_8536801.html)2绡?*   [![Image 189](https://i-blog.csdnimg.cn/columns/default/20201014180756724.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 绁炵粡缃戠粶鏁板鍩虹](https://blog.csdn.net/ohantanyanying/category_8540415.html)11绡?*   [![Image 190](https://i-blog.csdnimg.cn/columns/default/20201014180756757.png?x-oss-process=image/resize,m_fixed,h_64,w_64) PCL](https://blog.csdn.net/ohantanyanying/category_8726956.html)7绡?*   [![Image 191](https://i-blog.csdnimg.cn/columns/default/20201014180756928.png?x-oss-process=image/resize,m_fixed,h_64,w_64) QT](https://blog.csdn.net/ohantanyanying/category_8932773.html)1绡?*   [![Image 192](https://i-blog.csdnimg.cn/columns/default/20201014180756738.png?x-oss-process=image/resize,m_fixed,h_64,w_64) 瑙嗛纭搷浣淽(https://blog.csdn.net/ohantanyanying/category_9102222.html)2绡?*   [![Image 193](https://i-blog.csdnimg.cn/columns/default/20201014180756724.png?x-oss-process=image/resize,m_fixed,h_64,w_64) OpenGL](https://blog.csdn.net/ohantanyanying/category_9127071.html)2绡?
+[灞曞紑鍏ㄩ儴![Image 194](https://csdnimg.cn/release/blogv2/dist/pc/img/arrowup-line-bot-White.png)](http://blog.csdn.net/weixinhum/article/details/149218796)[鏀惰捣![Image 195](https://csdnimg.cn/release/blogv2/dist/pc/img/arrowup-line-top-White.png)](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+鐧诲綍鍚庢偍鍙互浜彈浠ヤ笅鏉冪泭锛?
+*   ![Image 196](blob:http://localhost/e891c3a7c1a92038da15617ead1c0096)鍏嶈垂澶嶅埗浠ｇ爜
+*   ![Image 197](blob:http://localhost/3d84693e43989ca72c63590d38052fc8)鍜屽崥涓诲ぇV浜掑姩
+*   ![Image 198](blob:http://localhost/a746ba3bd4746d1ec8acd6b5071ccf00)涓嬭浇娴烽噺璧勬簮
+*   ![Image 199](blob:http://localhost/7cd6e3cbe7e0076d0b9199193b4b832d)鍙戝姩鎬?鍐欐枃绔?鍔犲叆绀惧尯
+
+脳绔嬪嵆鐧诲綍
+
+璇勮![Image 200](https://csdnimg.cn/release/blogv2/dist/pc/img/closeBt.png)
+
+![Image 201](https://csdnimg.cn/release/blogv2/dist/pc/img/commentArrowLeftWhite.png)琚姌鍙犵殑 鏉&#164;瘎璁?[涓轰粈涔堣鎶樺彔?](https://blogdev.blog.csdn.net/article/details/122245662)[![Image 202](https://csdnimg.cn/release/blogv2/dist/pc/img/iconPark.png)鍒般€愮亴姘翠箰鍥€戝彂瑷€](https://bbs.csdn.net/forums/FreeZone)
+
+[鏌ョ湅鏇村璇勮![Image 203](https://csdnimg.cn/release/blogv2/dist/pc/img/commentArrowDownWhite.png)](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+ 娣诲姞绾㈠寘 [](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+绁濈璇?
+
+[](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+璇峰～鍐欑孩鍖呯绂忚鎴栨爣棰?
+绾㈠寘鏁伴噺 
+
+涓?
+绾㈠寘涓暟鏈€灏忎负10涓?
+绾㈠寘鎬婚噾棰?
+
+鍏?
+绾㈠寘閲戦鏈€浣?鍏?
+浣欓鏀粯 
+
+ 褰撳墠浣欓 3.43 鍏?[鍓嶅線鍏呭€?&gt;](https://i.csdn.net/#/wallet/balance/recharge)
+
+ 闇€鏀粯锛?0.00 鍏?
+
+鍙栨秷 纭畾
+
+![Image 204](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+鎴愬氨涓€浜挎妧鏈汉!
+
+ 棰嗗彇鍚庝綘浼氳嚜鍔ㄦ垚涓哄崥涓诲拰绾㈠寘涓荤殑绮変笣 [瑙勫垯](https://blogdev.blog.csdn.net/article/details/128932621)
+
+[![Image 205](https://profile-avatar.csdnimg.cn/default.jpg!2)](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+hope_wisdom
+
+ 鍙戝嚭鐨勭孩鍖?
+
+瀹炰粯 鍏?
+[浣跨敤浣欓鏀粯](javascript:;)
+
+![Image 206](https://csdnimg.cn/release/blogv2/dist/pc/img/pay-time-out.png)鐐瑰嚮閲嶆柊鑾峰彇
+
+![Image 207](https://csdnimg.cn/release/blogv2/dist/pc/img/weixin.png)![Image 208](https://csdnimg.cn/release/blogv2/dist/pc/img/zhifubao.png)![Image 209](https://csdnimg.cn/release/blogv2/dist/pc/img/jingdong.png)鎵爜鏀粯
+
+閽卞寘浣欓 0
+
+![Image 210](https://csdnimg.cn/release/blogv2/dist/pc/img/pay-help.png)
+
+鎶垫墸璇存槑锛?
+1.浣欓鏄挶鍖呭厖鍊肩殑铏氭嫙璐у竵锛屾寜鐓?:1鐨勬瘮渚嬭繘琛屾敮浠橀噾棰濈殑鎶垫墸銆?
+ 2.浣欓鏃犳硶鐩存帴璐拱涓嬭浇锛屽彲浠ヨ喘涔癡IP銆佷粯璐逛笓鏍忓強璇剧▼銆?
+[![Image 211](https://csdnimg.cn/release/blogv2/dist/pc/img/recharge.png)浣欓鍏呭€糫(https://i.csdn.net/#/wallet/balance/recharge)
+
+![Image 212](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+纭畾 鍙栨秷![Image 213](https://csdnimg.cn/release/blogv2/dist/pc/img/closeBt.png)
+
+涓炬姤
+
+![Image 214](https://csdnimg.cn/release/blogv2/dist/pc/img/closeBlack.png)
+
+閫夋嫨浣犳兂瑕佷妇鎶ョ殑鍐呭锛堝繀閫夛級
+
+*   鍐呭娑夐粍
+*   鏀挎不鐩稿叧
+*   鍐呭鎶勮
+*   娑夊珜骞垮憡
+*   鍐呭渚垫潈
+*   渚颈璋╅獋
+*   鏍峰紡闂
+*   鍏朵粬
+
+鍘熸枃閾炬帴锛堝繀濉級
+
+璇烽€夋嫨鍏蜂綋鍘熷洜锛堝繀閫夛級
+
+*   鍖呭惈涓嶅疄淇℃伅
+*   娑夊強涓汉闅愮
+
+璇烽€夋嫨鍏蜂綋鍘熷洜锛堝繀閫夛級
+
+*   渚颈璋╅獋
+*   璇借挨
+
+璇烽€夋嫨鍏蜂綋鍘熷洜锛堝繀閫夛級
+
+*   鎼鏍峰紡
+*   鍗氭枃鏍峰紡
+
+琛ュ厖璇存槑锛堥€夊～锛?
+鍙栨秷
+
+纭畾
+
+[![Image 215](https://csdnimg.cn/release/blogv2/dist/pc/img/toolbar/Group.png)鐐瑰嚮浣撻獙 DeepSeekR1婊&#164;鐗圿(https://ai.csdn.net/chat?utm_source=cknow_pc_blogdetail&amp;spm=1001.2101.3001.10583)[![Image 216](https://g.csdnimg.cn/side-toolbar/3.6/images/mobile.png) 涓嬭浇APP ![Image 217: 绋嬪簭鍛橀兘鍦ㄧ敤鐨勪腑鏂嘔T鎶€鏈氦娴佺ぞ鍖篯(https://g.csdnimg.cn/side-toolbar/3.6/images/qr_app.png) 绋嬪簭鍛橀兘鍦ㄧ敤鐨勪腑鏂嘔T鎶€鏈氦娴佺ぞ鍖?鍏紬鍙?![Image 218: 涓撲笟鐨勪腑鏂?IT 鎶€鏈ぞ鍖猴紝涓庡崈涓囨妧鏈汉鍏辨垚闀縘(https://g.csdnimg.cn/side-toolbar/3.6/images/qr_wechat.png) 涓撲笟鐨勪腑鏂?IT 鎶€鏈ぞ鍖猴紝涓庡崈涓囨妧鏈汉鍏辨垚闀?瑙嗛鍙?![Image 219: 鍏虫敞銆怌SDN銆戣棰戝彿锛岃涓氳祫璁€佹妧鏈垎浜簿褰╀笉鏂紝鐩存挱濂界ぜ閫佷笉鍋滐紒](https://g.csdnimg.cn/side-toolbar/3.6/images/qr_video.png) 鍏虫敞銆怌SDN銆戣棰戝彿锛岃涓氳祫璁€佹妧鏈垎浜簿褰╀笉鏂紝鐩存挱濂界ぜ閫佷笉鍋滐紒](http://blog.csdn.net/weixinhum/article/details/149218796)[![Image 220](https://g.csdnimg.cn/side-toolbar/3.6/images/customer.png)瀹㈡湇](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+鏂版墜寮曞
+
+[![Image 221](https://g.csdnimg.cn/side-toolbar/3.6/images/totop.png)杩斿洖椤堕儴](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+[![Image 222](https://csdnimg.cn/release/blogv2/dist/pc/img/quoteClose1White.png)](http://blog.csdn.net/weixinhum/article/details/149218796)
+
+![Image 223](https://i-blog.csdnimg.cn/direct/f9309447439e47c78bc15f17f8f423d3.png)
+
+![Image 224](https://i-blog.csdnimg.cn/direct/86eced7524244644baf9cdf42671a646.png)
+
+![Image 225](https://i-blog.csdnimg.cn/direct/3bb10be8aa1a4d8da61f15a0d43d3be4.png)
+
+-杩樺師+1:1 杩樺師
+</pre>
+  </div>
+</body>
+</html>

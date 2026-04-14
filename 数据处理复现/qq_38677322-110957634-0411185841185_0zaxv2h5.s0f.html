@@ -1,0 +1,384 @@
+﻿    <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <link rel="canonical" href="https://blog.csdn.net/qq_38677322/article/details/110957634"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <meta name="report" content='{"pid": "blog", "spm":"1001.2101"}'>
+    <meta name="referrer" content="always">
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <meta name="applicable-device" content="pc">
+    <link  href="https://g.csdnimg.cn/static/logo/favicon32.ico"  rel="shortcut icon" type="image/x-icon" />
+    <title>论文复现：“DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation“_deepsdf论文复现-CSDN博客</title>
+    
+        <meta name="keywords" content="linux,python,ubuntu,计算机视觉,debug">
+        <meta name="csdn-baidu-search"  content='{"autorun":true,"install":true,"keyword":"deepsdf论文复现"}'>
+    <meta name="description" content="文章浏览阅读1.2w次，点赞56次，收藏97次。本文详细介绍如何配置环境以生成DeepSDF数据集，包括安装必要库文件、处理ShapeNet数据集及训练模型等关键步骤。">
+              <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/css/detail_enter-ba6187dcfd.min.css">
+    
+        <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/release/blogv2/dist/pc/themesSkin/skin3-template/skin3-template-762f7595fd.min.css">
+    
+    
+    
+        <meta name="toolbar" content='{"type":"0","fixModel":"1"}'>
+      
+    
+    <link rel="stylesheet" type="text/css" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css">
+    <style>
+        .MathJax_Message, .MathJax_Preview{
+            display: none !important;
+        }
+    </style>
+    
+      
+    
+    
+    
+<style type="text/css">* { user-select: text; }pre{max-height: none!important; overflow-y: hidden;}</style></head>
+  <body class="nodata  " style="">
+    <div id="toolbarBox" style="min-height: 48px;"></div>
+        
+    
+    
+
+    <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/pc/css/blog_code-01256533b5.min.css">
+    <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/chart-3456820cac.css" />
+    <link rel="stylesheet" href="https://g.csdnimg.cn/lib/swiper/6.0.4/css/swiper.css" />
+    
+    
+        <div class="main_father clearfix d-flex justify-content-center mainfather-concision" style="height:100%;">
+          <div class="container clearfix container-concision" id="mainBox">
+          
+          <main>
+
+<div class="blog-content-box">
+  <div class="article-header-box" id="article-header-box">
+    <div class="article-header">
+      <div class="article-title-box">
+        <h1 class="title-article" id="articleContentId">论文复现：“DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation“</h1>
+      </div>
+      <div class="article-info-box">
+              <div class="up-time">最新推荐文章于&nbsp;2025-07-09 11:05:10&nbsp;发布</div>
+          <div class="article-bar-top">
+              <div class="bar-content active">
+              <span class="article-type-text original">原创</span>
+                <a href="https://mall.csdn.net/vip" data-report-query="spm=3001.10404"  data-report-click='{"spm":"3001.10404"}' data-report-view='{"spm":"3001.10404"}'  class="article-vip-box" target="_blank"><img class="article-vip-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/identityVipNew.png" alt=""></a>
+                 
+                    <span class="time blog-postTime" data-time="2020-12-12 16:54:27">最新推荐文章于&nbsp;2025-07-09 11:05:10&nbsp;发布</span>
+                <span class="border-dian">·</span>
+                <span class="read-count">1.2w 阅读</span>
+                <div class="read-count-box is-like like-ab-new" data-type="top">
+                  <span class="border-dian">·</span>
+                  <img class="article-read-img article-heard-img active" style="display:none" id="is-like-imgactive-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Active.png" alt="">
+                  <img class="article-read-img article-heard-img" style="display:block" id="is-like-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Black.png" alt="">
+                  <span class="read-count" id="blog-digg-num" style="color:;">
+                      56
+                  </span>
+                </div>
+                <span class="border-dian">·</span>
+                <a id="blog_detail_zk_collection" class="un-collection" data-report-click='{"mod":"popu_823","spm":"1001.2101.3001.4232","ab":"new"}'>
+                  <img class="article-collect-img article-heard-img un-collect-status isdefault" style="display:inline-block" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollect2.png" alt="">
+                  <img class="article-collect-img article-heard-img collect-status isactive" style="display:none" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollectionActive2.png" alt="">
+                  <span class="get-collection">
+                      97
+                  </span>
+                </a>
+
+              </div>
+              <div class="operating active">
+              </div>
+          </div>
+          <div class="blog-tags-box">
+            <div class="tags-box artic-tag-box">
+                      <div class="article-tag">
+                        <span class="label">文章标签：</span>
+                      <p>
+                          <a rel="nofollow" data-report-query="spm=1001.2101.3001.4223" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"linux","ab":"new","extra":"{\"searchword\":\"linux\"}"}' data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"linux","ab":"new","extra":"{\"searchword\":\"linux\"}"}' class="tag-link-new" href="https://so.csdn.net/so/search/s.do?q=linux&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" target="_blank" rel="noopener">#linux</a>
+                          <a rel="nofollow" data-report-query="spm=1001.2101.3001.4223" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"python","ab":"new","extra":"{\"searchword\":\"python\"}"}' data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"python","ab":"new","extra":"{\"searchword\":\"python\"}"}' class="tag-link-new" href="https://so.csdn.net/so/search/s.do?q=python&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" target="_blank" rel="noopener">#python</a>
+                          <a rel="nofollow" data-report-query="spm=1001.2101.3001.4223" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"ubuntu","ab":"new","extra":"{\"searchword\":\"ubuntu\"}"}' data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"ubuntu","ab":"new","extra":"{\"searchword\":\"ubuntu\"}"}' class="tag-link-new" href="https://so.csdn.net/so/search/s.do?q=ubuntu&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" target="_blank" rel="noopener">#ubuntu</a>
+                          <a rel="nofollow" data-report-query="spm=1001.2101.3001.4223" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"计算机视觉","ab":"new","extra":"{\"searchword\":\"计算机视觉\"}"}' data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"计算机视觉","ab":"new","extra":"{\"searchword\":\"计算机视觉\"}"}' class="tag-link-new" href="https://so.csdn.net/so/search/s.do?q=%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" target="_blank" rel="noopener">#计算机视觉</a>
+                          <a rel="nofollow" data-report-query="spm=1001.2101.3001.4223" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"debug","ab":"new","extra":"{\"searchword\":\"debug\"}"}' data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"debug","ab":"new","extra":"{\"searchword\":\"debug\"}"}' class="tag-link-new" href="https://so.csdn.net/so/search/s.do?q=debug&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" target="_blank" rel="noopener">#debug</a>
+                      </p>
+                      </div>
+                <p class="community-name" id="community-name"></p>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+    <div id="blogHuaweiyunAdvert" class="active-padding"></div>
+      <div class="ai-abstract-box">
+         <div class="ai-abstract">
+          <div class="abstract-content">
+            <img class="lock-img" src="https://i-operation.csdnimg.cn/images/a7311a21245d4888a669ca3155f1f4e5.png" alt="">本文详细介绍如何配置环境以生成DeepSDF数据集，包括安装必要库文件、处理ShapeNet数据集及训练模型等关键步骤。
+          </div>
+        </div>
+      </div>
+    <article class="baidu_pl">
+        <div id="article_content" class="article_content clearfix">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-1a98987dfd.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-a50b13a894.css">
+                <div id="content_views" class="markdown_views prism-atom-one-light">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                    </svg>
+                    <p></p>
+<div class="toc">
+ <h4>目录</h4>
+ <ul><li><a href="#__2">一、 数据集生成</a></li><li><ul><li><a href="#_3">&#xff08;一&#xff09;环境配置说明</a></li><li><a href="#cmakemake_11">&#xff08;二&#xff09;cmake和make</a></li><li><a href="#CLI11_39">&#xff08;三&#xff09;安装CLI11</a></li><li><a href="#Eigen3_56">&#xff08;四&#xff09;安装Eigen3</a></li><li><a href="#Pangolin_75">&#xff08;五&#xff09;安装Pangolin</a></li><li><a href="#nanoflann_135">&#xff08;六&#xff09;安装nanoflann</a></li><li><a href="#SDF_151">&#xff08;七&#xff09;编译SDF</a></li><li><a href="#_187">&#xff08;八&#xff09;处理数据集</a></li></ul>
+  </li><li><a href="#_230">二、模型训练</a></li><li><ul><li><a href="#SDF_231">&#xff08;一&#xff09;SDF数据浅析</a></li><li><a href="#_243">&#xff08;二&#xff09;训练过程</a></li></ul>
+  </li><li><a href="#_250">三、数据集地址</a></li></ul>
+</div>
+<p></p> 
+<h2><a id="__2"></a>一、 数据集生成</h2> 
+<h3><a id="_3"></a>&#xff08;一&#xff09;环境配置说明</h3> 
+<p>这篇博文主要讲解<a href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Park_DeepSDF_Learning_Continuous_Signed_Distance_Functions_for_Shape_Representation_CVPR_2019_paper.pdf" rel="nofollow">“DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation”</a>这篇paper复现过程中的环境配置工作。由于DeepSDF并没有直接给出训练数据集&#xff0c;只是给出了从原始ShapeNet数据集转SDF数据集的前处理代码&#xff0c;所以需要花费大量的工作来配置数据集处理所需的环境。</p> 
+<p><strong>强烈建议这一部分在本地完成&#xff0c;不要在远程服务器上进行。</strong> 因为远程服务器上一般来说没有管理员权限&#xff0c;没有办法运行<code>sudo apt install</code>指令&#xff0c;因此没有办法把依赖包下载到/usr目录。</p> 
+<p>针对上面的问题&#xff0c;一种解决办法是把需要的软件包源码下载到自己的用户目录&#xff0c;然后手动编译&#xff0c;再在~/.bashrc中编辑环境变量&#xff0c;把动态链接库指向自己用户目录下的库文件。但这样会带来各种各样的问题&#xff0c;因为有一些库文件并不能直接下载源码&amp;编译&#xff0c;有一些库文件还需要用到其它系统库文件的依赖&#xff0c;往往解决了一个bug还会出现另一个bug。我一开始打算这样在服务器上配置环境&#xff0c;但后来因为各种难以解决的bug而放弃了。</p> 
+<p>另一种解决办法是在本地的linux环境中配置&#xff0c;因为这一阶段不涉及到训练&#xff0c;只是生成数据集。我们完全可以在本地生成数据集&#xff0c;之后传到服务器上进行训练。本地的linux环境可以考虑在windows上的双系统&#xff0c;或者使用虚拟机。这篇博文主要讲解这种方法&#xff0c;我最后也是使用这种方法配置成功的。<strong>我使用的linux系统为Ubuntu16.04.</strong></p> 
+<h3><a id="cmakemake_11"></a>&#xff08;二&#xff09;cmake和make</h3> 
+<p>首先要保证系统中有cmake和make。在命令行里输入</p> 
+<pre><code class="prism language-bash">cmake --version
+<span class="token function">make</span> --version
+</code></pre> 
+<p>可以查看cmake和make是否安装&#xff0c;如果显示如下说明已经有cmake和make。<br /> <img src="https://i-blog.csdnimg.cn/blog_migrate/36ab3f17e5bd409e32f1d581beb7cc72.png" alt="在这里插入图片描述" /><br /> 如果提示“找不到make指令”或“找不到cmake指令”&#xff0c;就需要下载。<br /> 下载make命令可以直接使用</p> 
+<pre><code class="prism language-shell"><span class="token function">sudo</span> apt <span class="token function">install</span> <span class="token function">make</span>
+</code></pre> 
+<p>下载cmake命令如果直接使用<code>sudo apt install cmake</code>会下载最新版本的cmake&#xff08;现在是3.5.1版本&#xff09;&#xff0c;但SDF这个项目编译使用的cmake是低版本的&#xff0c;如果直接使用最新的cmake&#xff0c;在后面的编译过程会报错。建议使用3.14版本。下载旧版本cmake的方法参考下面这篇文章&#xff1a;<a href="https://blog.csdn.net/wu2700222/article/details/89023094">查看gcc版本并安装cmake3.14.1</a>。具体操作步骤为&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token comment"># 源码包下载到本地</span>
+<span class="token function">wget</span> https://github.com/Kitware/CMake/releases/download/v3.14.1/cmake-3.14.1.tar.gz 
+<span class="token comment"># 解压</span>
+<span class="token function">tar</span> xvf cmake-3.14.1.tar.gz 
+<span class="token function">cd</span> cmake-3.14.1/
+./bootstrap
+<span class="token function">make</span>
+<span class="token comment"># 安装</span>
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+<span class="token comment"># 如果需要移除旧版本的cmake</span>
+yum remove cmake -y 
+<span class="token function">ln</span> -s /usr/local/bin/cmake /usr/bin/
+</code></pre> 
+<h3><a id="CLI11_39"></a>&#xff08;三&#xff09;安装CLI11</h3> 
+<p>从这里开始&#xff0c;要安装SDF处理数据集所需要的四个C&#43;&#43;库文件&#xff0c;这在它的README里面也提到了。第一个是CLI11&#xff0c;这个库的github地址是<a href="https://github.com/CLIUtils/CLI11">https://github.com/CLIUtils/CLI11</a> &#xff0c;在命令行里面运行</p> 
+<pre><code class="prism language-shell"><span class="token function">git</span> clone https://github.com/CLIUtils/CLI11 --recursive 
+</code></pre> 
+<p>将这个项目克隆到本地。注意因为这个项目引用了别的项目&#xff0c;所以<code>git</code>后面要加<code>--recursive</code>参数。</p> 
+<p>接下来编译和安装&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token function">cd</span> CLI11
+<span class="token function">mkdir</span> build
+<span class="token function">cd</span> build
+cmake <span class="token punctuation">..</span>
+<span class="token function">make</span>
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+</code></pre> 
+<p>如果过程中没有报错则说明安装好了。在 /usr/local/lib/cmake 下可以找到名为CLI的文件夹。</p> 
+<h3><a id="Eigen3_56"></a>&#xff08;四&#xff09;安装Eigen3</h3> 
+<p>这个库不是github项目&#xff0c;需要下载源代码然后编译安装。首先将源码包下载下来&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token function">wget</span> https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.gz
+</code></pre> 
+<p>然后解压&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token function">tar</span> xvf eigen-3.3.9.tar.gz
+</code></pre> 
+<p>之后就像前面一样&#xff0c;编译并安装&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token function">cd</span> eigen-3.3.9
+<span class="token function">mkdir</span> build
+<span class="token function">cd</span> build
+cmake <span class="token punctuation">..</span>
+<span class="token function">make</span>
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+</code></pre> 
+<p>如果没有报错则说明安装好了。</p> 
+<h3><a id="Pangolin_75"></a>&#xff08;五&#xff09;安装Pangolin</h3> 
+<p>在安装这个之前首先需要安装一些依赖库。在命令行中运行如下语句&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token function">sudo</span> apt <span class="token function">install</span> libgl1-mesa-dev
+<span class="token function">sudo</span> apt <span class="token function">install</span> libglew-dev
+<span class="token function">sudo</span> apt <span class="token function">install</span> libpython2.7-dev
+<span class="token function">sudo</span> apt <span class="token function">install</span> pkg-config
+</code></pre> 
+<p>然后将github上的Pangolin项目克隆到本地&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token function">git</span> clone https://github.com/stevenlovegrove/Pangolin --recursive
+</code></pre> 
+<p>然后和之前一样&#xff0c;进行编译和安装&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token function">cd</span> Pangolin
+<span class="token function">mkdir</span> build
+<span class="token function">cd</span> build
+cmake <span class="token punctuation">..</span>
+<span class="token function">make</span>
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+</code></pre> 
+<p>如果上诉过程没有报错&#xff0c;则说明安装好了。</p> 
+<p>我自己安装过程中&#xff0c;在make命令运行到80%时碰到了&#34;undefined reference to ‘PyString_Size’&#34;这个问题&#xff0c;如下&#xff1a;<br /> <img src="https://i-blog.csdnimg.cn/blog_migrate/1b167abdf00317a40f5045037d5de301.png" alt="在这里插入图片描述" /><br /> 参考<a href="https://github.com/pytorch/pytorch/issues/591">https://github.com/pytorch/pytorch/issues/591</a>&#xff0c;可能是系统里自带的python版本有bug&#xff0c;解决办法是在系统里重新安装一遍python2.7&#xff0c;把系统默认的python替换掉。重新安装python的方法参见&#xff1a;<a href="https://www.cnblogs.com/xiaowenshu/p/10239834.html" rel="nofollow">Linux安装python2.7、pip和setuptools<br /> </a>&#xff0c;具体步骤如下&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token comment"># 源码包下载到本地</span>
+<span class="token function">wget</span> https://www.python.org/ftp/python/2.7.14/Python-2.7.14.tgz
+<span class="token comment"># 解压</span>
+<span class="token function">tar</span> -zxvf Python-2.7.14.tgz
+<span class="token comment"># 创建安装文件夹</span>
+<span class="token function">mkdir</span> /usr/local/python27
+<span class="token comment"># 编译安装</span>
+<span class="token function">cd</span> Python-2.7.14
+./configure --prefix<span class="token operator">&#61;</span>/usr/local/python27/ 
+<span class="token function">make</span>
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+</code></pre> 
+<p>安装完成之后&#xff0c;需要替换掉现有系统的python。不需要删除掉&#xff0c;只需要替换掉软链接即可。当前系统的python应该是指向/usr/bin目录下的python可执行文件&#xff0c;可以输入<code>ls /usr/bin/python* -l</code>查看&#xff1a;<br /> <img src="https://i-blog.csdnimg.cn/blog_migrate/761dc6b94b61e6aa163c42bb95b609b9.png" alt="在这里插入图片描述" /><br /> 其中&#xff0c;<code>/usr/bin/python</code>和<code>/usr/bin/python2</code>都是指向<code>/usr/bin/python2.7</code>的软链接。此时应该删除这两个软链接&#xff0c;并把它们重新指向我们新下载好的python&#xff0c;具体操作如下&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token comment"># 删掉之前的软链接</span>
+<span class="token function">sudo</span> <span class="token function">rm</span> /usr/bin/python
+<span class="token function">sudo</span> <span class="token function">rm</span> /usr/bin/python2
+<span class="token comment"># 新建软链接</span>
+<span class="token function">ln</span> -s /usr/local/python27/bin/python2.7 /usr/bin/python
+<span class="token function">ln</span> -s /usr/local/python27/bin/python2.7 /usr/bin/python2
+</code></pre> 
+<p>之后删掉<code>Pangolin/</code>目录下的<code>build</code>文件夹&#xff0c;重新进行上述步骤&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token function">mkdir</span> build
+<span class="token function">cd</span> build
+cmake <span class="token punctuation">..</span>
+<span class="token function">make</span>
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+</code></pre> 
+<p>没有再报错&#xff0c;安装完成。</p> 
+<h3><a id="nanoflann_135"></a>&#xff08;六&#xff09;安装nanoflann</h3> 
+<p>这个库文件跟CLI11的安装方法类似&#xff0c;也不太会碰到多余的问题。首先从github上将这个目录克隆下来&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token function">git</span> clone https://github.com/jlblancoc/nanoflann
+</code></pre> 
+<p>然后编译安装&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token function">cd</span> nanoflann
+<span class="token function">mkdir</span> build
+<span class="token function">cd</span> build
+cmake <span class="token punctuation">..</span>
+<span class="token function">make</span>
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+</code></pre> 
+<p>如果过程中没有报错则说明安装好了。</p> 
+<h3><a id="SDF_151"></a>&#xff08;七&#xff09;编译SDF</h3> 
+<p>在上面四个库都安装完成后&#xff0c;就可以安装SDF了。和之前的操作一样&#xff0c;在<code>DeepSDF</code>目录下&#xff0c;输入下面的命令&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token function">mkdir</span> build
+<span class="token function">cd</span> build
+cmake <span class="token punctuation">..</span>
+<span class="token function">make</span>
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+</code></pre> 
+<p>如果过程中没有报错&#xff0c;则安装成功。<br /> 我在cmake过程中碰到了下面的问题&#xff1a;<br /> <img src="https://i-blog.csdnimg.cn/blog_migrate/ab3fa3970fe67c4e99e9e33c68dd0781.png" alt="在这里插入图片描述" /><br /> 这是因为cmake缺少zlib库&#xff0c;需要手动下载安装&#xff0c;可以使用如下命令安装&#xff1a;</p> 
+<pre><code class="prism language-shell"><span class="token function">wget</span> http://www.zlib.net/zlib-1.2.11.tar.gz
+<span class="token function">tar</span> -xvzf zlib-1.2.11.tar.gz
+<span class="token function">cd</span> zlib-1.2.8.tar.gz
+./configure
+<span class="token function">make</span>
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+</code></pre> 
+<p>之后再次运行cmake就没问题了。</p> 
+<p>此外&#xff0c;我在make过程中碰到了下面的问题&#xff1a;<br /> <img src="https://i-blog.csdnimg.cn/blog_migrate/6b90664b2d0c0daca10cfc5f273486bc.png" alt="在这里插入图片描述" /><br /> 参考 <a href="https://github.com/facebookresearch/DeepSDF/issues/29">https://github.com/facebookresearch/DeepSDF/issues/29</a> 的解决方案&#xff0c;到github上把这个文件夹 <a href="https://github.com/stevenlovegrove/Pangolin/tree/master/include/mpark">https://github.com/stevenlovegrove/Pangolin/tree/master/include/mpark</a> 下载下来&#xff0c;放到<code>/usr/local/include/</code>目录下即可。从github下载单个文件夹可以使用GitZip插件&#xff0c;在http://kinolien.github.io/gitzip/这个网站上直接输入mpark的路径&#xff0c;即可下载这个文件夹而不下载整个git项目。</p> 
+<p>在make过程中还可能存在下面的问题&#xff1a;<br /> <img src="https://i-blog.csdnimg.cn/blog_migrate/d97b72b768386bddbd31c723ad8c66f7.png" alt="在这里插入图片描述" /><br /> 这是因为系统安装nanoflann.hpp时的路径有问题。查看一下<code>/usr/local/include/</code>目录&#xff0c;现在目录下可能是这个样子的&#xff1a;<br /> <img src="https://i-blog.csdnimg.cn/blog_migrate/00f1a4a709a69f3d0693df96e4982275.png" alt="在这里插入图片描述" /><br /> 解决办法是在该目录下新建一个名为<code>nanoflann</code>的文件夹&#xff0c;然后把<code>nanoflann.hpp</code>这个文件移到文件夹中去&#xff0c;具体操作方法和操作之后的文件夹组织如下&#xff1a;<br /> <img src="https://i-blog.csdnimg.cn/blog_migrate/72c3c8467a6123e894162b275056c6f0.png#pic_center" alt="在这里插入图片描述" /><br /> 之后再次运行<code>make</code>命令&#xff0c;可以正常编译了。</p> 
+<p>在<code>make install</code>完成后&#xff0c;应该能够在<code>DeepSDF/bin</code>目录下产生两个可执行文件&#xff0c;分别是<code>PreprocessMesh</code>和<code>SampleVisibleMeshSurface</code>&#xff0c;如果有这两个文件则说明SDF的环境都配置成功了。</p> 
+<h3><a id="_187"></a>&#xff08;八&#xff09;处理数据集</h3> 
+<p>SDF给出了一个名为&#34;preprocess_data.py&#34;的代码&#xff0c;这个代码能够把ShapeNetV2数据集转换成SDF数据集。在运行这个代码之前&#xff0c;首先要配置好python环境。README里并没有给出python的版本号和requirements.txt&#xff0c;我使用的是python3.6&#xff0c;需要安装的包有以下几个&#xff1a;</p> 
+<pre><code class="prism language-python">pytorch<span class="token operator">&#61;&#61;</span><span class="token number">1.1</span><span class="token number">.0</span>
+torchvision<span class="token operator">&#61;&#61;</span><span class="token number">0.3</span><span class="token number">.0</span>
+cudatoolkit<span class="token operator">&#61;</span><span class="token number">10.0</span>
+plyfile
+scikit<span class="token operator">-</span>image
+trimesh
+</code></pre> 
+<p>可以使用anaconda3新建一个python3.6的虚拟环境&#xff0c;然后使用<code>conda install</code>命令依次下载上面的包。</p> 
+<p><strong>注意</strong>&#xff1a;安装的pytorch版本不能高于1.1.0&#xff0c;因为有一些库不支持高版本的pytorch&#xff0c;会报错。</p> 
+<p>准备好ShapeNetV2数据集后&#xff0c;转换数据之前还有一步操作。DeepSDF的渲染器代码有语法错误&#xff0c;需要进行修正。在<code>DeepSDF/src/ShaderProgram.cpp</code>文件中&#xff0c;把第97行删掉&#xff0c;也就是<code>in int gl_PrimitiveID ;</code>这一句&#xff1a;</p> 
+<pre><code class="prism language-c">&#64;start fragment
+<span class="token macro property">#version 330 core</span>
+
+in vec3 viewDirection_cam<span class="token punctuation">;</span>
+in vec3 normal_world<span class="token punctuation">;</span>
+in vec3 normal_camera<span class="token punctuation">;</span>
+in vec4 xyz_world<span class="token punctuation">;</span>
+in vec4 xyz_camera<span class="token punctuation">;</span>
+in <span class="token keyword">int</span> gl_PrimitiveID <span class="token punctuation">;</span> <span class="token comment">//删掉这一行</span>
+
+uniform vec2 slant_thr<span class="token punctuation">;</span>
+varying vec4 ttt<span class="token punctuation">;</span>
+uniform mat4 V<span class="token punctuation">;</span>
+uniform mat4 ToWorld<span class="token punctuation">;</span>
+</code></pre> 
+<p>做完这一步&#xff0c;就可以在<code>DeepSDF</code>目录下运行下面的代码&#xff0c;将ShapeNetV2数据集转换成SDF数据集了&#xff08;训练数据集&#xff09;。<code>--source</code>选项指向ShapeNetCore.v2数据集的存放位置。<code>export MESA_GL_VERSION_OVERRIDE&#61;3.3</code>这句话是指定代码支持3.3版本的GLSL语法&#xff0c;否则会发生GLSL版本冲突。</p> 
+<pre><code class="prism language-shell"><span class="token function">mkdir</span> data
+<span class="token function">export</span> MESA_GL_VERSION_OVERRIDE<span class="token operator">&#61;</span>3.3
+python preprocess_data.py --data_dir data --source <span class="token punctuation">[</span><span class="token punctuation">..</span>.<span class="token punctuation">]</span>/ShapeNetCore.v2/ --name ShapeNetV2 --split examples/splits/sv2_sofas_train.json --skip
+</code></pre> 
+<p>在这个处理过程中&#xff0c;可能会报<code>Unable to read texture &#39;texture_4&#39;</code>和<code>GL Error 500</code>这两个error&#xff0c;但不用管它们&#xff0c;不影响最后的生成。</p> 
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/4a9e7c28dba2266c8082b354b472a845.png" alt="在这里插入图片描述" /><br /> 上面是运行过程的截图。在代码运行过程中&#xff0c;每个ShapeNet文件会对应生成一个没有内容的空白窗口&#xff0c;不要关闭这些窗口&#xff0c;等代码处理完会自动关闭的。<code>preprocess_data.py</code>会把数据生成在<code>data/SdfSamples/ShapeNetV2</code>目录下&#xff0c;每个ShapeNet物体大概需要1分钟左右的时间来生成一个SDF训练数据文件。</p> 
+<h2><a id="_230"></a>二、模型训练</h2> 
+<h3><a id="SDF_231"></a>&#xff08;一&#xff09;SDF数据浅析</h3> 
+<p>生成的SDF数据是一个npz文件&#xff0c;使用numpy可以读取该文件格式。这个数据拥有两个属性’pos’和’neg’&#xff0c;分别是mesh外部和内部的采样点。每一条数据有4个属性&#xff0c;前3个属性值是点的xyz坐标&#xff0c;第4个是SDF值&#xff08;&gt; 0在mesh外部&#xff0c;&lt; 0在mesh内部&#xff09;&#xff0c;如下&#xff1a;<br /> <img src="https://i-blog.csdnimg.cn/blog_migrate/9605e89e8abc882d0ff605336ac8666c.png" alt="在这里插入图片描述" /><br /> 将一个沙发数据可视化出来的样子如下&#xff0c;这里用颜色标注距离&#xff0c;越接近表面的点颜色越红&#xff0c;越远离的点颜色越绿。从可视化结果能够看出来&#xff0c;SDF是在空间立方体中采了几十万个点&#xff0c;对每个点计算到mesh表面的距离&#xff0c;这个SDF的计算值还是很准确的&#xff0c;从红点处形成的surface是非常接近ground truth sofa的。<br /> <img src="https://i-blog.csdnimg.cn/blog_migrate/1dc7d16ac57fdd492eb531824fd2acbc.png" alt="在这里插入图片描述" /><br /> <img src="https://i-blog.csdnimg.cn/blog_migrate/e5b63457cc1c8ac9353bfe417f1aedef.png" alt="在这里插入图片描述" /><br /> <img src="https://i-blog.csdnimg.cn/blog_migrate/d2b5cf2ff523edda585f2420e6efa9eb.png" alt="在这里插入图片描述" /></p> 
+<h3><a id="_243"></a>&#xff08;二&#xff09;训练过程</h3> 
+<p>在获得了SDF训练数据之后&#xff0c;就可以开始训练了。训练方法使用DeepSDF提供的训练代码&#xff1a;</p> 
+<pre><code class="prism language-shell">python train_deep_sdf.py -e examples/sofas
+</code></pre> 
+<p>如果前面的环境都配置成功&#xff0c;运行上面的指令应该就可以开始进行网络的训练。代码会自动读取之前生成好的DeepSDF数据集&#xff0c;并进行训练。</p> 
+<h2><a id="_250"></a>三、数据集地址</h2> 
+<p>生成好的数据集已经上传到网盘&#xff0c;大家可以自行下载&#xff0c;链接见下方~</p> 
+<p><a href="https://cloud.tsinghua.edu.cn/d/fc0f8f8a63974990a4a5/" rel="nofollow">https://cloud.tsinghua.edu.cn/d/fc0f8f8a63974990a4a5/ </a></p> 
+<p>密码&#xff1a;20220107</p>
+                </div>
+                <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/markdown_views-e1cc28b339.css" rel="stylesheet">
+                <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/style-d1e89cace4.css" rel="stylesheet">
+        </div>
+    </article>
+
+
+
+  
+</div>
+<div class="directory-boxshadow-dialog" style="display:none;">
+  <div class="directory-boxshadow-dialog-box">
+  </div>
+   <div class="vip-limited-time-offer-box-new" id="vip-limited-time-offer-box-new">
+      <img class="limited-img limited-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/vip-limited-close-newWhite.png">
+      <div class="vip-limited-time-top">
+        确定要放弃本次机会？
+      </div>
+      <span class="vip-limited-time-text">福利倒计时</span>
+      <div class="limited-time-box-new">
+        <span class="time-hour"></span>
+        <i>:</i>
+        <span class="time-minite"></span>
+        <i>:</i>
+        <span class="time-second"></span>
+      </div>
+      <div class="limited-time-vip-box">
+        <p>
+          <img class="coupon-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/vip-limited-close-roup.png">
+          <span class="def">立减 ¥</span>
+          <span class="active limited-num"></span>
+        </p>
+        <span class="">普通VIP年卡可用</span>
+      </div>
+      <a class="limited-time-btn-new" href="https://mall.csdn.net/vip" data-report-click='{"spm":"1001.2101.3001.9621"}' data-report-query='spm=1001.2101.3001.9621'>立即使用</a>
+  </div>
+</div>
+    <hr> </body>
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="https://g.csdnimg.cn/lib/cboxEditor/1.1.6/embed-editor.min.css">
+  <link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css">
+  
+  
+    
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  
+  
+</html>
