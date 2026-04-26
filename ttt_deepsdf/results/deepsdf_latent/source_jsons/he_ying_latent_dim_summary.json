@@ -1,0 +1,44 @@
+﻿[
+    {
+        "dimension":  64,
+        "experiment":  "external_artifacts/remote_deepsdf_setup/official_experiments/he_ying_airplane_code64_e100",
+        "checkpoint_100":  true,
+        "train":  0.012136628742404638,
+        "train_valid":  1779,
+        "train_total":  null,
+        "test_mean":  0.04198402372237883,
+        "test_mean_valid":  456,
+        "test_mean_total":  null,
+        "test_opt":  0.010619293662449835,
+        "test_opt_valid":  456,
+        "test_opt_total":  null
+    },
+    {
+        "dimension":  128,
+        "experiment":  "external_artifacts/remote_deepsdf_setup/official_experiments/he_ying_airplane_code128_e100",
+        "checkpoint_100":  true,
+        "train":  0.011419430929757005,
+        "train_valid":  1779,
+        "train_total":  null,
+        "test_mean":  0.046283086731196625,
+        "test_mean_valid":  456,
+        "test_mean_total":  null,
+        "test_opt":  0.009099677317416328,
+        "test_opt_valid":  456,
+        "test_opt_total":  null
+    },
+    {
+        "dimension":  256,
+        "experiment":  "external_artifacts/remote_deepsdf_setup/official_experiments/he_ying_airplane_code256_e100",
+        "checkpoint_100":  true,
+        "train":  0.01017424914286487,
+        "train_valid":  1779,
+        "train_total":  null,
+        "test_mean":  0.04156828852443907,
+        "test_mean_valid":  456,
+        "test_mean_total":  null,
+        "test_opt":  0.007461943534987145,
+        "test_opt_valid":  456,
+        "test_opt_total":  null
+    }
+]

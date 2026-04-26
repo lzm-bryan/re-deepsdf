@@ -1,0 +1,20 @@
+﻿{
+    "checkpoint":  "100",
+    "experiment_dir":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500",
+    "eval_subdir":  "Evaluation",
+    "eval_ttt_subdir":  "EvaluationTTT",
+    "metrics":  {
+                    "test_mean":  0.07540728327764484,
+                    "test_opt":  0.010835265751386313,
+                    "test_ttt_adapter":  0.008773367110944282,
+                    "test_ttt_lora":  0.00585965458762635,
+                    "test_ttt_lora_fa":  0.007229776688081284
+                },
+    "test_mean":  0.07540728327764484,
+    "test_opt":  0.010835265751386313,
+    "test_ttt_adapter":  0.008773367110944282,
+    "test_ttt_lora":  0.00585965458762635,
+    "test_ttt_lora_fa":  0.007229776688081284,
+    "best_ttt_method":  "test_ttt_lora",
+    "best_ttt_value":  0.00585965458762635
+}

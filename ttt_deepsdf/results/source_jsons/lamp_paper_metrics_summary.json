@@ -1,0 +1,118 @@
+﻿{
+    "rows":  [
+                 {
+                     "file":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/lamp_code256_e100/EvaluationTTTAblation/100/test_ttt_lora_r8_i25_sdf_mae.json",
+                     "name":  "test_ttt_lora_r8_i25_sdf_mae.json",
+                     "mode":  "lora",
+                     "iters":  25,
+                     "lora_rank":  8,
+                     "avg_mae":  0.01786610406294395,
+                     "valid":  213,
+                     "total":  null,
+                     "avg_seconds_per_valid_shape":  0.2874234020518699,
+                     "median_seconds_per_valid_shape":  0.27622362796682864,
+                     "wall_seconds":  61.481507549993694,
+                     "cuda_peak_memory_mb":  130.35107421875,
+                     "trainable_params":  {
+                                              "latent":  256,
+                                              "adapter":  61440,
+                                              "total":  61696
+                                          }
+                 },
+                 {
+                     "file":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/lamp_code256_e100/EvaluationTTTAblation/100/test_ttt_lora_r8_i50_sdf_mae.json",
+                     "name":  "test_ttt_lora_r8_i50_sdf_mae.json",
+                     "mode":  "lora",
+                     "iters":  50,
+                     "lora_rank":  8,
+                     "avg_mae":  0.012098521308999665,
+                     "valid":  213,
+                     "total":  null,
+                     "avg_seconds_per_valid_shape":  0.6594772744107283,
+                     "median_seconds_per_valid_shape":  0.6975823160028085,
+                     "wall_seconds":  140.69582162890583,
+                     "cuda_peak_memory_mb":  130.35107421875,
+                     "trainable_params":  {
+                                              "latent":  256,
+                                              "adapter":  61440,
+                                              "total":  61696
+                                          }
+                 },
+                 {
+                     "file":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/lamp_code256_e100/EvaluationTTTAblation/100/test_ttt_lora_r4_i100_sdf_mae.json",
+                     "name":  "test_ttt_lora_r4_i100_sdf_mae.json",
+                     "mode":  "lora",
+                     "iters":  100,
+                     "lora_rank":  4,
+                     "avg_mae":  0.008805376170377986,
+                     "valid":  213,
+                     "total":  null,
+                     "avg_seconds_per_valid_shape":  1.241730479921975,
+                     "median_seconds_per_valid_shape":  1.2845312079880387,
+                     "wall_seconds":  264.7170576509088,
+                     "cuda_peak_memory_mb":  129.38232421875,
+                     "trainable_params":  {
+                                              "latent":  256,
+                                              "adapter":  30720,
+                                              "total":  30976
+                                          }
+                 },
+                 {
+                     "file":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/lamp_code256_e100/EvaluationTTTPaper/100/test_ttt_lora_r8_i100_efficiency_sdf_mae.json",
+                     "name":  "test_ttt_lora_r8_i100_efficiency_sdf_mae.json",
+                     "mode":  "lora",
+                     "iters":  100,
+                     "lora_rank":  8,
+                     "avg_mae":  0.008638209011842948,
+                     "valid":  213,
+                     "total":  null,
+                     "avg_seconds_per_valid_shape":  1.315650395400267,
+                     "median_seconds_per_valid_shape":  1.3720160470111296,
+                     "wall_seconds":  280.62902412505355,
+                     "cuda_peak_memory_mb":  130.35107421875,
+                     "trainable_params":  {
+                                              "latent":  256,
+                                              "adapter":  61440,
+                                              "total":  61696
+                                          }
+                 },
+                 {
+                     "file":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/lamp_code256_e100/EvaluationTTTAblation/100/test_ttt_lora_r16_i100_sdf_mae.json",
+                     "name":  "test_ttt_lora_r16_i100_sdf_mae.json",
+                     "mode":  "lora",
+                     "iters":  100,
+                     "lora_rank":  16,
+                     "avg_mae":  0.008701136289820286,
+                     "valid":  213,
+                     "total":  null,
+                     "avg_seconds_per_valid_shape":  1.2970582936019222,
+                     "median_seconds_per_valid_shape":  1.36583086499013,
+                     "wall_seconds":  276.5266658839537,
+                     "cuda_peak_memory_mb":  132.28857421875,
+                     "trainable_params":  {
+                                              "latent":  256,
+                                              "adapter":  122880,
+                                              "total":  123136
+                                          }
+                 },
+                 {
+                     "file":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/lamp_code256_e100/EvaluationTTTAblation/100/test_ttt_lora_r8_i200_sdf_mae.json",
+                     "name":  "test_ttt_lora_r8_i200_sdf_mae.json",
+                     "mode":  "lora",
+                     "iters":  200,
+                     "lora_rank":  8,
+                     "avg_mae":  0.0066071390873914315,
+                     "valid":  213,
+                     "total":  null,
+                     "avg_seconds_per_valid_shape":  2.3500776545471456,
+                     "median_seconds_per_valid_shape":  2.45773931092117,
+                     "wall_seconds":  500.7966584370006,
+                     "cuda_peak_memory_mb":  130.35107421875,
+                     "trainable_params":  {
+                                              "latent":  256,
+                                              "adapter":  61440,
+                                              "total":  61696
+                                          }
+                 }
+             ]
+}

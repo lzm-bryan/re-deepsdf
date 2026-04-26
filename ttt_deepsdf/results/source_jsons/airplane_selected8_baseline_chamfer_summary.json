@@ -1,0 +1,134 @@
+﻿{
+    "mode":  "baseline",
+    "checkpoint":  "100",
+    "output_label":  "PaperBaseline100_Selected8_N256_i200",
+    "split_file":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/PaperTTTSelections/airplane_ckpt100_selected8.json",
+    "surface_root":  "external_artifacts/surface_data/airplane",
+    "resolution":  256,
+    "iters":  200,
+    "samples":  4096,
+    "adapt_samples":  4096,
+    "wall_seconds":  42.286091211019084,
+    "shape_results":  [
+                          {
+                              "instance":  "e387c8d826cbbdd68a8dc9dc46f918a8",
+                              "mae":  0.016422461718320847,
+                              "missing":  false,
+                              "seconds":  6.171476043993607,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/02691156/e387c8d826cbbdd68a8dc9dc46f918a8.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/02691156/e387c8d826cbbdd68a8dc9dc46f918a8.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "f9db62e6a88f0d7129343faf3bbffb15",
+                              "mae":  0.0256499033421278,
+                              "missing":  false,
+                              "seconds":  5.233960496960208,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/02691156/f9db62e6a88f0d7129343faf3bbffb15.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/02691156/f9db62e6a88f0d7129343faf3bbffb15.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "d709b3afd41a578ba03df56f69a35fcc",
+                              "mae":  0.014881959185004234,
+                              "missing":  false,
+                              "seconds":  4.366033183061518,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/02691156/d709b3afd41a578ba03df56f69a35fcc.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/02691156/d709b3afd41a578ba03df56f69a35fcc.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "ddc14c7e0a228663796843908eee8f7d",
+                              "mae":  0.006546529941260815,
+                              "missing":  false,
+                              "seconds":  5.046724329935387,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/02691156/ddc14c7e0a228663796843908eee8f7d.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/02691156/ddc14c7e0a228663796843908eee8f7d.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "f3cbfb52ea1c907a850e00840470903a",
+                              "mae":  0.00416503194719553,
+                              "missing":  false,
+                              "seconds":  5.22180123499129,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/02691156/f3cbfb52ea1c907a850e00840470903a.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/02691156/f3cbfb52ea1c907a850e00840470903a.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "f2975fde05d9d63eeea0c0561850e04e",
+                              "mae":  0.004968205001205206,
+                              "missing":  false,
+                              "seconds":  4.594200065010227,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/02691156/f2975fde05d9d63eeea0c0561850e04e.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/02691156/f2975fde05d9d63eeea0c0561850e04e.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "f986604528abe35554eefcdc602d4520",
+                              "mae":  0.005225725471973419,
+                              "missing":  false,
+                              "seconds":  4.987860616063699,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/02691156/f986604528abe35554eefcdc602d4520.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/02691156/f986604528abe35554eefcdc602d4520.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "f6e6fd724a9eab24ba8e93696257b3fc",
+                              "mae":  0.015291604213416576,
+                              "missing":  false,
+                              "seconds":  4.7594620529562235,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/02691156/f6e6fd724a9eab24ba8e93696257b3fc.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/02691156/f6e6fd724a9eab24ba8e93696257b3fc.pth",
+                              "mesh_error":  null
+                          }
+                      ],
+    "chamfer_csv":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100/Evaluation/PaperBaseline100_Selected8_N256_i200/chamfer.csv",
+    "count":  8,
+    "mean_chamfer":  0.0015990333804115685,
+    "median_chamfer":  0.0012971446571747335,
+    "min_chamfer":  9.2448109347709035E-05,
+    "max_chamfer":  0.0037576630984858636,
+    "rows":  [
+                 {
+                     "shape":  "ShapeNetV2/02691156/e387c8d826cbbdd68a8dc9dc46f918a8",
+                     "chamfer_dist":  0.0015196526910698754,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/02691156/f9db62e6a88f0d7129343faf3bbffb15",
+                     "chamfer_dist":  0.003177289571819247,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/02691156/d709b3afd41a578ba03df56f69a35fcc",
+                     "chamfer_dist":  0.0006956423693853036,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/02691156/ddc14c7e0a228663796843908eee8f7d",
+                     "chamfer_dist":  0.0004079783498398754,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/02691156/f3cbfb52ea1c907a850e00840470903a",
+                     "chamfer_dist":  0.002066956230065083,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/02691156/f2975fde05d9d63eeea0c0561850e04e",
+                     "chamfer_dist":  0.0037576630984858636,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/02691156/f986604528abe35554eefcdc602d4520",
+                     "chamfer_dist":  9.2448109347709035E-05,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/02691156/f6e6fd724a9eab24ba8e93696257b3fc",
+                     "chamfer_dist":  0.0010746366232795915,
+                     "missing":  false
+                 }
+             ]
+}

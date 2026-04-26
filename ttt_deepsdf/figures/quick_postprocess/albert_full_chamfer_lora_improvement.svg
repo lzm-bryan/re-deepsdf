@@ -1,0 +1,38 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' width='980' height='520' viewBox='0 0 980 520'>
+<rect width='100%' height='100%' fill='#ffffff'/>
+<text x='90' y='28' font-family='Segoe UI, Arial' font-size='18' font-weight='700'>LoRA vs baseline: full Chamfer relative improvement</text>
+<line x1='90' y1='50' x2='90' y2='380' stroke='#444'/>
+<line x1='90' y1='380' x2='940' y2='380' stroke='#444'/>
+<line x1='90' y1='380' x2='940' y2='380' stroke='#eeeeee'/>
+<text x='20' y='384' font-family='Segoe UI, Arial' font-size='12' fill='#555'>0.0%</text>
+<line x1='90' y1='297.5' x2='940' y2='297.5' stroke='#eeeeee'/>
+<text x='20' y='301.5' font-family='Segoe UI, Arial' font-size='12' fill='#555'>15.1%</text>
+<line x1='90' y1='215' x2='940' y2='215' stroke='#eeeeee'/>
+<text x='20' y='219' font-family='Segoe UI, Arial' font-size='12' fill='#555'>30.1%</text>
+<line x1='90' y1='132.5' x2='940' y2='132.5' stroke='#eeeeee'/>
+<text x='20' y='136.5' font-family='Segoe UI, Arial' font-size='12' fill='#555'>45.2%</text>
+<line x1='90' y1='50' x2='940' y2='50' stroke='#eeeeee'/>
+<text x='20' y='54' font-family='Segoe UI, Arial' font-size='12' fill='#555'>60.3%</text>
+<rect x='113.833333333333' y='79.9922789426805' width='94' height='300.00772105732' fill='#3b6ea8'/>
+<text x='115.833333333333' y='73.9922789426805' font-family='Segoe UI, Arial' font-size='11'>54.8%</text>
+<text transform='translate(160.833333333333,415) rotate(55)' font-family='Segoe UI, Arial' font-size='12'>airplane 100</text>
+<rect x='255.5' y='125.499690779481' width='94' height='254.500309220519' fill='#3b6ea8'/>
+<text x='257.5' y='119.499690779481' font-family='Segoe UI, Arial' font-size='11'>46.5%</text>
+<text transform='translate(302.5,415) rotate(55)' font-family='Segoe UI, Arial' font-size='12'>airplane 200</text>
+<rect x='397.166666666667' y='93.0407367286447' width='94' height='286.959263271355' fill='#3b6ea8'/>
+<text x='399.166666666667' y='87.0407367286447' font-family='Segoe UI, Arial' font-size='11'>52.4%</text>
+<text transform='translate(444.166666666667,415) rotate(55)' font-family='Segoe UI, Arial' font-size='12'>chair 100</text>
+<rect x='538.833333333333' y='50' width='94' height='330' fill='#3b6ea8'/>
+<text x='540.833333333333' y='44' font-family='Segoe UI, Arial' font-size='11'>60.3%</text>
+<text transform='translate(585.833333333333,415) rotate(55)' font-family='Segoe UI, Arial' font-size='12'>chair 200</text>
+<rect x='680.5' y='80.6623950991529' width='94' height='299.337604900847' fill='#3b6ea8'/>
+<text x='682.5' y='74.6623950991529' font-family='Segoe UI, Arial' font-size='11'>54.7%</text>
+<text transform='translate(727.5,415) rotate(55)' font-family='Segoe UI, Arial' font-size='12'>lamp 100</text>
+<rect x='822.166666666667' y='82.9372175203944' width='94' height='297.062782479606' fill='#3b6ea8'/>
+<text x='824.166666666667' y='76.9372175203944' font-family='Segoe UI, Arial' font-size='11'>54.3%</text>
+<text transform='translate(869.166666666667,415) rotate(55)' font-family='Segoe UI, Arial' font-size='12'>lamp 200</text>
+</svg>
+
+
+
+

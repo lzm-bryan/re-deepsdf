@@ -1,0 +1,9 @@
+﻿numpy
+torch
+scikit-image
+trimesh
+scipy
+
+
+
+

@@ -1,0 +1,12 @@
+﻿{
+    "workspace":  "external_artifacts/local_workspace",
+    "epochs":  100,
+    "scenes_per_batch":  4,
+    "samples_per_scene":  8192,
+    "threads":  2,
+    "experiments":  [
+                        "external_artifacts/local_experiments/he_ying_chair_latent_dims_local/chair_code64_e100_local",
+                        "external_artifacts/local_experiments/he_ying_chair_latent_dims_local/chair_code128_e100_local",
+                        "external_artifacts/local_experiments/he_ying_chair_latent_dims_local/chair_code256_e100_local"
+                    ]
+}

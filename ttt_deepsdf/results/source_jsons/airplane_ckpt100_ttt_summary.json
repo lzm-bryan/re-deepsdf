@@ -1,0 +1,20 @@
+﻿{
+    "checkpoint":  "100",
+    "experiment_dir":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/airplane_code256_e100",
+    "eval_subdir":  "Evaluation",
+    "eval_ttt_subdir":  "EvaluationTTT",
+    "metrics":  {
+                    "test_mean":  0.04215124453287245,
+                    "test_opt":  0.00748256255623378,
+                    "test_ttt_adapter":  0.0063974806791775975,
+                    "test_ttt_lora":  0.004198001143154933,
+                    "test_ttt_lora_fa":  0.005200831555524482
+                },
+    "test_mean":  0.04215124453287245,
+    "test_opt":  0.00748256255623378,
+    "test_ttt_adapter":  0.0063974806791775975,
+    "test_ttt_lora":  0.004198001143154933,
+    "test_ttt_lora_fa":  0.005200831555524482,
+    "best_ttt_method":  "test_ttt_lora",
+    "best_ttt_value":  0.004198001143154933
+}

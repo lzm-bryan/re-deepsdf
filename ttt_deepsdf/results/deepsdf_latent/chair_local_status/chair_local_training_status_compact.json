@@ -1,0 +1,35 @@
+﻿{
+    "64":  {
+               "experiment":  "external_artifacts/local_experiments/he_ying_chair_latent_dims_local/chair_code64_e100_local",
+               "status":  "quick_eval_complete",
+               "logs":  {
+                            "epochs_completed":  100,
+                            "last_epoch_seconds":  66.0534508228302,
+                            "loss_entries":  20500,
+                            "logs_mtime":  "2026-04-25T17:20:51"
+                        },
+               "quick_eval":  "external_artifacts/local_experiments/he_ying_chair_latent_dims_local/chair_code64_e100_local/EvaluationSDFQuick/100/test_latent_opt_sdf_mae_quick.json"
+           },
+    "128":  {
+                "experiment":  "external_artifacts/local_experiments/he_ying_chair_latent_dims_local/chair_code128_e100_local",
+                "status":  "quick_eval_complete",
+                "logs":  {
+                             "epochs_completed":  100,
+                             "last_epoch_seconds":  69.85510754585266,
+                             "loss_entries":  20500,
+                             "logs_mtime":  "2026-04-25T19:17:38"
+                         },
+                "quick_eval":  "external_artifacts/local_experiments/he_ying_chair_latent_dims_local/chair_code128_e100_local/EvaluationSDFQuick/100/test_latent_opt_sdf_mae_quick.json"
+            },
+    "256":  {
+                "experiment":  "external_artifacts/local_experiments/he_ying_chair_latent_dims_local/chair_code256_e100_local",
+                "status":  "quick_eval_complete",
+                "logs":  {
+                             "epochs_completed":  100,
+                             "last_epoch_seconds":  59.81184530258179,
+                             "loss_entries":  20500,
+                             "logs_mtime":  "2026-04-25T21:06:44"
+                         },
+                "quick_eval":  "external_artifacts/local_experiments/he_ying_chair_latent_dims_local/chair_code256_e100_local/EvaluationSDFQuick/100/test_latent_opt_sdf_mae_quick.json"
+            }
+}

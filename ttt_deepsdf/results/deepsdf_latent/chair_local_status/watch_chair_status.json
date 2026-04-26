@@ -1,0 +1,8 @@
+﻿{
+    "time":  "2026-04-25T15:38:22",
+    "stage":  "training",
+    "sdf_count":  4113,
+    "norm_count":  4113,
+    "expected":  4113,
+    "message":  "aggressive restart: ScenesPerBatch=16, first attempt batch_split=2"
+}

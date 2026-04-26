@@ -1,0 +1,70 @@
+{
+  "direct_deepsdf_family": [
+    {
+      "name": "DeepSDF latent-only test-time optimization",
+      "status": "included_results",
+      "code": "scripts/evaluate_sdf_latent_opt.py",
+      "results": "results/tables/full_chamfer_summary.csv",
+      "notes": "Primary matched baseline using the same checkpoints, splits, and evaluator."
+    },
+    {
+      "name": "LoRA-TTT",
+      "status": "included_results",
+      "code": "scripts/evaluate_sdf_ttt.py",
+      "results": "results/tables/ttt_sdf_mae_summary.csv",
+      "notes": "Main parameter-efficient test-time adaptation method."
+    },
+    {
+      "name": "Residual TTT",
+      "status": "included_results",
+      "code": "scripts/evaluate_sdf_ttt.py",
+      "results": "results/tables/ttt_sdf_mae_summary.csv",
+      "notes": "Residual correction module adapted at test time."
+    },
+    {
+      "name": "LoRA-FA TTT",
+      "status": "included_results",
+      "code": "scripts/evaluate_sdf_ttt.py",
+      "results": "results/tables/ttt_sdf_mae_summary.csv",
+      "notes": "LoRA-FA variant reported in the SDF-MAE table."
+    },
+    {
+      "name": "Curriculum DeepSDF",
+      "status": "code_and_docs_only",
+      "code": "baselines/curriculum_deepsdf/scripts/",
+      "results": "pending",
+      "notes": "Baseline direction included for future matched comparisons."
+    }
+  ],
+  "external_sota_context": [
+    {
+      "name": "Convolutional Occupancy Networks",
+      "status": "staging_docs_only",
+      "repo": "https://github.com/autonomousvision/convolutional_occupancy_networks",
+      "env": "baselines/sota_context/envs/convonet_environment.yml",
+      "results": "pending"
+    },
+    {
+      "name": "Occupancy Networks",
+      "status": "staging_docs_only",
+      "repo": "https://github.com/autonomousvision/occupancy_networks",
+      "env": null,
+      "results": "pending"
+    },
+    {
+      "name": "NKSR",
+      "status": "staging_docs_only",
+      "repo": "https://github.com/nv-tlabs/nksr",
+      "env": "baselines/sota_context/envs/nksr_environment.yml",
+      "results": "pending"
+    },
+    {
+      "name": "POCO",
+      "status": "staging_docs_only",
+      "repo": "https://github.com/valeoai/POCO",
+      "env": "baselines/sota_context/envs/poco_environment.yml",
+      "results": "pending"
+    }
+  ]
+}
+

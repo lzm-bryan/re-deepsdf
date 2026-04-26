@@ -1,0 +1,48 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' width='920' height='500' viewBox='0 0 920 500'>
+<rect width='100%' height='100%' fill='#ffffff'/>
+<text x='90' y='24' font-family='Segoe UI, Arial' font-size='18' font-weight='700'>He Ying latent dimension trend: test-opt SDF MAE</text>
+<line x1='90' y1='40' x2='90' y2='420' stroke='#444'/>
+<line x1='90' y1='420' x2='880' y2='420' stroke='#444'/>
+<line x1='90' y1='420' x2='880' y2='420' stroke='#eeeeee'/>
+<text x='12' y='424' font-family='Segoe UI, Arial' font-size='12' fill='#555'>0.000000</text>
+<line x1='90' y1='325' x2='880' y2='325' stroke='#eeeeee'/>
+<text x='12' y='329' font-family='Segoe UI, Arial' font-size='12' fill='#555'>0.004957</text>
+<line x1='90' y1='230' x2='880' y2='230' stroke='#eeeeee'/>
+<text x='12' y='234' font-family='Segoe UI, Arial' font-size='12' fill='#555'>0.009913</text>
+<line x1='90' y1='135' x2='880' y2='135' stroke='#eeeeee'/>
+<text x='12' y='139' font-family='Segoe UI, Arial' font-size='12' fill='#555'>0.014870</text>
+<line x1='90' y1='40' x2='880' y2='40' stroke='#eeeeee'/>
+<text x='12' y='44' font-family='Segoe UI, Arial' font-size='12' fill='#555'>0.019826</text>
+<text x='78' y='455' font-family='Segoe UI, Arial' font-size='13'>64</text>
+<text x='473' y='455' font-family='Segoe UI, Arial' font-size='13'>128</text>
+<text x='868' y='455' font-family='Segoe UI, Arial' font-size='13'>256</text>
+<circle cx='90' cy='216.465450995331' r='5' fill='#1f77b4'/>
+<text x='97' y='208.465450995331' font-family='Segoe UI, Arial' font-size='11' fill='#1f77b4'>0.010619</text>
+<circle cx='485' cy='245.591157212515' r='5' fill='#1f77b4'/>
+<text x='492' y='237.591157212515' font-family='Segoe UI, Arial' font-size='11' fill='#1f77b4'>0.009100</text>
+<circle cx='880' cy='276.980759703227' r='5' fill='#1f77b4'/>
+<text x='887' y='268.980759703227' font-family='Segoe UI, Arial' font-size='11' fill='#1f77b4'>0.007462</text>
+<polyline points='90,216.465450995331 485,245.591157212515 880,276.980759703227' fill='none' stroke='#1f77b4' stroke-width='3'/>
+<circle cx='90' cy='40' r='5' fill='#d95f02'/>
+<text x='97' y='32' font-family='Segoe UI, Arial' font-size='11' fill='#d95f02'>0.019826</text>
+<circle cx='485' cy='70.813423059406' r='5' fill='#d95f02'/>
+<text x='492' y='62.813423059406' font-family='Segoe UI, Arial' font-size='11' fill='#d95f02'>0.018219</text>
+<circle cx='880' cy='168.021157751016' r='5' fill='#d95f02'/>
+<text x='887' y='160.021157751016' font-family='Segoe UI, Arial' font-size='11' fill='#d95f02'>0.013147</text>
+<polyline points='90,40 485,70.813423059406 880,168.021157751016' fill='none' stroke='#d95f02' stroke-width='3'/>
+<circle cx='90' cy='105.39096100212' r='5' fill='#2ca02c'/>
+<text x='97' y='97.3909610021204' font-family='Segoe UI, Arial' font-size='11' fill='#2ca02c'>0.016415</text>
+<circle cx='485' cy='130.713907118091' r='5' fill='#2ca02c'/>
+<text x='492' y='122.713907118091' font-family='Segoe UI, Arial' font-size='11' fill='#2ca02c'>0.015093</text>
+<circle cx='880' cy='165.559464567753' r='5' fill='#2ca02c'/>
+<text x='887' y='157.559464567753' font-family='Segoe UI, Arial' font-size='11' fill='#2ca02c'>0.013275</text>
+<polyline points='90,105.39096100212 485,130.713907118091 880,165.559464567753' fill='none' stroke='#2ca02c' stroke-width='3'/>
+<rect x='90' y='468' width='12' height='12' fill='#1f77b4'/>
+<text x='108' y='480' font-family='Segoe UI, Arial' font-size='13'>airplane</text>
+<rect x='210' y='468' width='12' height='12' fill='#d95f02'/>
+<text x='228' y='480' font-family='Segoe UI, Arial' font-size='13'>chair</text>
+<rect x='330' y='468' width='12' height='12' fill='#2ca02c'/>
+<text x='348' y='480' font-family='Segoe UI, Arial' font-size='13'>lamp</text>
+</svg>
+
+
