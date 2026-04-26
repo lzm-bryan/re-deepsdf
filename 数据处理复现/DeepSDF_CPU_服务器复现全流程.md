@@ -1,82 +1,61 @@
-﻿# DeepSDF 在 CPU-only 服务器上的完整复现手册（连接、部署、排障、验证）
+# DeepSDF CPU-only 服务器数据预处理复现手册
 
-## 0. 文档目标
+本文档说明如何在一台 CPU-only、无显示器的 Linux 服务器上复现 DeepSDF 数据
+预处理流程，将 ShapeNet 原始 mesh 转换为 DeepSDF 使用的 SDF 采样数据。
 
-本文档面向“从零复现 DeepSDF 数据转换（ShapeNet -> SDF）”的同学，目标是让他人按步骤直接复现你当前已经跑通的流程。
+文档中的主机地址、用户名、私钥路径和工作目录均使用占位符。实际执行时，请替换
+为自己的服务器信息，避免把私有账号或机器地址提交到公开仓库。
 
-文档覆盖内容：
+## 1. 适用范围
 
-1. 如何从 Windows 连接服务器。
-2. 如何在 Ubuntu 24.04 CPU-only 服务器部署环境。
-3. 如何从失败状态修到可用状态。
-4. 如何验证转换成功。
-5. 如何做“原始数据 vs 转换后数据”的可视化对比。
-6. 常见报错与对策。
+本流程适用于以下场景：
 
----
+- 服务器没有 NVIDIA GPU，`nvidia-smi` 不存在或不可用。
+- 服务器没有物理显示器，需要通过 `xvfb` 和 Mesa 软件渲染运行预处理程序。
+- 目标任务是运行 DeepSDF 原始仓库的 `preprocess_data.py`，并生成
+  `SdfSamples/*.npz` 和 `NormalizationParameters/*.json`。
 
-## 1. 本次复现的基线信息
+推荐系统环境：
 
-### 1.1 本地环境
+| 项目 | 建议 |
+| --- | --- |
+| OS | Ubuntu 22.04 或 24.04 |
+| CPU | 2 cores 以上 |
+| Memory | 8 GB 以上更稳 |
+| Compiler | `gcc-12` / `g++-12` |
+| Pangolin | `v0.6` |
+| Python env | Conda environment with Python 3.6 for the original DeepSDF code |
 
-- 本地系统：Windows（PowerShell）
-- 工作目录：`E:\作业`
-- SSH 私钥：`E:\作业\lzm897.pem`
+## 2. 目录约定
 
-### 1.2 服务器信息
+后续命令使用以下占位符：
 
-- 登录地址：`13.239.96.213`
-- 登录用户：`ubuntu`
-- 主机名：`ip-172-31-39-0`
-- 系统：`Ubuntu 24.04.4 LTS`
-- CPU：`2 vCPU`
-- 内存：`7.6 GiB`
-- GPU：无（`nvidia-smi` 不存在）
-- 系统盘：约 `48G`
+| 占位符 | 含义 |
+| --- | --- |
+| `<SERVER_HOST>` | 服务器 IP 或域名 |
+| `<SERVER_USER>` | SSH 登录用户名 |
+| `<SSH_KEY>` | 本地 SSH 私钥路径 |
+| `<WORKDIR>` | 服务器上的工作目录，例如 `~/deepsdf_setup` |
+| `<SHAPENET_DIR>` | ShapeNetCore.v2 根目录 |
 
-### 1.3 数据与代码位置（服务器）
+示例连接命令：
 
-- ShapeNet 数据：`/home/ubuntu/datasets/ShapeNetCore.v2`
-- DeepSDF 工程：`/home/ubuntu/deepsdf_setup/DeepSDF`
-- 编译依赖目录：`/home/ubuntu/deepsdf_setup`
-
-### 1.4 参考文章（你提供）
-
-- CSDN（新文）：<https://blog.csdn.net/weixinhum/article/details/149218796>
-- CSDN（旧文，本地保存页对应原文）：`qq_38677322/article/details/110957634`
-
----
-
-## 2. 先说结论（复现结果）
-
-- 结论：**CPU-only 可以做 DeepSDF 的数据转换**，但必须满足正确版本组合与无头渲染设置。
-- 最终成功产物（示例样本）：
-  - `/home/ubuntu/deepsdf_setup/DeepSDF/data_cpu_test_v2/SdfSamples/ShapeNetV2/03001627/1006be65e7bc937e9141f9b58470d646.npz`
-- 成功验证：`.npz` 内有 `pos/neg` 两组 SDF 样本。
-
----
-
-## 3. 从 Windows 连接服务器
-
-在本地 PowerShell 执行：
-
-```powershell
-ssh -i "E:\作业\lzm897.pem" ubuntu@13.239.96.213
+```bash
+ssh -i <SSH_KEY> <SERVER_USER>@<SERVER_HOST>
 ```
 
-首次连接会写入 known_hosts。若需非交互测试连通性：
+非交互连通性测试：
 
-```powershell
-ssh -o BatchMode=yes -o ConnectTimeout=8 -i "E:\作业\lzm897.pem" ubuntu@13.239.96.213 "echo ok"
+```bash
+ssh -o BatchMode=yes -o ConnectTimeout=8 -i <SSH_KEY> \
+  <SERVER_USER>@<SERVER_HOST> "echo ok"
 ```
 
-预期输出：`ok`
+预期输出为 `ok`。
 
----
+## 3. 服务器基础检查
 
-## 4. 服务器基础检查（建议先做）
-
-登录后先确认是 CPU-only 场景：
+登录服务器后先确认系统、资源和 GPU 状态：
 
 ```bash
 cat /etc/os-release | head -n 6
@@ -85,94 +64,87 @@ free -h
 nvidia-smi
 ```
 
-- 如果 `nvidia-smi` 不存在，说明无 NVIDIA GPU。
+如果 `nvidia-smi` 不存在，说明当前是 CPU-only 环境。这不影响数据预处理，但
+需要启用无头渲染配置。
 
----
-
-## 5. 基础软件安装
+## 4. 安装基础软件
 
 ```bash
 sudo apt-get update -y
 sudo apt-get install -y \
   build-essential cmake git wget curl unzip pkg-config \
   libglew-dev libgl1-mesa-dev libegl1-mesa-dev libglu1-mesa-dev \
-  mesa-utils xvfb zlib1g-dev
+  mesa-utils xvfb zlib1g-dev gcc-12 g++-12
 ```
 
-说明：
+关键依赖说明：
 
-- `xvfb`：无显示器时提供虚拟 X11。
-- `mesa` 系列：软件 OpenGL 渲染。
-- `zlib`：`cnpy`/DeepSDF 编译常见依赖。
+- `xvfb`：在无显示器环境中提供虚拟 X11。
+- Mesa 相关库：提供 CPU 软件 OpenGL 渲染。
+- `zlib1g-dev`：`cnpy`/DeepSDF 编译时常见依赖。
+- `gcc-12`/`g++-12`：在 Ubuntu 24.04 上比默认较新的编译器组合更稳定。
 
----
-
-## 6. GCC/G++ 版本处理（关键）
-
-根据文章实践，Ubuntu 24.04 上建议使用 `gcc-12/g++-12`：
+后续编译不需要修改系统默认编译器，直接在命令前指定：
 
 ```bash
-sudo apt-get install -y gcc-12 g++-12
+CC=/usr/bin/gcc-12 CXX=/usr/bin/g++-12
 ```
 
-后续编译时不改系统默认版本，直接在命令前指定：
+## 5. 编译 C++ 依赖
 
-- `CC=/usr/bin/gcc-12`
-- `CXX=/usr/bin/g++-12`
-
----
-
-## 7. 安装/编译四个 C++ 依赖
-
-以下都在 `/home/ubuntu/deepsdf_setup` 下进行。
-
-### 7.1 CLI11
+以下命令默认在 `<WORKDIR>` 下执行。
 
 ```bash
-cd ~/deepsdf_setup
+mkdir -p <WORKDIR>
+cd <WORKDIR>
+```
+
+### 5.1 CLI11
+
+```bash
 git clone https://github.com/CLIUtils/CLI11 --recursive
 cd CLI11
-mkdir -p build && cd build
+mkdir -p build
+cd build
 cmake ..
 cmake --build . -j2
 sudo cmake --install .
 ```
 
-### 7.2 Eigen3（3.4.0）
+### 5.2 Eigen3 3.4.0
 
 ```bash
-cd ~/deepsdf_setup
+cd <WORKDIR>
 wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 tar xvf eigen-3.4.0.tar.gz
 cd eigen-3.4.0
-mkdir -p build && cd build
+mkdir -p build
+cd build
 cmake ..
 cmake --build . -j2
 sudo cmake --install .
 ```
 
-### 7.3 Pangolin（必须重点看）
+### 5.3 Pangolin v0.6
 
-#### 7.3.1 正确版本
-
-必须用 `v0.6`，不要用新版本（例如 v0.9.x）。
+DeepSDF 原始预处理工具依赖 Pangolin。建议使用 `v0.6`，不要直接使用较新的
+`v0.9.x`，否则在部分服务器上可能遇到 OpenGL 或 ABI 兼容问题。
 
 ```bash
-cd ~/deepsdf_setup
+cd <WORKDIR>
 git clone https://github.com/stevenlovegrove/Pangolin.git --recursive
 cd Pangolin
 git checkout v0.6
 git submodule update --init --recursive
 ```
 
-#### 7.3.2 Ubuntu 24.04 上的关键编译参数
-
-在本次环境里，如果直接编会遇到 Python 3.12 + pybind 的错误，需要关闭 Pangolin Python 相关模块：
+Ubuntu 24.04 默认 Python 版本较新，Pangolin v0.6 的 Python/pybind 组件可能编译
+失败。数据预处理不依赖 Pangolin Python 绑定，因此建议关闭相关模块：
 
 ```bash
-cd ~/deepsdf_setup/Pangolin
 rm -rf build
-mkdir build && cd build
+mkdir build
+cd build
 CC=/usr/bin/gcc-12 CXX=/usr/bin/g++-12 cmake \
   -DBUILD_PANGOLIN_FFMPEG=OFF \
   -DBUILD_PANGOLIN_PYTHON=OFF \
@@ -183,65 +155,57 @@ sudo cmake --install .
 sudo ldconfig
 ```
 
-说明：
-
-- `-DBUILD_PANGOLIN_FFMPEG=OFF`：兼容性更高，文章同样建议关闭。
-- `-DBUILD_PANGOLIN_PYTHON=OFF`：规避 pybind 在 Python 3.12 上的不兼容报错。
-
-### 7.4 nanoflann
+### 5.4 nanoflann
 
 ```bash
-cd ~/deepsdf_setup
+cd <WORKDIR>
 git clone https://github.com/jlblancoc/nanoflann
 cd nanoflann
-mkdir -p build && cd build
+mkdir -p build
+cd build
 cmake ..
 cmake --build . -j2
 sudo cmake --install .
 ```
 
-如需兼容旧代码 include，可检查 `/usr/local/include/nanoflann.hpp` 路径。
+如旧代码查找 `nanoflann.hpp` 失败，可确认头文件是否位于
+`/usr/local/include/nanoflann.hpp`。
 
----
-
-## 8. 编译 DeepSDF
+## 6. 编译 DeepSDF
 
 ```bash
-cd ~/deepsdf_setup
+cd <WORKDIR>
 git clone https://github.com/facebookresearch/DeepSDF.git
 cd DeepSDF/third-party
 git clone https://github.com/rogersce/cnpy.git
 ```
 
-可按文章修改 `ShaderProgram.cpp` 的语句（一些环境下可避免 shader 相关问题）。
-
-然后编译：
+然后编译 DeepSDF：
 
 ```bash
-cd ~/deepsdf_setup/DeepSDF
+cd <WORKDIR>/DeepSDF
 rm -rf build
-mkdir build && cd build
+mkdir build
+cd build
 CC=/usr/bin/gcc-12 CXX=/usr/bin/g++-12 cmake -DCMAKE_CXX_STANDARD=17 ..
 cmake --build . -j2
 sudo cmake --install .
 ```
 
-检查二进制：
+检查二进制是否生成：
 
 ```bash
-ls -la ~/deepsdf_setup/DeepSDF/bin
+ls -la <WORKDIR>/DeepSDF/bin
 ```
 
-预期看到：
+应至少包含：
 
 - `PreprocessMesh`
 - `SampleVisibleMeshSurface`
 
----
+## 7. Python 环境
 
-## 9. Python 环境（数据转换）
-
-建议使用 conda 独立环境：
+DeepSDF 原始代码较老，建议使用独立 conda 环境：
 
 ```bash
 cd ~
@@ -252,10 +216,9 @@ conda create -n deepsdf_py36 python=3.6 -y
 conda activate deepsdf_py36
 ```
 
-安装依赖：
+安装 CPU 版本依赖：
 
 ```bash
-# CPU-only 环境建议直接装 CPU torch 1.1.0
 pip install torch==1.1.0 torchvision==0.3.0
 pip install numpy scipy scikit-image trimesh plyfile
 ```
@@ -270,13 +233,11 @@ print('cuda_available=', torch.cuda.is_available())
 PY
 ```
 
-预期：`cuda_available=False`
+CPU-only 环境下预期 `cuda_available=False`。
 
----
+## 8. 运行数据转换
 
-## 10. 运行数据转换（核心命令）
-
-### 10.1 无头渲染环境变量（CPU-only 必须）
+### 8.1 设置无头渲染变量
 
 ```bash
 export LIBGL_ALWAYS_SOFTWARE=1
@@ -285,59 +246,61 @@ export MESA_GL_VERSION_OVERRIDE=3.3
 export MESA_GLSL_VERSION_OVERRIDE=330
 ```
 
-### 10.2 小样本验证（强烈建议先跑 1 个）
+### 8.2 小样本验证
 
-示例 split：`examples/splits/sv2_chair_one_test.json`
+正式转换前建议先跑一个最小 split，确认编译、OpenGL 和 Python 环境都可用。
 
 ```bash
-cd ~/deepsdf_setup/DeepSDF
+cd <WORKDIR>/DeepSDF
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate deepsdf_py36
 
 xvfb-run -s "-screen 0 1024x768x24" python preprocess_data.py \
-  --data_dir data_cpu_test_v2 \
-  --source ~/datasets/ShapeNetCore.v2 \
+  --data_dir data_cpu_test \
+  --source <SHAPENET_DIR> \
   --name ShapeNetV2 \
   --split examples/splits/sv2_chair_one_test.json \
   --skip --threads 1
 ```
 
-### 10.3 正式数据集转换
-
-例如训练集：
+### 8.3 正式数据集转换
 
 ```bash
 xvfb-run -s "-screen 0 1024x768x24" python preprocess_data.py \
   --data_dir data \
-  --source ~/datasets/ShapeNetCore.v2 \
+  --source <SHAPENET_DIR> \
   --name ShapeNetV2 \
   --split examples/splits/sv2_chairs_train.json \
   --skip --threads 1
 ```
 
-注意：本机只有 2 vCPU，建议 `--threads 1` 或 `2`，优先稳定。
+CPU 较少或内存较小时，优先使用 `--threads 1` 保证稳定。
 
----
+## 9. 验证输出
 
-## 11. 如何判断“真的成功”
-
-必须检查**文件产物**，不要只看脚本是否退出。
+不要只依据终端日志判断成功，必须检查文件产物：
 
 ```bash
-find ~/deepsdf_setup/DeepSDF/data_cpu_test_v2 -type f | head
+find <WORKDIR>/DeepSDF/data_cpu_test -type f | head
 ```
 
 应出现类似路径：
 
-`.../SdfSamples/ShapeNetV2/<class>/<instance>.npz`
+```text
+.../SdfSamples/ShapeNetV2/<class_id>/<instance_id>.npz
+```
 
-再检查 npz 内容：
+检查 `.npz` 内容：
 
 ```bash
 python - <<'PY'
+from pathlib import Path
 import numpy as np
-p='/home/ubuntu/deepsdf_setup/DeepSDF/data_cpu_test_v2/SdfSamples/ShapeNetV2/03001627/1006be65e7bc937e9141f9b58470d646.npz'
-d=np.load(p)
+
+root = Path('data_cpu_test/SdfSamples/ShapeNetV2')
+sample = next(root.glob('*/*.npz'))
+d = np.load(sample)
+print(sample)
 print(d.files)
 print('pos', d['pos'].shape, d['pos'].dtype)
 print('neg', d['neg'].shape, d['neg'].dtype)
@@ -346,97 +309,61 @@ PY
 
 预期至少包含：
 
-- `pos (N,4)`
-- `neg (M,4)`
+- `pos (N, 4)`
+- `neg (M, 4)`
 
----
+## 10. 常见问题与修复
 
-## 12. 这次真实遇到的问题与修复顺序（关键复现经验）
+### `preprocess_data.py` 有日志但没有 `.npz`
 
-### 问题 1：初始环境“看起来跑了”，但没有 `.npz`
+DeepSDF 原始 `preprocess_data.py` 内部调用子进程时不总是严格检查
+`returncode`。如果目录里只有 `.datasources.json`，请直接执行
+`./bin/PreprocessMesh` 或查看子进程输出，定位真实错误。
 
-表现：
+### `PreprocessMesh` 出现 segmentation fault
 
-- `preprocess_data.py` 有日志，但目录里只有 `.datasources.json`。
+常见原因是 Pangolin、编译器和 OpenGL 环境组合不兼容。建议确认：
 
-原因：
+1. 使用 `Pangolin v0.6`。
+2. 使用 `gcc-12/g++-12` 重新编译 Pangolin 和 DeepSDF。
+3. 使用 `xvfb-run`。
+4. 设置 `LIBGL_ALWAYS_SOFTWARE=1` 等 Mesa 软件渲染变量。
 
-- `preprocess_data.py` 内部用 `subprocess.Popen(...).wait()`，没有检查 `returncode`，子进程失败时主脚本不一定报错退出。
+### Pangolin v0.6 编译时报 Python/pybind 错误
 
-修复：
+典型错误包括 `invalid use of incomplete type 'PyFrameObject'`。关闭 Pangolin
+Python 组件即可：
 
-- 直接单独执行 `./bin/PreprocessMesh` 定位真实崩溃原因。
+```bash
+-DBUILD_PANGOLIN_PYTHON=OFF
+-DBUILD_PYPANGOLIN_MODULE=OFF
+```
 
-### 问题 2：`PreprocessMesh` 段错误（Segmentation fault）
+### `Permission denied (publickey)`
 
-表现：
+检查 SSH 用户、私钥路径和服务器授权配置。不要把真实私钥路径或服务器地址写入
+公开文档。
 
-- 大量 OpenGL 警告后崩溃。
+### `nvidia-smi not found`
 
-原因：
+CPU-only 服务器上的正常现象，不影响数据转换。继续使用 `xvfb-run + Mesa`
+软件渲染配置。
 
-- 版本组合不对：当时是 `Pangolin v0.9.5 + gcc13`，与文章实践不一致。
+## 11. 最小复现脚本
 
-修复：
-
-1. 切到 `Pangolin v0.6`。
-2. 使用 `gcc-12/g++-12` 编译 Pangolin 与 DeepSDF。
-3. 运行时启用 `xvfb + Mesa software render`。
-
-### 问题 3：Pangolin v0.6 在 Ubuntu 24.04 编译报 Python/pybind 错
-
-典型报错：
-
-- `invalid use of incomplete type 'PyFrameObject'`
-
-原因：
-
-- pybind 老版本与 Python 3.12 API 兼容问题。
-
-修复：
-
-- 编译 Pangolin 时关闭 Python 组件：
-  - `-DBUILD_PANGOLIN_PYTHON=OFF`
-  - `-DBUILD_PYPANGOLIN_MODULE=OFF`
-
-结论：
-
-- 数据转换不依赖 Pangolin Python 绑定，关闭后不影响本任务。
-
----
-
-## 13. 可视化对比（用于人工验收）
-
-目的：
-
-- 左图看原始 mesh 顶点分布。
-- 中图看转换后 SDF `pos/neg` 点云分布。
-- 右图看 SDF 数值分布。
-
-本次生成位置（本地）：
-
-- `C:\temp\deepsdf_compare\deepsdf_before_after_compare.png`
-
-可视化结论示例：
-
-- 原始 OBJ 顶点数：`756`
-- SDF 输出：`pos=302205`，`neg=163337`
-- `pos` 第四列以正值为主，`neg` 第四列以负值为主，符合预期。
-
----
-
-## 14. 一份可直接执行的最小复现脚本（服务器端）
-
-把下面内容保存为 `run_deepsdf_cpu_test.sh`：
+将下面内容保存为 `run_deepsdf_cpu_test.sh`，并替换占位符：
 
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
 
+WORKDIR="<WORKDIR>"
+SHAPENET_DIR="<SHAPENET_DIR>"
+
 source ~/miniconda3/etc/profile.d/conda.sh
 conda activate deepsdf_py36
 
-cd ~/deepsdf_setup/DeepSDF
+cd "${WORKDIR}/DeepSDF"
 
 export LIBGL_ALWAYS_SOFTWARE=1
 export GALLIUM_DRIVER=llvmpipe
@@ -444,13 +371,13 @@ export MESA_GL_VERSION_OVERRIDE=3.3
 export MESA_GLSL_VERSION_OVERRIDE=330
 
 xvfb-run -s "-screen 0 1024x768x24" python preprocess_data.py \
-  --data_dir data_cpu_test_v2 \
-  --source ~/datasets/ShapeNetCore.v2 \
+  --data_dir data_cpu_test \
+  --source "${SHAPENET_DIR}" \
   --name ShapeNetV2 \
   --split examples/splits/sv2_chair_one_test.json \
   --skip --threads 1
 
-find data_cpu_test_v2 -type f | sed -n '1,50p'
+find data_cpu_test -type f | sed -n '1,50p'
 ```
 
 执行：
@@ -460,89 +387,13 @@ chmod +x run_deepsdf_cpu_test.sh
 ./run_deepsdf_cpu_test.sh
 ```
 
----
+## 12. 复现检查清单
 
-## 15. 常见问题速查
-
-### Q1：`Permission denied (publickey)`
-
-A：
-
-- 确认用户名是 `ubuntu`。
-- 确认私钥权限和路径正确。
-- 命令里显式 `-i` 指向 `.pem`。
-
-### Q2：`Please login as the user "ubuntu" rather than the user "root"`
-
-A：
-
-- 该机器禁止 root 直登，改用 `ubuntu`。
-
-### Q3：`nvidia-smi not found`
-
-A：
-
-- 这是 CPU-only 机器正常现象，不影响数据转换。
-
-### Q4：`glxinfo: not found`
-
-A：
-
-- 装 `mesa-utils`；但核心是 `xvfb-run + MESA` 环境变量。
-
-### Q5：`preprocess_data.py` 似乎成功但没输出文件
-
-A：
-
-- 直接手动跑 `./bin/PreprocessMesh`，检查是否崩溃。
-
-### Q6：`Segmentation fault`（PreprocessMesh）
-
-A：
-
-1. 确认 `Pangolin v0.6`。
-2. 确认 `gcc-12/g++-12` 重新编译。
-3. 使用 `xvfb-run`。
-4. 加 `LIBGL_ALWAYS_SOFTWARE=1` 等软件渲染变量。
-
-### Q7：Pangolin 编译 pybind/Python 错
-
-A：
-
-- 关闭 Python 模块编译参数（见第 7.3.2 节）。
-
----
-
-## 16. 复现实验建议（针对 2 vCPU / 7.6G）
-
-1. 先 1 个样本验证，再扩展 split。
-2. 线程不要开高，`--threads 1` 最稳。
-3. 每次只改一个变量（版本、编译器、环境变量），便于定位问题。
-4. 关注产物文件，不要只看终端“看似成功”的日志。
-
----
-
-## 17. 本次最终可复现状态（记录）
-
-- DeepSDF 二进制存在：
-  - `/home/ubuntu/deepsdf_setup/DeepSDF/bin/PreprocessMesh`
-  - `/home/ubuntu/deepsdf_setup/DeepSDF/bin/SampleVisibleMeshSurface`
-- 样本转换成功产物：
-  - `/home/ubuntu/deepsdf_setup/DeepSDF/data_cpu_test_v2/SdfSamples/ShapeNetV2/03001627/1006be65e7bc937e9141f9b58470d646.npz`
-- 可视化对比图（本地）：
-  - `C:\temp\deepsdf_compare\deepsdf_before_after_compare.png`
-
----
-
-## 18. 给复现者的最短执行清单
-
-1. `ssh` 登录服务器（ubuntu 用户）。
-2. 安装依赖包和 `gcc-12/g++-12`。
-3. 编译 `Pangolin v0.6`（关闭 Python/FFMPEG）。
-4. 用 gcc12 重编 `DeepSDF`。
-5. 激活 `deepsdf_py36` 环境。
-6. 设置 `MESA + xvfb` 参数。
-7. 跑 `preprocess_data.py` 小样本。
-8. 检查 `SdfSamples/*.npz` 的真实产物。
-
-按上面 8 步做，基本就能稳定复现本次数据处理流程。
+1. SSH 能正常登录服务器。
+2. 系统依赖和 `gcc-12/g++-12` 已安装。
+3. `Pangolin v0.6` 已关闭 Python/FFMPEG 并成功安装。
+4. DeepSDF 已用同一编译器组合重新编译。
+5. Conda 环境 `deepsdf_py36` 可用。
+6. `xvfb` 和 Mesa 软件渲染环境变量已设置。
+7. 小样本 split 能生成 `SdfSamples/*.npz`。
+8. `.npz` 中包含 `pos` 和 `neg` 两组 SDF 样本。
