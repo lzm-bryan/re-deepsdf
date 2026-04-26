@@ -1,5 +1,7 @@
 # 数据处理复现目录使用说明
 
+[中文](README.md) | [English](README.en.md)
+
 本目录是**历史数据处理资料和参考链接归档**，不是主复现入口。
 
 如果你是第一次阅读本仓库，建议先看根目录 `README.md` 跑通 DeepSDF 飞机复现；如果关注 TTT/LoRA 实验，直接看 `ttt_deepsdf/README.md`。本目录适合在需要追溯数据来源、查看 CPU/服务器处理记录时再阅读。

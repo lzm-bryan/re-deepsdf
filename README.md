@@ -1,5 +1,7 @@
 # DeepSDF 飞机重建实验 - 4.13 planes类 600epoch
 
+[中文](README.md) | [English](README.en.md)
+
 > 版本：planes类 600epoch
 > 日期：2026-04-13
 > 模型：DeepSDF Auto-Decoder (Epoch 600)
@@ -15,9 +17,9 @@
 | --- | --- | --- |
 | 跑通基础 DeepSDF 飞机重建 | 本 README | 包含环境、数据下载、生成、可视化、训练和评估命令。 |
 | 查看数据从哪里来、当时如何处理 | [`数据处理复现/`](数据处理复现/) | 历史数据处理记录、CPU/服务器复现说明、参考链接和离线网页备份。一般不需要先读。 |
-| 查看 TTT / LoRA 改进实验 | [`ttt_deepsdf/`](ttt_deepsdf/) | TTT 代码、DeepSDF/TTT 结果表、小图、复现指南、Curriculum DeepSDF 和 SOTA baseline 文档。 |
+| 查看 TTT / LoRA 改进实验 | [`ttt_deepsdf/`](ttt_deepsdf/README.zh-CN.md) | TTT 代码、DeepSDF/TTT 结果表、小图、复现指南、Curriculum DeepSDF 和 SOTA baseline 文档。 |
 
-如果你是第一次打开这个仓库，推荐顺序是：先读本 README 跑通基础复现；需要追溯数据时再看 `数据处理复现/`；需要看课程/论文方向的 TTT 结果时再进入 `ttt_deepsdf/README.md`。
+如果你是第一次打开这个仓库，推荐顺序是：先读本 README 跑通基础复现；需要追溯数据时再看 `数据处理复现/`；需要看课程/论文方向的 TTT 结果时再进入 `ttt_deepsdf/README.zh-CN.md`。
 
 ## 仓库结构
 
