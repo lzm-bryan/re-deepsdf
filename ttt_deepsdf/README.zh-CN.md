@@ -4,7 +4,7 @@
 
 这个目录保存 DeepSDF 测试时自适应实验中适合放入 Git 的小型材料，包括 TTT 评估代码、整理后的结果表、定性可视化图片和复现说明。
 
-大体量数据、完整 checkpoint、重建 mesh 以及每个 shape 的 TTT 中间状态不直接放在 Git 里。需要复现时，请先按 `docs/DATA_AND_ARTIFACTS.md` 下载外部文件，并解压到 `external_artifacts/`。
+大体量数据、完整 checkpoint、重建 mesh 以及每个 shape 的 TTT 中间状态不直接放在 Git 里。需要复现时，请先按 `docs/DATA_AND_ARTIFACTS.md` 和 `docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md` 下载外部文件，并解压到 `external_artifacts/`。
 
 ## 包含内容
 
@@ -65,7 +65,7 @@ python ttt_deepsdf/scripts/evaluate_sdf_ttt.py \
 
 ```text
 Google Drive folder:
-https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=drive_link
+https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing
 ```
 
-推荐把下载链接、文件说明和 checksum 统一维护在 `docs/DATA_AND_ARTIFACTS.md`。这个 README 只保留最小入口，避免以后多个地方同时改链接。
+推荐把下载链接、文件说明和 checksum 统一维护在 `docs/DATA_AND_ARTIFACTS.md` 和 `docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md`。这个 README 只保留最小入口，避免以后多个地方同时改链接。

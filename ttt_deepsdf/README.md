@@ -1,4 +1,4 @@
-﻿# TTT-DeepSDF Results And Reproduction Package
+# TTT-DeepSDF Results And Reproduction Package
 
 [English](README.md) | [中文](README.zh-CN.md)
 
@@ -8,7 +8,7 @@ curated result tables, qualitative figures, and reproduction notes.
 
 Large data, checkpoints, reconstructed meshes, and per-shape TTT state files are
 not stored in Git. They should be downloaded separately and unpacked under
-`external_artifacts/` as described in `docs/DATA_AND_ARTIFACTS.md`.
+`external_artifacts/` as described in `docs/DATA_AND_ARTIFACTS.md` and `docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md`.
 
 ## What Is Included
 
@@ -77,12 +77,12 @@ Three-class data and large artifacts are stored outside Git:
 
 ```text
 Google Drive folder:
-https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=drive_link
+https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing
 ```
 
 Recommended metadata location in this package:
 
-- short link and checksums: `docs/DATA_AND_ARTIFACTS.md`
+- short link and checksums: `docs/DATA_AND_ARTIFACTS.md` and `docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md`
 - optional mirrored note: this README
 
 

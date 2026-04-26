@@ -1,80 +1,87 @@
-﻿# Data And Artifact Policy
+# Data And Artifact Policy
 
-This repository stores only small files needed to understand and rerun the
-experiments. Large files should be hosted separately, for example on Google
-Drive, and unpacked into `ttt_deepsdf/external_artifacts/` when reproducing.
+This repository stores only small files needed to understand and rerun the experiments. Large files are hosted separately, for example on Google Drive, and should be unpacked into `ttt_deepsdf/external_artifacts/` or another local workspace when reproducing.
 
-## Put In Git
+## Google Drive Folder
 
-- TTT source code.
-- Result CSV tables.
-- Small JSON summaries.
-- Selected-case manifests.
-- PNG/SVG figures used by the report.
-- Documentation and example commands.
+Owner-managed artifact folder:
 
-## Keep Out Of Git
+<https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing>
+
+If you only want to read the report and inspect the summarized metrics, cloning this GitHub repository is enough. If you want to rerun evaluation or reuse the exact reconstructed meshes/checkpoints, download the external artifacts listed below.
+
+## What Is In Git
+
+- TTT / LoRA source code and small helper scripts.
+- Result CSV tables and compact JSON summaries.
+- Selected qualitative figures and communication figures.
+- Reproduction notes, baseline notes, and report-facing documentation.
+
+## What Stays Out Of Git
 
 - ShapeNet raw data.
-- Processed DeepSDF `.npz` data.
+- Processed DeepSDF `.npz` SDF samples and full surface samples.
 - Full model checkpoints and latent-code checkpoints.
 - Full reconstructed mesh folders.
 - Per-shape `TTTStates/*.pth`.
-- Full server snapshots and local experiment archives.
+- Full cloud server snapshots and local experiment archives.
 
-## Expected External Layout
+## Recommended Drive Packages
 
-After downloading external artifacts, arrange them like this:
+| Package | Approx. size | Required? | Purpose |
+| --- | ---: | --- | --- |
+| `deepsdf_processed_data_airplane_chair_lamp_20260427.tar` | about 55 GiB | Required for rerun/evaluation | Processed SDF samples, normalization parameters, and surface samples for airplane, chair, and lamp. |
+| `final_live_results_30446_latest.tar` | 6.66 GiB | Optional provenance | Verified full 30446 cloud result snapshot. |
+| `final_live_results_30622_latest.tar` | 7.73 GiB | Optional provenance | Final 30622 cloud result snapshot. |
+| `final_chair_e200_30446_latest.tar` | 2.47 GiB | Optional targeted backup | Repaired chair CurriculumDeepSDF-fullish checkpoint-200 archive. Redundant with the full 30446 package but convenient. |
+| `completed_baselines_30446_latest.tar` | 1.05 GiB | Optional legacy snapshot | Earlier completed-baseline snapshot from 30446. |
+| `completed_baselines_30622_latest.tar` | 0.94 GiB | Optional legacy snapshot | Earlier completed-baseline snapshot from 30622. |
+| `deepsdf_repo_reports_snapshot_20260427.tar` | small | Recommended | Repo/report/document snapshot for offline handoff. |
+
+Local upload staging path used by the project owner:
 
 ```text
-ttt_deepsdf/external_artifacts/
+E:\DeepSDF_GDrive_Upload_20260427
+```
+
+The staging folder contains `README_UPLOAD_FIRST.md` and `UPLOAD_MANIFEST_2026-04-27.csv`, plus any packages that have finished building/copying.
+
+## Expected External Layout After Download
+
+For rerunning the main DeepSDF/TTT commands, extract the processed-data tar and arrange it as:
+
+```text
+external_artifacts/
   data/
-    SdfSamples/ShapeNetV2/<class_id>/*.npz
-    NormalizationParameters/ShapeNetV2/<class_id>/*.npz
-  surface_data/
-    SurfaceSamples/ShapeNetV2/<class_id>/*.ply
+    SdfSamples/ShapeNetV2/02691156/*.npz
+    SdfSamples/ShapeNetV2/03001627/*.npz
+    SdfSamples/ShapeNetV2/03636649/*.npz
+    NormalizationParameters/ShapeNetV2/<class_id>/*
+    SurfaceSamples/ShapeNetV2/<class_id>/*
   splits/
+    sv2_planes_train.json
     sv2_planes_test.json
+    sv2_chairs_train.json
     sv2_chairs_test.json
+    sv2_lamps_train.json
     sv2_lamps_test.json
-  experiments/
-    airplane_code256_e100/
-    airplane_code256_e200/
-    chair_code256_e100/
-    chair_code256_e200/
-    lamp_code256_e100/
-    lamp_code256_e200/
-  server_snapshots/
-    30446/
-    30622/
-  local_experiments/
-    paper_ckpt200_full_chamfer_local/
 ```
 
-Only `data/`, `surface_data/`, `splits/`, and `experiments/` are required to
-rerun the main commands. The `server_snapshots/` and `local_experiments/`
-folders are optional provenance archives referenced by sanitized result tables.
+The local processed data used in the final experiments had these counts:
 
-## Data Link Placeholder
+| Class | Train split | Test split | SDF/Norm files | Surface files |
+| --- | ---: | ---: | ---: | ---: |
+| airplane `02691156` | 1780 | 456 | 2236 | 456 |
+| chair `03001627` | 3281 | 832 | 4113 | 832 |
+| lamp `03636649` | 897 | 213 | 1110 | 213 |
 
-Google Drive folder for external data/artifacts:
+## How To Choose What To Download
 
-```text
-https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=drive_link
-TODO: Optional SHA256 checksum or file-size note.
-```
+- Read-only report inspection: clone GitHub only.
+- Recompute tables from processed samples: download `deepsdf_processed_data_airplane_chair_lamp_20260427.tar`.
+- Inspect exact cloud outputs/checkpoints/meshes: download the two `final_live_results_*` archives.
+- Verify the late chair e200 repair only: download `final_chair_e200_30446_latest.tar`.
 
-If the result mesh/checkpoint archive is uploaded separately, add it here:
+## Path Hygiene
 
-```text
-TODO: Google Drive link for checkpoints, reconstructed meshes, and TTT states.
-```
-
-## Privacy And Path Hygiene
-
-The committed result files use relative paths such as
-`external_artifacts/server_snapshots/...`. They intentionally avoid local user
-names, desktop paths, machine names, SSH endpoints, and internal server roots.
-
-
-
+Committed result files use relative or sanitized paths. Local desktop paths, SSH endpoints, and server-internal paths are documented only in private handoff notes, not required for public reproduction.

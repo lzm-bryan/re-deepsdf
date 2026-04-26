@@ -182,8 +182,12 @@ python scripts/render_planes.py
 三类数据和较大文件托管在 Git 之外：
 
 ```text
-https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=drive_link
+https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing
 ```
+
+详细数据/结果说明：
+- [DATA_AND_ARTIFACTS.md](ttt_deepsdf/docs/DATA_AND_ARTIFACTS.md)
+- [GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md](ttt_deepsdf/docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md)
 
 入口文档：`ttt_deepsdf/README.zh-CN.md`。
 

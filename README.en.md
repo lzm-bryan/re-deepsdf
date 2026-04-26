@@ -188,8 +188,12 @@ DeepSDF notes, and SOTA baseline planning documents.
 Large three-class artifacts are hosted outside Git:
 
 ```text
-https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=drive_link
+https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing
 ```
+
+Detailed data and result notes:
+- [DATA_AND_ARTIFACTS.md](ttt_deepsdf/docs/DATA_AND_ARTIFACTS.md)
+- [GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md](ttt_deepsdf/docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md)
 
 Start with `ttt_deepsdf/README.md`.
 
