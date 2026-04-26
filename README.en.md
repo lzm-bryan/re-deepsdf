@@ -44,6 +44,17 @@ to be stored directly in Git. Download them from the Google Drive links in this
 README or `ttt_deepsdf/docs/DATA_AND_ARTIFACTS.md`.
 
 ---
+## Three-Class TTT/LoRA Artifact Access
+
+The current three-class DeepSDF/TTT study uses airplane, chair, and lamp data. Large processed data and full result snapshots are intentionally kept out of GitHub. If you want to reuse the prepared data/results instead of recomputing them, see:
+
+- `ttt_deepsdf/docs/DATA_AND_ARTIFACTS.md`
+- `ttt_deepsdf/docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md`
+
+Google Drive artifact folder:
+<https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=sharing>
+
+---
 
 ## Quick Inference Run
 
@@ -217,7 +228,7 @@ Curriculum DeepSDF code notes, and future SOTA baseline planning documents.
 Large three-class artifacts are hosted outside Git:
 
 ```text
-https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=drive_link
+https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=sharing
 ```
 
 Start with `ttt_deepsdf/README.md`.
