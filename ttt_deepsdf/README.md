@@ -23,6 +23,19 @@ not stored in Git. They should be downloaded separately and unpacked under
 - `docs/`: reproduction guide, artifact policy, and result summary.
 - `configs/`: example command configuration.
 
+## How To Read This Folder
+
+For a quick overview:
+
+1. Read `docs/RESULTS_SUMMARY.md` for the main DeepSDF-vs-TTT conclusion.
+2. Read `docs/REPRODUCTION_GUIDE.md` for runnable commands.
+3. Read `docs/PROJECT_STRUCTURE.md` if you want to understand the folder layout.
+4. Read `baselines/README.md` and `docs/SOTA_BASELINE_GUIDE.md` for Curriculum
+   DeepSDF and external SOTA baseline status.
+
+The committed files are intentionally small. Full datasets, checkpoints, meshes,
+and per-shape TTT states are external artifacts.
+
 ## Main Result
 
 LoRA test-time adaptation improves over the reproduced DeepSDF baseline on all
@@ -56,16 +69,16 @@ python ttt_deepsdf/scripts/evaluate_sdf_ttt.py \
 For full mesh reconstruction and Chamfer evaluation, see
 `docs/REPRODUCTION_GUIDE.md`.
 
-## Data Link Placeholder
+## External Data And Large Artifacts
 
-The three-class processed data bundle link can be added here after upload:
+Three-class data and large artifacts are stored outside Git:
 
 ```text
 Google Drive folder:
 https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=drive_link
 ```
 
-Recommended location in this package:
+Recommended metadata location in this package:
 
 - short link and checksums: `docs/DATA_AND_ARTIFACTS.md`
 - optional mirrored note: this README

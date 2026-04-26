@@ -7,6 +7,34 @@
 
 ---
 
+## 第一次阅读建议
+
+这个仓库现在包含三类内容：
+
+1. **DeepSDF 飞机类复现**：本 README 的主体内容，适合快速生成、可视化和复现飞机类实验。
+2. **TTT / LoRA DeepSDF 扩展实验**：见 [`ttt_deepsdf/`](ttt_deepsdf/)，包含 TTT 代码、结果表、复现说明和未来 SOTA baseline 文档。
+3. **数据处理复现记录**：见 [`数据处理复现/`](数据处理复现/)，主要是历史数据处理资料和离线网页备份，新读者可以先跳过。
+
+如果只是想快速跑起来，先按下面的“一键运行”走；如果想看论文/课程项目里的 TTT 结果，直接进入 `ttt_deepsdf/README.md`。
+
+## 仓库结构
+
+```text
+re-deepsdf/
+├── configs/           # DeepSDF 飞机实验配置
+├── generated/         # 小型生成 mesh 示例
+├── images/            # 可视化图片
+├── models/            # 小型模型参数和 latent code 示例
+├── scripts/           # 生成、渲染、可视化脚本
+├── source_code/       # DeepSDF 训练、重建、评估代码
+├── ttt_deepsdf/       # TTT/LoRA DeepSDF 研究包
+└── 数据处理复现/      # 数据处理过程记录与参考资料
+```
+
+大体量数据、完整 checkpoint、全量重建 mesh 不建议直接放进 Git；需要时从 README 或 `ttt_deepsdf/docs/DATA_AND_ARTIFACTS.md` 中的 Google Drive 链接下载。
+
+---
+
 ## 一键运行（仅推理）
 
 ```bash
@@ -198,12 +226,12 @@ python scripts/render_planes.py
 
 | 数据 | 大小 | 说明 | 下载链接 |
 |------|------|------|----------|
-| **训练SDF采样** | 4.1 GB | **完整训练数据，可直接复现训练** | [待上传] |
+| **训练SDF采样** | 4.1 GB | **完整训练数据，可直接复现训练** | [train_4.13planes-600epoch.zip](https://drive.google.com/file/d/1KCqG-tOYm3H92792S17m-JFwLCmFdS0k/view?usp=sharing) |
 | 测试数据 | 3.0 GB | 456个测试样本SDF采样 | [test_4.13planes-600epoch.zip](https://drive.google.com/file/d/19ENGz3Cnxp_7HmjjBLcPgkSR23UpwqC-/view?usp=sharing) |
 | 重建结果 | 261 MB | 456个重建mesh (.ply) | [reconstructions_4.13planes-600epoch.zip](https://drive.google.com/file/d/11KQy6ca7o8MuPxGZBU5PWwAhzOVQhw9n/view?usp=sharing) |
 | 隐向量 | 583 KB | 627个训练样本隐向量 | [latentcodes_4.13planes-600epoch.zip](https://drive.google.com/file/d/1WeusBcG0clPVxzfozuSA0M84I8EKtSN7/view?usp=sharing) |
 
-> ⚠️ **请上传 `sdfsamples_4.13planes-600epoch.zip` 到 Google Drive 并更新上方链接**
+TTT/LoRA 三类别数据和大文件归档见：[`ttt_deepsdf/docs/DATA_AND_ARTIFACTS.md`](ttt_deepsdf/docs/DATA_AND_ARTIFACTS.md)。
 
 ---
 
