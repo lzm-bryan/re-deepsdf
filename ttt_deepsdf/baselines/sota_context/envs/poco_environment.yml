@@ -1,0 +1,25 @@
+﻿name: poco-baseline
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pip
+  - numpy
+  - scipy
+  - pandas
+  - tqdm
+  - pyyaml
+  - trimesh
+  - scikit-image
+  - pytorch
+  - torchvision
+  - cudatoolkit=11.8
+  - pip:
+      - open3d
+      - plyfile
+
+
+
+

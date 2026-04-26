@@ -1,0 +1,20 @@
+﻿{
+    "checkpoint":  "100",
+    "experiment_dir":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/lamp_code256_e100",
+    "eval_subdir":  "Evaluation",
+    "eval_ttt_subdir":  "EvaluationTTT",
+    "metrics":  {
+                    "test_mean":  0.10538966871553183,
+                    "test_opt":  0.01327528313300769,
+                    "test_ttt_adapter":  0.011589270434888875,
+                    "test_ttt_lora":  0.008840759534021499,
+                    "test_ttt_lora_fa":  0.010945025053172604
+                },
+    "test_mean":  0.10538966871553183,
+    "test_opt":  0.01327528313300769,
+    "test_ttt_adapter":  0.011589270434888875,
+    "test_ttt_lora":  0.008840759534021499,
+    "test_ttt_lora_fa":  0.010945025053172604,
+    "best_ttt_method":  "test_ttt_lora",
+    "best_ttt_value":  0.008840759534021499
+}

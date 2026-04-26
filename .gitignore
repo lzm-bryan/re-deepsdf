@@ -15,3 +15,18 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# TTT external artifacts and generated outputs
+ttt_deepsdf/external_artifacts/
+ttt_deepsdf/runs/
+ttt_deepsdf/**/*.npz
+ttt_deepsdf/**/*.pth
+ttt_deepsdf/**/*.ply
+ttt_deepsdf/**/*.zip
+ttt_deepsdf/**/*.tar
+ttt_deepsdf/**/*.tar.gz
+ttt_deepsdf/**/__pycache__/
+ttt_deepsdf/baselines/**/repos/
+ttt_deepsdf/baselines/**/checkpoints/
+ttt_deepsdf/baselines/**/runs/
+ttt_deepsdf/baselines/**/logs/

@@ -1,0 +1,26 @@
+﻿{
+    "airplane":  {
+                     "split_file":  "external_artifacts/remote_deepsdf_setup/DeepSDF/examples/splits/sv2_planes_test.json",
+                     "synset":  "02691156",
+                     "surface_root":  "external_artifacts/surface_data/airplane",
+                     "count":  456,
+                     "csv":  "external_artifacts/baselines/sota_baselines_2026-04-25/data_manifests/airplane_official_full_test_inputs.csv",
+                     "found_surface_files":  456
+                 },
+    "chair":  {
+                  "split_file":  "external_artifacts/remote_deepsdf_setup/DeepSDF/examples/splits/sv2_chairs_test.json",
+                  "synset":  "03001627",
+                  "surface_root":  "external_artifacts/surface_data/chair",
+                  "count":  832,
+                  "csv":  "external_artifacts/baselines/sota_baselines_2026-04-25/data_manifests/chair_official_full_test_inputs.csv",
+                  "found_surface_files":  832
+              },
+    "lamp":  {
+                 "split_file":  "external_artifacts/remote_deepsdf_setup/DeepSDF/examples/splits/sv2_lamps_test.json",
+                 "synset":  "03636649",
+                 "surface_root":  "external_artifacts/surface_data/lamp",
+                 "count":  213,
+                 "csv":  "external_artifacts/baselines/sota_baselines_2026-04-25/data_manifests/lamp_official_full_test_inputs.csv",
+                 "found_surface_files":  213
+             }
+}

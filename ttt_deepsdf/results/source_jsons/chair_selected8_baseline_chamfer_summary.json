@@ -1,0 +1,134 @@
+﻿{
+    "mode":  "baseline",
+    "checkpoint":  "100",
+    "output_label":  "PaperBaseline100_Selected8_N256_i200",
+    "split_file":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/PaperTTTSelections/chair_ckpt100_selected8.json",
+    "surface_root":  "external_artifacts/surface_data/chair",
+    "resolution":  256,
+    "iters":  200,
+    "samples":  4096,
+    "adapt_samples":  4096,
+    "wall_seconds":  52.486755943042226,
+    "shape_results":  [
+                          {
+                              "instance":  "d4b5f8edc72b4676f4175ee3a177350a",
+                              "mae":  0.011644421145319939,
+                              "missing":  false,
+                              "seconds":  6.511986438999884,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/03001627/d4b5f8edc72b4676f4175ee3a177350a.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/03001627/d4b5f8edc72b4676f4175ee3a177350a.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "ccd5e24c9b96febd5208aab875b932bc",
+                              "mae":  0.02005327120423317,
+                              "missing":  false,
+                              "seconds":  5.3826980530284345,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/03001627/ccd5e24c9b96febd5208aab875b932bc.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/03001627/ccd5e24c9b96febd5208aab875b932bc.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "ed7b1be61b8e78ac5d8eba92952b9366",
+                              "mae":  0.02555752545595169,
+                              "missing":  false,
+                              "seconds":  6.652966522960924,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/03001627/ed7b1be61b8e78ac5d8eba92952b9366.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/03001627/ed7b1be61b8e78ac5d8eba92952b9366.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "f030f5181057ddf75622d7484764b58f",
+                              "mae":  0.008473451249301434,
+                              "missing":  false,
+                              "seconds":  6.052443273947574,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/03001627/f030f5181057ddf75622d7484764b58f.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/03001627/f030f5181057ddf75622d7484764b58f.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "fdd7090f3ca12395a7ae19ac44244eae",
+                              "mae":  0.014429413713514805,
+                              "missing":  false,
+                              "seconds":  7.845563165959902,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/03001627/fdd7090f3ca12395a7ae19ac44244eae.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/03001627/fdd7090f3ca12395a7ae19ac44244eae.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "ced9c5eee916cce089c398a8a379054a",
+                              "mae":  0.006033407058566809,
+                              "missing":  false,
+                              "seconds":  5.7980772610753775,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/03001627/ced9c5eee916cce089c398a8a379054a.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/03001627/ced9c5eee916cce089c398a8a379054a.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "f1c390f2a04d13f6742728b30848ed03",
+                              "mae":  0.009388759732246399,
+                              "missing":  false,
+                              "seconds":  6.088672155980021,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/03001627/f1c390f2a04d13f6742728b30848ed03.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/03001627/f1c390f2a04d13f6742728b30848ed03.pth",
+                              "mesh_error":  null
+                          },
+                          {
+                              "instance":  "fee248777c9c4807f8bc1f8036e08e44",
+                              "mae":  0.010142178274691105,
+                              "missing":  false,
+                              "seconds":  5.555062609957531,
+                              "mesh":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/Meshes/ShapeNetV2/03001627/fee248777c9c4807f8bc1f8036e08e44.ply",
+                              "state":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Reconstructions/PaperBaseline100_Selected8_N256_i200/TTTStates/ShapeNetV2/03001627/fee248777c9c4807f8bc1f8036e08e44.pth",
+                              "mesh_error":  null
+                          }
+                      ],
+    "chamfer_csv":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500/Evaluation/PaperBaseline100_Selected8_N256_i200/chamfer.csv",
+    "count":  8,
+    "mean_chamfer":  0.0013318920211286894,
+    "median_chamfer":  0.00019538804165784068,
+    "min_chamfer":  9.5914205335843289E-05,
+    "max_chamfer":  0.009008506292485681,
+    "rows":  [
+                 {
+                     "shape":  "ShapeNetV2/03001627/d4b5f8edc72b4676f4175ee3a177350a",
+                     "chamfer_dist":  0.00020178539442974538,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/03001627/ccd5e24c9b96febd5208aab875b932bc",
+                     "chamfer_dist":  0.009008506292485681,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/03001627/ed7b1be61b8e78ac5d8eba92952b9366",
+                     "chamfer_dist":  0.00018899068888593597,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/03001627/f030f5181057ddf75622d7484764b58f",
+                     "chamfer_dist":  0.00011886715457549285,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/03001627/fdd7090f3ca12395a7ae19ac44244eae",
+                     "chamfer_dist":  9.5914205335843289E-05,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/03001627/ced9c5eee916cce089c398a8a379054a",
+                     "chamfer_dist":  0.0002671995698495252,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/03001627/f1c390f2a04d13f6742728b30848ed03",
+                     "chamfer_dist":  0.0006760606020399416,
+                     "missing":  false
+                 },
+                 {
+                     "shape":  "ShapeNetV2/03001627/fee248777c9c4807f8bc1f8036e08e44",
+                     "chamfer_dist":  9.7812261427350082E-05,
+                     "missing":  false
+                 }
+             ]
+}

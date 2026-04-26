@@ -1,0 +1,67 @@
+﻿{
+    "rows":  [
+                 {
+                     "class":  "lamp",
+                     "latent_dim":  64,
+                     "checkpoint":  100,
+                     "experiment_dir":  "external_artifacts/remote_deepsdf_setup/official_experiments/he_ying_lamp_code64_e100",
+                     "train":  {
+                                   "avg_mae":  0.02041236554150996,
+                                   "valid":  897,
+                                   "total":  null
+                               },
+                     "test_mean":  {
+                                       "avg_mae":  0.10100153998904665,
+                                       "valid":  213,
+                                       "total":  null
+                                   },
+                     "test_opt":  {
+                                      "avg_mae":  0.01641453890908212,
+                                      "valid":  213,
+                                      "total":  null
+                                  }
+                 },
+                 {
+                     "class":  "lamp",
+                     "latent_dim":  128,
+                     "checkpoint":  100,
+                     "experiment_dir":  "external_artifacts/remote_deepsdf_setup/official_experiments/he_ying_lamp_code128_e100",
+                     "train":  {
+                                   "avg_mae":  0.020031662231130544,
+                                   "valid":  897,
+                                   "total":  null
+                               },
+                     "test_mean":  {
+                                       "avg_mae":  0.1092162131825943,
+                                       "valid":  213,
+                                       "total":  null
+                                   },
+                     "test_opt":  {
+                                      "avg_mae":  0.015093329303543752,
+                                      "valid":  213,
+                                      "total":  null
+                                  }
+                 },
+                 {
+                     "class":  "lamp",
+                     "latent_dim":  256,
+                     "checkpoint":  100,
+                     "experiment_dir":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/lamp_code256_e100",
+                     "train":  {
+                                   "avg_mae":  0.019534756552008547,
+                                   "valid":  897,
+                                   "total":  null
+                               },
+                     "test_mean":  {
+                                       "avg_mae":  0.10538966871553183,
+                                       "valid":  213,
+                                       "total":  null
+                                   },
+                     "test_opt":  {
+                                      "avg_mae":  0.01327528313300769,
+                                      "valid":  213,
+                                      "total":  null
+                                  }
+                 }
+             ]
+}

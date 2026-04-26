@@ -1,0 +1,76 @@
+﻿{
+    "Description":  [
+                        "Local RTX 5070 chair latent-dimension experiment, CodeLength=128.",
+                        "Aggressive-but-safe local settings after GPU under-utilization check; official ShapeNetV2 chair split is preserved."
+                    ],
+    "DataSource":  "external_artifacts/data",
+    "TrainSplit":  "external_artifacts/deepsdf_code_snapshot/examples/splits/sv2_chairs_train.json",
+    "TestSplit":  "external_artifacts/deepsdf_code_snapshot/examples/splits/sv2_chairs_test.json",
+    "NetworkArch":  "deep_sdf_decoder",
+    "NetworkSpecs":  {
+                         "dims":  [
+                                      512,
+                                      512,
+                                      512,
+                                      512,
+                                      512,
+                                      512,
+                                      512,
+                                      512
+                                  ],
+                         "dropout":  [
+                                         0,
+                                         1,
+                                         2,
+                                         3,
+                                         4,
+                                         5,
+                                         6,
+                                         7
+                                     ],
+                         "dropout_prob":  0.2,
+                         "norm_layers":  [
+                                             0,
+                                             1,
+                                             2,
+                                             3,
+                                             4,
+                                             5,
+                                             6,
+                                             7
+                                         ],
+                         "latent_in":  4,
+                         "xyz_in_all":  false,
+                         "use_tanh":  false,
+                         "latent_dropout":  false,
+                         "weight_norm":  true
+                     },
+    "CodeLength":  128,
+    "NumEpochs":  100,
+    "SnapshotFrequency":  50,
+    "AdditionalSnapshots":  [
+                                50,
+                                100
+                            ],
+    "LearningRateSchedule":  [
+                                 {
+                                     "Type":  "Step",
+                                     "Initial":  0.0005,
+                                     "Interval":  500,
+                                     "Factor":  0.5
+                                 },
+                                 {
+                                     "Type":  "Step",
+                                     "Initial":  0.001,
+                                     "Interval":  500,
+                                     "Factor":  0.5
+                                 }
+                             ],
+    "SamplesPerScene":  8192,
+    "ScenesPerBatch":  16,
+    "DataLoaderThreads":  2,
+    "ClampingDistance":  0.1,
+    "CodeRegularization":  true,
+    "CodeRegularizationLambda":  0.0001,
+    "CodeBound":  1.0
+}
