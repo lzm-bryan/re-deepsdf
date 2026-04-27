@@ -73,17 +73,15 @@ For full mesh reconstruction and Chamfer evaluation, see
 
 ## External Data And Large Artifacts
 
-Three-class data and large artifacts are stored outside Git:
+Three-class data and large experiment artifacts are stored outside Git. There are two folders:
 
-```text
-Google Drive folder:
-https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing
-```
+| Type | Purpose | Link |
+| --- | --- | --- |
+| Dataset / processed data | Airplane/chair/lamp train/test SDF, normalization parameters, surface samples, and split files. | https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=sharing |
+| Result / model artifacts | Checkpoints, reconstructed meshes, server snapshots, result archives, and report snapshots. | https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing |
 
 Recommended metadata location in this package:
 
-- short link and checksums: `docs/DATA_AND_ARTIFACTS.md` and `docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md`
-- optional mirrored note: this README
-
-
-
+- public reproduction entry: `docs/REPRODUCIBILITY_START_HERE.md`
+- data policy: `docs/DATA_AND_ARTIFACTS.md`
+- package manifest: `docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md`

@@ -1,14 +1,14 @@
-﻿{
-    "ShapeNetV2":  {
-                       "02691156":  [
-                                        "e387c8d826cbbdd68a8dc9dc46f918a8",
-                                        "f9db62e6a88f0d7129343faf3bbffb15",
-                                        "d709b3afd41a578ba03df56f69a35fcc",
-                                        "ddc14c7e0a228663796843908eee8f7d",
-                                        "f3cbfb52ea1c907a850e00840470903a",
-                                        "f2975fde05d9d63eeea0c0561850e04e",
-                                        "f986604528abe35554eefcdc602d4520",
-                                        "f6e6fd724a9eab24ba8e93696257b3fc"
-                                    ]
-                   }
+{
+  "ShapeNetV2": {
+    "02691156": [
+      "e387c8d826cbbdd68a8dc9dc46f918a8",
+      "f9db62e6a88f0d7129343faf3bbffb15",
+      "d709b3afd41a578ba03df56f69a35fcc",
+      "ddc14c7e0a228663796843908eee8f7d",
+      "f3cbfb52ea1c907a850e00840470903a",
+      "f2975fde05d9d63eeea0c0561850e04e",
+      "f986604528abe35554eefcdc602d4520",
+      "f6e6fd724a9eab24ba8e93696257b3fc"
+    ]
+  }
 }

@@ -1,0 +1,4 @@
+class,count,missing_count,mean_chamfer_l1,mean_chamfer_l2,mean_sinkhorn_emd,mean_fscore_at_0p005,mean_fscore_at_0p01,protocol_note
+airplane,455,1,0.026136328569184082,0.0021619403802512643,0.06455580191789093,0.44389031650443517,0.7141960083364178,"NKSR pretrained ks checkpoint, SurfaceSamples xyz plus PCA normals; point-cloud/surface protocol, not DeepSDF latent/SDF protocol"
+chair,832,0,0.039177437265147566,0.0022734802626005893,0.08429786410684195,0.1240147818470417,0.42799741176087547,"NKSR pretrained ks checkpoint, SurfaceSamples xyz plus PCA normals; point-cloud/surface protocol, not DeepSDF latent/SDF protocol"
+lamp,210,3,0.03838742592522231,0.006312446901283211,0.08920776173472404,0.31235878209178064,0.6224053278257071,"NKSR pretrained ks checkpoint, SurfaceSamples xyz plus PCA normals; point-cloud/surface protocol, not DeepSDF latent/SDF protocol"

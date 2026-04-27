@@ -185,13 +185,15 @@ The later TTT/LoRA research package is under `ttt_deepsdf/`. It includes
 DeepSDF-vs-TTT result tables, figures, TTT evaluation scripts, Curriculum
 DeepSDF notes, and SOTA baseline planning documents.
 
-Large three-class artifacts are hosted outside Git:
+Large three-class artifacts are hosted outside Git. There are two separate external folders:
 
-```text
-https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing
-```
+| Type | Purpose | Link |
+| --- | --- | --- |
+| Dataset / processed data | Train/test SDF samples, normalization parameters, surface samples, and split files for airplane/chair/lamp. | https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=sharing |
+| Result / model artifacts | Checkpoints, reconstructed meshes, server snapshots, result archives, and report snapshots. | https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing |
 
 Detailed data and result notes:
+- [REPRODUCIBILITY_START_HERE.md](ttt_deepsdf/docs/REPRODUCIBILITY_START_HERE.md)
 - [DATA_AND_ARTIFACTS.md](ttt_deepsdf/docs/DATA_AND_ARTIFACTS.md)
 - [GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md](ttt_deepsdf/docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md)
 

@@ -1,20 +1,20 @@
-﻿{
-    "checkpoint":  "200",
-    "experiment_dir":  "external_artifacts/remote_deepsdf_setup/official_ttt_ckpt100_queue/experiments/lamp_code256_e100",
-    "eval_subdir":  "Evaluation",
-    "eval_ttt_subdir":  "EvaluationTTT",
-    "metrics":  {
-                    "test_mean":  0.11633345397285452,
-                    "test_opt":  0.01079663927032844,
-                    "test_ttt_adapter":  0.009667352334915402,
-                    "test_ttt_lora":  0.007385477787670745,
-                    "test_ttt_lora_fa":  0.00899429779560983
-                },
-    "test_mean":  0.11633345397285452,
-    "test_opt":  0.01079663927032844,
-    "test_ttt_adapter":  0.009667352334915402,
-    "test_ttt_lora":  0.007385477787670745,
-    "test_ttt_lora_fa":  0.00899429779560983,
-    "best_ttt_method":  "test_ttt_lora",
-    "best_ttt_value":  0.007385477787670745
+{
+  "checkpoint": "200",
+  "experiment_dir": "/root/rivermind-data/deepsdf_setup/official_ttt_ckpt100_queue/experiments/lamp_code256_e100",
+  "eval_subdir": "Evaluation",
+  "eval_ttt_subdir": "EvaluationTTT",
+  "metrics": {
+    "test_mean": 0.11633345397285452,
+    "test_opt": 0.01079663927032844,
+    "test_ttt_adapter": 0.009667352334915402,
+    "test_ttt_lora": 0.007385477787670745,
+    "test_ttt_lora_fa": 0.00899429779560983
+  },
+  "test_mean": 0.11633345397285452,
+  "test_opt": 0.01079663927032844,
+  "test_ttt_adapter": 0.009667352334915402,
+  "test_ttt_lora": 0.007385477787670745,
+  "test_ttt_lora_fa": 0.00899429779560983,
+  "best_ttt_method": "test_ttt_lora",
+  "best_ttt_value": 0.007385477787670745
 }

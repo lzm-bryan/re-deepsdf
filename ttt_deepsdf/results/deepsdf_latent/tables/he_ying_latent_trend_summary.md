@@ -1,4 +1,4 @@
-﻿# He Ying Latent-Dimension Quick Summary
+# He Ying Latent-Dimension Quick Summary
 
 Generated: 2026-04-26 13:33:43
 
@@ -13,5 +13,3 @@ Main reading: in all three categories, CodeLength=256 has the lowest test-opt SD
 Artifacts:
 - results/quick_postprocess/he_ying_latent_trend_scoreboard.csv
 - figures/quick_postprocess/he_ying_latent_dim_trend.svg
-
-

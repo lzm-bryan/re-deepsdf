@@ -1,0 +1,393 @@
+\documentclass[letterpaper]{article}
+\usepackage{aaai2026}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+\urlstyle{rm}
+\def\UrlFont{\rm}
+\usepackage{natbib}
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+\pdfinfo{
+/TemplateVersion (2026.1)
+}
+\setcounter{secnumdepth}{0}
+
+\title{Parameter-Efficient Test-Time Adaptation for DeepSDF Shape Reconstruction}
+\author{
+Liang Zhiming (G2504427L),
+Wang Yingqi (G2504385C),
+Zhang Likun (G2504440F)
+}
+\affiliations{
+College of Computing and Data Science (CCDS)\\
+Nanyang Technological University
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+DeepSDF reconstructs 3D shapes by fitting a shape-specific latent code while keeping a learned signed-distance decoder fixed. This inference procedure is elegant, but it assumes that all test-time error can be absorbed by the latent vector. We study a direct extension of DeepSDF in which each test shape can also update a small decoder-side adaptation module. The study follows a simple progression: start from latent-only DeepSDF inference, test several decoder-side test-time adaptation parameterizations, and then use the best-performing variant for the main surface reconstruction analysis. Under the same data splits and checkpoints, LoRA test-time adaptation is the strongest of the tested variants. On ShapeNet airplane, chair, and lamp splits at checkpoint 200, LoRA improves SDF-MAE over our reproduced DeepSDF baseline by 31.6\% to 50.7\%, and improves full-split Chamfer distance in all three categories. Checkpoint-200 extra surface metrics, checkpoint-100 robustness experiments, and qualitative panels support the same trend. These results do not claim external state of the art; rather, they show that parameter-efficient decoder adaptation is a stable and lightweight correction step for DeepSDF-style implicit reconstruction.
+\end{abstract}
+
+\section{Introduction}
+
+Implicit neural representations are widely used for 3D shape reconstruction because they represent geometry as a continuous function instead of a fixed voxel grid. DeepSDF \cite{deepsdf} is a canonical example: it learns an autodecoder that maps a latent code and a 3D coordinate to a signed distance value. At test time, the decoder is frozen and the shape is reconstructed by optimizing a latent code for the observed SDF samples.
+
+We ask whether latent-only inference is too restrictive. If the decoder has systematic residual error for a new shape, moving only in latent space may not correct the local geometry. This naturally leads to a test-time adaptation question: can the inference procedure update a small part of the decoder, using only the same test-shape SDF samples, without turning the method into full fine-tuning?
+
+We therefore treat the project as a controlled search over test-time parameterizations. Residual TTT asks whether a small output correction is enough. LoRA-TTT asks whether low-rank internal decoder updates are more effective. LoRA-FA asks whether a cheaper low-rank update preserves most of the gain. After this comparison, LoRA-TTT becomes the main variant used for full-split Chamfer, extra surface metrics, qualitative inspection, and contextual comparisons to other DeepSDF-family baselines.
+
+We make three contributions. First, we reproduce a DeepSDF-style latent-optimization baseline on three ShapeNet \cite{shapenet} categories and frame it as the matched latent-only test-time baseline. Second, we implement residual, LoRA, and LoRA-FA decoder-side adaptation inside the same test-time optimization loop, so the variants differ mainly in which parameters are allowed to move. Third, we select the strongest variant under matched SDF-MAE evaluation and validate it with surface metrics and contextual baselines, making the main claim a controlled improvement over the reproduced DeepSDF baseline rather than an external state-of-the-art comparison.
+
+\section{Background and Related Work}
+
+DeepSDF \cite{deepsdf} represents each shape by a learned latent vector and each surface by a continuous signed distance function. Its autodecoder design makes inference naturally optimization-based: an unseen shape is recovered by optimizing its latent code. Curriculum DeepSDF \cite{curriculum} improves the same model family by changing the training schedule and sample weighting, which makes it a useful auxiliary DeepSDF-family reference. Occupancy Networks \cite{occupancy} and later implicit reconstruction methods also represent geometry continuously, but they often use different inputs, encoders, and evaluation protocols. We therefore use DeepSDF itself as the primary matched baseline instead of making an unfair numerical comparison to methods trained under different settings.
+
+Test-time training and adaptation \cite{ttt} update a model using information from the test sample. In DeepSDF, latent-code optimization is already a form of per-instance adaptation, but it updates only the latent vector. Our method expands the test-time parameterization to include small decoder-side modules. LoRA \cite{lora} was introduced for parameter-efficient adaptation by representing a weight update as a low-rank factorization. We use the same idea for shape reconstruction: each test shape receives a low-rank decoder correction, while the pretrained decoder remains mostly fixed.
+
+\section{Approach}
+
+The approach starts from the standard DeepSDF inference loop and changes only the parameters that are allowed to move at test time. This keeps the comparison close to the original model while making the central question explicit: whether a small decoder-side update can correct errors that latent-code optimization alone cannot express. The variants are not independent proposed methods; they form an ablation ladder from a tiny output residual, to a more expressive low-rank decoder update, to a cheaper low-rank approximation.
+
+\subsection{Baseline DeepSDF Inference}
+
+Let $f_\theta(z, x)$ denote the DeepSDF decoder, where $z$ is a shape latent code and $x$ is a 3D coordinate. The reproduced baseline follows the standard DeepSDF test-time procedure:
+\[
+z^\star = \arg\min_z \sum_j |f_\theta(z, x_j)-s_j| + \lambda \|z\|_2^2 .
+\]
+The decoder parameters $\theta$ are fixed; only the test-shape latent code is optimized. This baseline is called DeepSDF or \texttt{test\_opt} in our tables.
+
+\subsection{Test-Time Decoder Adaptation}
+
+We compare three decoder-side adaptation variants to decide which test-time parameterization is worth carrying into the main reconstruction analysis. Residual TTT adds a small residual module whose output corrects the base decoder prediction:
+\[
+\hat{s}=f_\theta(z,x)+g_\phi(x,f_\theta(z,x)).
+\]
+The adapter parameters $\phi$ are optimized for the current test shape together with the latent code.
+
+LoRA-TTT instead applies a low-rank update to selected decoder layers. For a weight matrix $W$, the adapted test-time weight is
+\[
+W' = W + BA ,
+\]
+where $A$ and $B$ have low rank. This increases test-time flexibility without fully fine-tuning the decoder. LoRA-FA is a lighter variant that freezes one low-rank factor, reducing trainable parameters while preserving a decoder-side correction path. Unless otherwise stated, LoRA results use rank 8 and 100 test-time optimization steps; mesh Chamfer baseline reconstructions use the matched latent-optimization configuration reported in the tables. Once the SDF-MAE comparison identifies LoRA-TTT as the strongest variant, later surface and contextual comparisons focus on DeepSDF versus LoRA-TTT.
+
+Table~\ref{tab:parameterization} and Table~\ref{alg:lora-ttt} summarize the inference procedure. The key constraint is that adaptation uses only the test-shape SDF samples; mesh Chamfer, F-score, and EMD-style metrics are computed after reconstruction and are not used as optimization losses.
+
+\begin{table}[t]
+\centering
+\begin{small}
+\setlength{\tabcolsep}{4pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{llll}
+\hline
+Method & Test variables & Decoder update & Loss signal \\
+\hline
+DeepSDF & $z$ & fixed $f_\theta$ & SDF samples \\
+Residual TTT & $z,\phi$ & $f_\theta$ plus output residual & SDF samples \\
+LoRA-TTT & $z,A,B$ & selected $W \rightarrow W+BA$ & SDF samples \\
+LoRA-FA & $z$ and one LoRA factor & lower-cost low-rank update & SDF samples \\
+\hline
+\end{tabular}
+}
+\end{small}
+\caption{Comparison of test-time parameterizations. All variants use the same per-shape SDF observations; mesh metrics are evaluated only after optimization.}
+\label{tab:parameterization}
+\end{table}
+
+\begin{table}[t]
+\centering
+\begin{small}
+\begin{tabular}{p{0.94\columnwidth}}
+\hline
+\textbf{Algorithm 1: LoRA-TTT inference for one test shape} \\
+\hline
+\textbf{Input:} pretrained decoder $f_\theta$, test SDF samples $\mathcal{D}=\{(x_j,s_j)\}$, latent code $z$, rank $r$, steps $T$. \newline
+\textbf{Initialize:} low-rank factors $A,B$ for selected decoder layers; keep base weights $\theta$ frozen. \newline
+\textbf{For} $t=1,\ldots,T$: predict $\hat{s}_j=f_{\theta+BA}(z,x_j)$; minimize $\sum_j|\hat{s}_j-s_j|+\lambda\|z\|_2^2$ over $z,A,B$ using the current test shape only. \newline
+\textbf{Output:} adapted decoder for this shape, reconstructed mesh, and post-hoc evaluation metrics. The adapted parameters are discarded before the next test shape. \\
+\hline
+\end{tabular}
+\end{small}
+\caption{Compact pseudocode for the main LoRA-TTT variant. LoRA-FA follows the same loop but freezes one low-rank factor.}
+\label{alg:lora-ttt}
+\end{table}
+
+\section{Experiments}
+
+\subsection{Data and Protocol}
+
+We use three ShapeNetCore.v2 \cite{shapenet} categories: airplane, chair, and lamp. Table~\ref{tab:data} summarizes the category identifiers and split sizes. The preprocessed data include SDF samples, normalization parameters, and held-out surface samples for these categories. For the matched DeepSDF-family evaluations in the main tables, all full-split rows have zero missing test cases.
+
+\begin{table}[t]
+\centering
+\begin{small}
+\begin{tabular}{llrr}
+\hline
+Category & Synset & Train & Test \\
+\hline
+Airplane & 02691156 & 1780 & 456 \\
+Chair & 03001627 & 3281 & 832 \\
+Lamp & 03636649 & 897 & 213 \\
+\hline
+\end{tabular}
+\end{small}
+\caption{ShapeNetCore.v2 categories used in the experiments. Train and test counts follow the preprocessed DeepSDF-style splits used throughout the matched comparisons.}
+\label{tab:data}
+\end{table}
+
+The reproduced DeepSDF checkpoints are evaluated at 100 and 200 epochs. This is a compute-limited training budget rather than the original long-budget DeepSDF benchmark. The important fairness constraint is that each comparison uses the same class, checkpoint, split, and evaluator.
+
+We organize the experiments as a staged evaluation. Stage 1 is variant selection: at checkpoint 200, DeepSDF latent-only inference is compared against residual TTT, LoRA-TTT, and LoRA-FA using SDF-MAE under the same test-time observations. Stage 2 is surface validation: because LoRA-TTT is the best SDF-MAE variant, we compare DeepSDF and LoRA-TTT using full-split Chamfer and extra surface metrics. Stage 3 is robustness and context: checkpoint-100 results, efficiency rows, qualitative panels, and curriculum/NKSR comparisons test whether the same interpretation remains plausible outside the single main table.
+
+We report SDF-MAE on sampled SDF points, Chamfer distance on reconstructed meshes, and checkpoint-200 extra surface metrics: accuracy, completeness, approximate Sinkhorn EMD, and F-score. Approximate Sinkhorn EMD is explicitly not exact EMD.
+
+\subsection{Implementation Details}
+
+All methods are evaluated from the same reproduced DeepSDF implementation and the same ShapeNet splits. Within each comparison, the decoder checkpoint, test shapes, SDF observations, mesh resolution, and evaluator are matched. LoRA-TTT uses rank 8 and 100 adaptation steps unless otherwise stated; the baseline mesh reconstructions use the matched latent-optimization setting reported in the tables. The qualitative figure uses selected checkpoint-200 reconstructions for all three classes.
+
+\subsection{Main Checkpoint-200 Results}
+
+\begin{table}[t]
+\centering
+\begin{small}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\hline
+Class & Valid & DeepSDF & Residual & LoRA & LoRA-FA & LoRA Gain \\
+\hline
+Airplane & 456 & 0.00655 & 0.00552 & 0.00360 & 0.00443 & 45.0\% \\
+Chair & 832 & 0.01017 & 0.00784 & 0.00502 & 0.00620 & 50.7\% \\
+Lamp & 213 & 0.01080 & 0.00967 & 0.00739 & 0.00899 & 31.6\% \\
+\hline
+\end{tabular}
+}
+\end{small}
+\caption{Main checkpoint-200 SDF-MAE results on the official-style test splits. Lower is better. LoRA-TTT is the best method in all three categories.}
+\label{tab:sdf-mae}
+\end{table}
+
+Table~\ref{tab:sdf-mae} is the variant-selection result. At checkpoint 200, LoRA-TTT improves over the reproduced DeepSDF test-time latent-optimization baseline on all three categories. It also outperforms both residual TTT and LoRA-FA, which identifies LoRA-TTT as the variant to carry forward into the surface reconstruction analysis. The gains are largest on chair and smallest on lamp, but even the smallest gain is still 31.6\%. This consistency matters more than a single best row: the method is not simply tuned to one category.
+
+\begin{table}[t]
+\centering
+\begin{small}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrr}
+\hline
+Class & Valid & DeepSDF Mean CD $\times 10^3$ & LoRA Mean CD $\times 10^3$ & Gain \\
+\hline
+Airplane & 456 & 0.241 & 0.129 & 46.5\% \\
+Chair & 832 & 0.682 & 0.271 & 60.3\% \\
+Lamp & 213 & 2.061 & 0.942 & 54.3\% \\
+\hline
+\end{tabular}
+}
+\end{small}
+\caption{Main checkpoint-200 full-split Chamfer distance. Values are raw mean Chamfer multiplied by $10^3$ for readability. Lower is better.}
+\label{tab:chamfer}
+\end{table}
+
+Table~\ref{tab:chamfer} is the first validation step after selecting LoRA-TTT. It verifies that the checkpoint-200 improvement transfers from SDF samples to reconstructed surfaces. LoRA reduces full-split mean Chamfer in every category, including the geometrically harder lamp category. Since Chamfer uses reconstructed surfaces rather than only the adaptation/evaluation SDF points, this result reduces the risk that LoRA merely overfits the sampled SDF metric.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/ckpt200_metric_summary.png}
+\caption{Checkpoint-200 visual summary of the two main quantitative metrics. Bars report the relative reduction from DeepSDF to LoRA-TTT for each class.}
+\label{fig:ckpt200-summary}
+\end{figure}
+
+Figure~\ref{fig:ckpt200-summary} visualizes the same main-setting trend as relative reductions: LoRA-TTT lowers both the optimization-facing SDF error and the post-hoc surface Chamfer metric across all three categories.
+
+\begin{table}[t]
+\centering
+\begin{small}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrr}
+\hline
+Class & Accuracy & Completeness & Sinkhorn EMD & F@0.005 \\
+\hline
+Airplane & .00559 $\to$ .00430 & .00623 $\to$ .00526 & .04116 $\to$ .03755 & .700 $\to$ .765 \\
+Chair & .01055 $\to$ .00728 & .00971 $\to$ .00763 & .05606 $\to$ .04935 & .319 $\to$ .399 \\
+Lamp & .01428 $\to$ .00815 & .01434 $\to$ .01053 & .07052 $\to$ .05568 & .401 $\to$ .513 \\
+\hline
+\end{tabular}
+}
+\end{small}
+\caption{Checkpoint-200 extra surface metrics, shown as DeepSDF $\to$ LoRA. Lower is better for accuracy, completeness, and approximate Sinkhorn EMD; higher is better for F-score.}
+\label{tab:extra}
+\end{table}
+
+Table~\ref{tab:extra} gives additional main-setting surface evidence beyond Chamfer. LoRA improves mean accuracy, completeness, and approximate Sinkhorn EMD for all classes, and also improves F@0.005. The F-score gain is especially visible for lamp and chair, where many baseline reconstructions have larger local surface deviations.
+
+
+\subsection{Auxiliary Checkpoint-100 Study}
+
+\begin{table}[t]
+\centering
+\begin{small}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrr}
+\hline
+Class & DeepSDF MAE & LoRA MAE & DeepSDF CD & LoRA CD \\
+\hline
+Airplane & .00748 & .00420 & .441 & .199 \\
+Chair & .01084 & .00586 & .903 & .429 \\
+Lamp & .01328 & .00884 & 3.141 & 1.424 \\
+\hline
+\end{tabular}
+}
+\end{small}
+\caption{Auxiliary checkpoint-100 robustness check. CD values are mean Chamfer multiplied by $10^3$. Lower is better.}
+\label{tab:ckpt100}
+\end{table}
+
+The checkpoint-100 study is used as auxiliary evidence rather than the central claim. Table~\ref{tab:ckpt100} shows that LoRA still improves both SDF-MAE and full-split Chamfer in all three categories. Curriculum-style baselines are useful context, but they are kept for the discussion section because the matched DeepSDF-versus-LoRA tables remain the cleanest same-protocol evidence.
+
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.98\textwidth]{figures/qualitative_ckpt200_gt_deepsdf_lora.png}
+\caption{Selected checkpoint-200 qualitative comparisons for airplane, chair, and lamp. Each row shows ground-truth surface samples, the reproduced DeepSDF reconstruction, and the LoRA-TTT reconstruction for one representative full-split test case. The figure is qualitative and auxiliary; the main claims rely on the checkpoint-200 full-split tables.}
+\label{fig:qualitative}
+\end{figure*}
+
+The qualitative panels in Figure~\ref{fig:qualitative} agree with the quantitative trend. LoRA reconstructions generally preserve the target geometry more cleanly, especially on thin or locally detailed structures. The figure is included as supporting evidence only; it is not used as a substitute for the full-split results.
+
+\subsection{Efficiency and Ablation}
+
+\begin{table}[t]
+\centering
+\begin{small}
+\begin{tabular}{lrrr}
+\hline
+Class & 64-d & 128-d & 256-d \\
+\hline
+Airplane & .01062 & .00910 & .00746 \\
+Chair & .01983 & .01822 & .01315 \\
+Lamp & .01641 & .01509 & .01328 \\
+\hline
+\end{tabular}
+\end{small}
+\caption{DeepSDF latent-code dimensionality ablation at checkpoint 100. Entries are test-time optimized SDF-MAE. Lower is better. The trend supports using 256-d latent codes in the main TTT experiments.}
+\label{tab:latent}
+\end{table}
+
+Table~\ref{tab:latent} is a backbone ablation rather than a direct comparison between adaptation methods. It checks a basic DeepSDF design choice: whether a larger latent code provides a stronger starting point before decoder-side test-time adaptation. The 256-dimensional latent code is best for all three categories, so the main TTT experiments use this setting. The chair rows are full official test-split evaluations with a reduced 4096-sample SDF evaluator for speed, so they are used only as ablation evidence.
+
+\begin{table}[t]
+\centering
+\begin{small}
+\begin{tabular}{lrrrr}
+\hline
+Method & MAE & Sec./shape & Params & MB \\
+\hline
+Residual & .00552 & .777 & 1,505 & 116.8 \\
+LoRA & .00360 & .772 & 61,696 & 131.3 \\
+LoRA-FA & .00443 & .643 & 30,952 & 122.9 \\
+\hline
+\end{tabular}
+\end{small}
+\caption{Airplane checkpoint-200 efficiency rows. LoRA is most accurate, while LoRA-FA reduces trainable parameters and runtime with some loss in accuracy.}
+\label{tab:eff}
+\end{table}
+
+Table~\ref{tab:eff} shows that the LoRA gain is not achieved by full decoder fine-tuning. The trainable parameter count remains small compared with the full DeepSDF decoder. LoRA-FA is a useful trade-off point: it halves the trainable parameters relative to LoRA and runs faster on this row, but it is less accurate. Lamp ablations further show the expected iteration trade-off. With rank 8 LoRA on lamp checkpoint 100, 25 iterations gives MAE 0.01787, 50 iterations gives 0.01210, 100 iterations gives 0.00864, and 200 iterations gives 0.00661. Increasing rank from 4 to 16 at 100 iterations changes MAE only slightly, suggesting that optimization budget is more important than rank in this setting.
+
+\section{Discussion}
+
+The main conclusion is that decoder-side test-time adaptation is a stable improvement over latent-only DeepSDF inference under the matched protocol. The narrative is therefore not simply that LoRA is a useful module, but that a controlled test-time parameterization study selects LoRA-TTT as the strongest decoder-side correction. This is technically plausible: the latent code controls where the test shape lies in the learned shape manifold, while a low-rank decoder update can correct systematic local errors that the latent code alone cannot easily express.
+
+The result also explains why LoRA outperforms the tiny residual adapter. The residual adapter has very few parameters and corrects the final SDF value after the decoder has already processed the coordinate and latent code. LoRA modifies internal decoder transformations, so it can change intermediate features while still remaining parameter-efficient. LoRA-FA confirms the same trend but with a stronger efficiency constraint.
+
+The strongest part of the evidence is the checkpoint-200 main result: LoRA improves SDF-MAE, full-split Chamfer, and the additional surface metrics on all three categories. The checkpoint-100 study then acts as a robustness check, not as a competing main result. We intentionally keep the main tables limited to matched DeepSDF-style comparisons. Additional curriculum-style DeepSDF variants are useful context. The latest synced package includes the fullish checkpoint-100 chair row, the fullish checkpoint-200 airplane row, and the repaired fullish checkpoint-200 chair row. The chair e200 row reached SDF-MAE $0.00853$, final mean Chamfer $1.842\times 10^{-3}$, and median Chamfer $0.409\times 10^{-3}$ with 832/832 valid test shapes. Its source archive has now been pulled into the local 5070 workspace, but we still use it as auxiliary context rather than primary evidence because the main claim is the matched DeepSDF-vs-LoRA comparison.
+
+\begin{table}[t]
+\centering
+\begin{small}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{llrrrr}
+\hline
+Class & Metric & DeepSDF & LoRA-TTT & Lite & Fullish \\
+\hline
+Airplane & SDF-MAE & .00748 & \textbf{.00420} & .00811 & .00861 \\
+Airplane & CD $\times 10^3$ & .441 & \textbf{.199} & .695 & .963 \\
+Chair & SDF-MAE & .01084 & \textbf{.00586} & .01224 & .01107 \\
+Chair & CD $\times 10^3$ & .903 & \textbf{.429} & 1.186 & 1.090 \\
+Lamp & SDF-MAE & .01328 & \textbf{.00884} & .01435 & .01552 \\
+Lamp & CD $\times 10^3$ & 3.141 & \textbf{1.424} & 5.078 & 13.171 \\
+\hline
+\end{tabular}
+}
+\end{small}
+\caption{Checkpoint-100 contextual comparison to CurriculumDeepSDF variants. Lower is better. The bold entry is the best available value in each row; the fullish chair row is included after the final 30622 sync.}
+\label{tab:curriculum-context}
+\end{table}
+
+Table~\ref{tab:curriculum-context} makes the purpose of the curriculum comparison explicit: it asks whether a curriculum-style DeepSDF baseline changes the interpretation of the matched LoRA result. In the currently complete checkpoint-100 comparison, LoRA-TTT is the best available method for every SDF-MAE and Chamfer row. This does not turn the paper into a curriculum benchmark; it simply shows that the available curriculum baselines do not weaken the main DeepSDF-versus-LoRA conclusion.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/curriculum_context_summary.png}
+\caption{Normalized checkpoint-100 curriculum context. The dashed vertical line is the reproduced DeepSDF baseline at $1.0$; lower ratios are better. The table contains the latest fullish chair row; this figure is retained as an earlier aggregate visualization.}
+\label{fig:curriculum-context}
+\end{figure}
+
+Figure~\ref{fig:curriculum-context} summarizes the same point visually. LoRA-TTT is below the DeepSDF baseline on both metrics, while the curriculum-lite and available fullish rows are above the baseline in this reproduction. For completeness, the late repaired fullish checkpoint-200 chair run reached SDF-MAE $0.00853$, mean CD $\times 10^3=1.842$, and median CD $\times 10^3=0.409$; the local result matrix now includes the source JSON/CSV, checkpoints, meshes, and per-shape TTTStates pulled from 30446.
+
+We also evaluated NKSR \cite{nksr} as an external point-cloud reconstruction reference. This comparison is reported only as context because NKSR uses surface point clouds with estimated normals rather than the DeepSDF SDF-sample adaptation protocol. For airplane, chair, and lamp, the valid-shape counts are 455/456, 832/832, and 210/213, respectively. The corresponding mean Chamfer-L2 values are $2.162$, $2.273$, and $6.312$ after multiplying by $10^3$; approximate Sinkhorn EMD values are $.0646$, $.0843$, and $.0892$; and F@0.01 values are $.714$, $.428$, and $.622$. These numbers help calibrate the scale of point-cloud reconstruction performance, but they are not used for the main DeepSDF-family comparison because the input modality, objective, and evaluator differ.
+
+\section{Limitations}
+
+First, the reproduced DeepSDF models are evaluated mainly at checkpoint 200, with checkpoint 100 used as an auxiliary setting; these are practical checkpoints rather than the original long-budget DeepSDF benchmark. Second, exact EMD is not reported; the surface table uses approximate Sinkhorn EMD with 512 sampled points and local resampling, so it should be read as supporting evidence rather than exact transport. Third, the qualitative figure uses selected cases, so it should be read as illustration rather than a statistical result.
+
+\section{Conclusion}
+
+We implemented parameter-efficient test-time adaptation for DeepSDF shape reconstruction and evaluated it on airplane, chair, and lamp. LoRA-TTT consistently improves over the reproduced DeepSDF latent-only baseline in SDF-MAE and full-split Chamfer distance, while using a small number of trainable test-time parameters. The evidence therefore supports a conservative but meaningful claim: under a matched DeepSDF protocol, low-rank decoder adaptation is a useful test-time correction mechanism for implicit shape reconstruction.
+
+\begin{thebibliography}{99}
+
+\bibitem[Chang et al.(2015)]{shapenet}
+Chang, A. X.; Funkhouser, T.; Guibas, L.; Hanrahan, P.; Huang, Q.; Li, Z.; Savarese, S.; Savva, M.; Song, S.; Su, H.; Xiao, J.; Yi, L.; and Yu, F. 2015.
+ShapeNet: An Information-Rich 3D Model Repository.
+arXiv:1512.03012.
+
+\bibitem[Duan et al.(2020)]{curriculum}
+Duan, Y.; Zhu, H.; Wang, H.; Yi, L.; Nevatia, R.; and Guibas, L. J. 2020.
+Curriculum DeepSDF.
+In \emph{European Conference on Computer Vision}.
+
+\bibitem[Hu et al.(2022)]{lora}
+Hu, E. J.; Shen, Y.; Wallis, P.; Allen-Zhu, Z.; Li, Y.; Wang, S.; Wang, L.; and Chen, W. 2022.
+LoRA: Low-Rank Adaptation of Large Language Models.
+In \emph{International Conference on Learning Representations}.
+
+\bibitem[Huang et al.(2023)]{nksr}
+Huang, J.; Gojcic, Z.; Atzmon, M.; Litany, O.; Fidler, S.; and Williams, F. 2023.
+Neural Kernel Surface Reconstruction.
+In \emph{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition}.
+
+\bibitem[Mescheder et al.(2019)]{occupancy}
+Mescheder, L.; Oechsle, M.; Niemeyer, M.; Nowozin, S.; and Geiger, A. 2019.
+Occupancy Networks: Learning 3D Reconstruction in Function Space.
+In \emph{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition}.
+
+\bibitem[Park et al.(2019)]{deepsdf}
+Park, J. J.; Florence, P.; Straub, J.; Newcombe, R.; and Lovegrove, S. 2019.
+DeepSDF: Learning Continuous Signed Distance Functions for Shape Representation.
+In \emph{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition}.
+
+\bibitem[Sun et al.(2020)]{ttt}
+Sun, Y.; Wang, X.; Liu, Z.; Miller, J.; Efros, A. A.; and Hardt, M. 2020.
+Test-Time Training with Self-Supervision for Generalization under Distribution Shifts.
+In \emph{Proceedings of the International Conference on Machine Learning}.
+
+\end{thebibliography}
+
+\end{document}
+

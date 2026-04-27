@@ -61,11 +61,15 @@ python ttt_deepsdf/scripts/evaluate_sdf_ttt.py \
 
 ## 外部数据和大文件
 
-三类数据和较大的实验产物放在 Git 之外：
+三类数据和较大的实验产物放在 Git 之外，并且分成两个入口：
 
-```text
-Google Drive folder:
-https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing
-```
+| 类型 | 用途 | 链接 |
+| --- | --- | --- |
+| 数据集 / processed data | airplane/chair/lamp 的 train/test SDF、NormalizationParameters、SurfaceSamples 和 split 文件。 | https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=sharing |
+| 结果 / 模型 artifact | checkpoint、重建 mesh、server snapshot、结果归档和报告快照。 | https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing |
 
-推荐把下载链接、文件说明和 checksum 统一维护在 `docs/DATA_AND_ARTIFACTS.md` 和 `docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md`。这个 README 只保留最小入口，避免以后多个地方同时改链接。
+推荐把下载链接、文件说明和 checksum 统一维护在：
+
+- 公开复现入口：`docs/REPRODUCIBILITY_START_HERE.md`
+- 数据策略：`docs/DATA_AND_ARTIFACTS.md`
+- 文件清单：`docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md`

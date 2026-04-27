@@ -1,4 +1,4 @@
-﻿"class","checkpoint","method","rank","iters","avg_mae","valid","avg_seconds","median_seconds","trainable_params","cuda_peak_memory_mb","source"
+"class","checkpoint","method","rank","iters","avg_mae","valid","avg_seconds","median_seconds","trainable_params","cuda_peak_memory_mb","source"
 "lamp","100","lora","8","25","0.01786610406294395","213","0.2874234020518699","0.27622362796682864","61696","130.35107421875","external_artifacts/server_snapshots/30446/official_ttt_ckpt100_queue/reports/lamp_code256_e100_paper_metrics/lamp_paper_metrics_summary.json"
 "lamp","100","lora","8","50","0.012098521308999665","213","0.6594772744107283","0.6975823160028085","61696","130.35107421875","external_artifacts/server_snapshots/30446/official_ttt_ckpt100_queue/reports/lamp_code256_e100_paper_metrics/lamp_paper_metrics_summary.json"
 "lamp","100","lora","4","100","0.008805376170377986","213","1.241730479921975","1.2845312079880387","30976","129.38232421875","external_artifacts/server_snapshots/30446/official_ttt_ckpt100_queue/reports/lamp_code256_e100_paper_metrics/lamp_paper_metrics_summary.json"

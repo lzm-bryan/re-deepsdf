@@ -179,13 +179,15 @@ python scripts/render_planes.py
 后续 TTT/LoRA 研究包位于 `ttt_deepsdf/`，包含 DeepSDF 与 TTT 的结果表、图、
 评估脚本、Curriculum DeepSDF 说明和 SOTA baseline 规划文档。
 
-三类数据和较大文件托管在 Git 之外：
+三类数据和较大文件托管在 Git 之外，注意这里有两个不同入口：
 
-```text
-https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing
-```
+| 类型 | 用途 | 链接 |
+| --- | --- | --- |
+| 数据集 / processed data | 三类 airplane/chair/lamp 的 train/test SDF、NormalizationParameters、SurfaceSamples 和 split 文件。 | https://drive.google.com/drive/folders/13GROzOX06VnVvUyttnTEAmkw0to6O36y?usp=sharing |
+| 结果 / 模型 artifact | checkpoint、重建 mesh、server snapshot、结果归档和报告快照。 | https://drive.google.com/drive/folders/1EPH4qcBP8OfL0nSVdleFuJZi2a7E6H4a?usp=sharing |
 
 详细数据/结果说明：
+- [REPRODUCIBILITY_START_HERE.md](ttt_deepsdf/docs/REPRODUCIBILITY_START_HERE.md)
 - [DATA_AND_ARTIFACTS.md](ttt_deepsdf/docs/DATA_AND_ARTIFACTS.md)
 - [GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md](ttt_deepsdf/docs/GOOGLE_DRIVE_ARTIFACT_MANIFEST_2026-04-27.md)
 

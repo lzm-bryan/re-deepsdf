@@ -1,4 +1,4 @@
-﻿# Results Summary
+# Results Summary
 
 The experiments compare a reproduced DeepSDF baseline with parameter-efficient
 test-time adaptation methods: residual TTT, LoRA, and LoRA-FA.
@@ -39,6 +39,18 @@ Chamfer comparison in every completed class/checkpoint setting.
 | lamp | 100 | 0.003141395 | 0.001423707 | 54.7% | 213 |
 | lamp | 200 | 0.002060678 | 0.001061194 | 48.5% | 213 |
 
+
+## Baseline Context
+
+`results/tables/baseline_completion_matrix.csv` records the compact baseline runs that were completed for the Albert/TTT comparison context. These runs are useful as practical same-project baselines, but the main claim remains a matched-protocol DeepSDF-vs-LoRA-TTT improvement rather than a strict external SOTA claim.
+
+| Family | Variant | Classes | Checkpoints | Notes |
+| --- | --- | --- | --- | --- |
+| DeepSDF | main matched | airplane, chair, lamp | 100, 200 | Primary reproduced baseline used for the TTT/LoRA comparison. |
+| CurriculumDeepSDF | lite | airplane, chair, lamp | 100 | Lightweight curriculum context baseline. |
+| CurriculumDeepSDF | fullish | airplane, chair, lamp | 100, 200 | Heavier curriculum context baseline; compact metrics are committed, full checkpoints/meshes remain external artifacts. |
+
+For the full row-level metrics, use `results/tables/baseline_completion_matrix.csv` together with the full Chamfer and SDF-MAE tables.
 ## Figures
 
 Qualitative selected-case panels are stored in `figures/`:

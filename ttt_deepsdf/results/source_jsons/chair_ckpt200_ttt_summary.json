@@ -1,20 +1,20 @@
-﻿{
-    "checkpoint":  "200",
-    "experiment_dir":  "external_artifacts/remote_deepsdf_setup/river_two_classes/experiments/chair_classic_e500",
-    "eval_subdir":  "Evaluation",
-    "eval_ttt_subdir":  "EvaluationTTT",
-    "metrics":  {
-                    "test_mean":  0.08549117297829631,
-                    "test_opt":  0.010171040349142948,
-                    "test_ttt_adapter":  0.00784454774279416,
-                    "test_ttt_lora":  0.0050193885234386055,
-                    "test_ttt_lora_fa":  0.006199737163674749
-                },
-    "test_mean":  0.08549117297829631,
-    "test_opt":  0.010171040349142948,
-    "test_ttt_adapter":  0.00784454774279416,
-    "test_ttt_lora":  0.0050193885234386055,
-    "test_ttt_lora_fa":  0.006199737163674749,
-    "best_ttt_method":  "test_ttt_lora",
-    "best_ttt_value":  0.0050193885234386055
+{
+  "checkpoint": "200",
+  "experiment_dir": "/root/rivermind-data/deepsdf_setup/river_two_classes/experiments/chair_classic_e500",
+  "eval_subdir": "Evaluation",
+  "eval_ttt_subdir": "EvaluationTTT",
+  "metrics": {
+    "test_mean": 0.08549117297829631,
+    "test_opt": 0.010171040349142948,
+    "test_ttt_adapter": 0.00784454774279416,
+    "test_ttt_lora": 0.0050193885234386055,
+    "test_ttt_lora_fa": 0.006199737163674749
+  },
+  "test_mean": 0.08549117297829631,
+  "test_opt": 0.010171040349142948,
+  "test_ttt_adapter": 0.00784454774279416,
+  "test_ttt_lora": 0.0050193885234386055,
+  "test_ttt_lora_fa": 0.006199737163674749,
+  "best_ttt_method": "test_ttt_lora",
+  "best_ttt_value": 0.0050193885234386055
 }
